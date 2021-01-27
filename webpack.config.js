@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const serverConfig = {
-  entry: './src/server/server.js',
+  entry: './src/backend/server.js',
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,7 +17,7 @@ const serverConfig = {
 };
 
 const clientConfig = {
-  entry: './src/client/index.js',
+  entry: './src/frontend/index.js',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -31,6 +31,11 @@ const clientConfig = {
         use: ["babel-loader"]
       },
       {
+        test: /\.svg?$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"]
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       }
@@ -38,7 +43,7 @@ const clientConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/client/index.html"
+      template: "./src/frontend/index.html"
     })
   ]
 };

@@ -8,8 +8,6 @@
 
 import { Connection } from './index';
 
-var moment = require('moment');
-
 export const all = async (note) => {
     if (note == undefined) { note = "This is my test note"; }
 

@@ -18,7 +18,7 @@ export default class App extends Component {
 
         const query = new URLSearchParams(window.location.search);
         let note = query.get('note');
-        if (note == null) { serial = 'My test note';}  // add a default value
+        if (note == null) { note = 'My test note';}  // add a default value
 
         this.state = {
             add_note: [],
