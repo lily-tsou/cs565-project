@@ -13,7 +13,7 @@
     "mongodb": "^3.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.0"
   },
   "scripts": {
     "start": "node dist/server.js",
@@ -37,23 +37,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.10@",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.6.0",
-    "babel-jest": "^26.6.3",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^3.2.0",
-    "html-webpack-plugin": "^4.5.1",
-    "jest": "^26.6.2",
-    "jest-transform-css": "^2.0.0",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.18.0",
-    "webpack-cli": "^4.4.0",
-    "webpack-dev-server": "^3.11.2"
-  },
+  "devDependencies": {},
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest",

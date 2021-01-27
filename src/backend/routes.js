@@ -21,7 +21,7 @@ router.get('/api/hello', (req, res, next) => {
 
 router.get('/api/add_note', async (req, res) => {
     try {
-        let add_note = await DB.add_note.all(req.query.note);
+        let add_note //= await DB.add_note.all(req.query.note);
         res.json(add_note);
     } catch(err) {
         console.log(err);
