@@ -45,7 +45,7 @@ export default class App extends Component {
             <main className="container">
                 <h1 className="text-primary text-center">Galaxy Note</h1>
 
-                <h2>hello world</h2>
+                <h2>This is in App.js</h2>
 
             </main>
         )
