@@ -1,48 +1,28 @@
 {
-  "name": "galaxy-note",
+  "name": "notequest",
   "version": "0.1.0",
   "description": "Note taking app",
-  "repository": {
-    "type": "git",
-    "url": "git"
-  },
-  "license": "ISC",
+  "license": "MIT",
   "main": "dist/server.js",
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
+    "nodemon": "^2.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.0"
+    "react-dom": "^17.0.1"
   },
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "nodemon dist/server.js",
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode development",
     "test": "jest --silent --forceExit",
-    "clean": "rm -rf dist public"
+    "clean": "rm -rf dist public",
+    "debug": "nodemon --inspect dist/server.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {},
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     }
-  },
-  "author": ""
+  }
 }

@@ -8,6 +8,9 @@ const serverConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.js'
   },
+  optimization: {
+    minimize: false
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     filename: 'server.js',
@@ -22,6 +25,9 @@ const clientConfig = {
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'client.js'
+  },
+  optimization: {
+    minimize: false
   },
   module: {
     rules: [
