@@ -6,9 +6,14 @@
 *
 */
 
-import { Connection } from './index';
+// Switched from ES modules to CommonJS
+// import { Connection } from './index';
 
-export const all = async (note) => {
+const { Connection } = require('./index');
+
+// Switched from ES modules to CommonJS
+// export const all = async (note) => {
+const all = async (note) => {
     if (note == undefined) { note = "This is my test note"; }
 
     let add_query = `<tdb>`;
@@ -26,6 +31,8 @@ export const all = async (note) => {
 
 }
 
-export default {
-    all
-}
+// export default {
+//     all
+// }
+
+module.exports = all;

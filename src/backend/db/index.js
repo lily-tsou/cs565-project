@@ -5,17 +5,36 @@
 *
 */
 
-import * as mongodb from 'mongodb';
-import config from '../config';
+// Switched from ES modules to CommonJS
+// import * as mongodb from 'mongodb';
+// import config from '../config';
+// import addNote from './addnote';
 
-import Add_note from './add_note';
+const mongoClient = require('mongodb').MongoClient;
+const config = require('../config');
+const addNote = require('./addnote');
 
-export const Connection = mongodb.createConnection(config.mongodb);
+// Switched from ES modules to CommonJS
+// export const Connection = mongodb.createConnection(config.mongodb);
+// const Connection = mongodb.createConnection(config.mongodb);
 
-Connection.connect(err => {
-    if(err) console.log(err);
-});
+const url = 'mongodb://localhost:27017';
+const dbName = 'notequest';
 
-export default {
-    Add_note
-}
+// mongoClient.connect(url, function(err, client) {
+//     if(err) console.log(err);
+//     console.log("Connected successfully to server");
+//     const db = client.db(dbName);
+//     client.close();
+// });
+
+// Connection.connect(err => {
+//     if(err) console.log(err);
+// });
+
+// Switched from ES modules to CommonJS
+// export default {
+//     Add_note
+// }
+
+module.export = mongoClient;

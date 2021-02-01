@@ -17,7 +17,7 @@
     "build": "webpack --mode development",
     "test": "jest --silent --forceExit",
     "clean": "rm -rf dist public",
-    "debug": "nodemon --inspect dist/server.js"
+    "debug": "nodemon --inspect src/backend/server.js"
   },
   "jest": {
     "transform": {

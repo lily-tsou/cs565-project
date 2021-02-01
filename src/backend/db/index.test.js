@@ -1,6 +1,10 @@
 // import { Connection } from './index';
-import * as mongodb from 'mongodb';
-import config from '../config';
+// Switched from ES modules to CommonJS
+// import * as mongodb from 'mongodb';
+// import config from '../config';
+
+const mongodb = require('mongodb');
+const config = require('../config');
 
 // test('db/index  test', () => {
 //     let rc = true;

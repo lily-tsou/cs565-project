@@ -10,8 +10,11 @@
 *
 */
 
-import express from 'express';
+// Switched from ES modules to CommonJS
+// import express from 'express';
 // import DB from './db';
+const express = require('express');
+const db = require('./db');
 
 const router = express.Router();
 
@@ -29,4 +32,6 @@ router.get('/api/add_note', async (req, res) => {
     }
 })
 
-export default router;
+// Switched from ES modules to CommonJS
+// export default router;
+module.exports = router;

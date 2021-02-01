@@ -7,10 +7,15 @@
 *
 */
 
-import express from 'express';
-import apiRouter from './routes';
+// Switched from ES modules to CommonJS
+// import express from 'express';
+// import apiRouter from './routes';
+const express = require('express');
+const apiRouter = require('./routes');
 
-export default function StartServer() {
+// Switched from ES modules to CommonJS
+// export default function StartServer() {
+function StartServer() {
     const app = express();
 
     app.use(express.static('public'));
@@ -21,4 +26,5 @@ export default function StartServer() {
     return rc.listening;  // true if server is listening
 }
 
+module.exports = StartServer;
 StartServer();
