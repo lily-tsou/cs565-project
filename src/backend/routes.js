@@ -10,11 +10,8 @@
 *
 */
 
-// Switched from ES modules to CommonJS
-// import express from 'express';
-// import DB from './db';
 const express = require('express');
-const db = require('./db');
+const api = require('./api');
 
 const router = express.Router();
 
@@ -24,14 +21,13 @@ router.get('/api/hello', (req, res, next) => {
 
 router.get('/api/add_note', async (req, res) => {
     try {
-        let add_note //= await DB.add_note.all(req.query.note);
-        res.json(add_note);
+        let addNote = await api.add(req.query.note);
+        console.log("Adding: " + req.query.note);
+        res.json(addNote);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 })
 
-// Switched from ES modules to CommonJS
-// export default router;
 module.exports = router;

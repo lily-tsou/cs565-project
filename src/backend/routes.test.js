@@ -1,6 +1,3 @@
-// Switched from ES modules to CommonJS
-// import express from 'express';
-// import apiRouter from './routes';
 const express = require('express');
 const apiRouter = require('./routes');
 

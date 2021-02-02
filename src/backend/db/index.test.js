@@ -1,23 +1,27 @@
-// import { Connection } from './index';
-// Switched from ES modules to CommonJS
-// import * as mongodb from 'mongodb';
-// import config from '../config';
-
-const mongodb = require('mongodb');
+const mongoClient = require('mongodb').MongoClient;
 const config = require('../config');
 
-// test('db/index  test', () => {
-//     let rc = true;
-
-//     // this gives open handle error in jest due to Connection.connect()
-//     try {
-//         const Connection = mongodb.createConnection(config.mongodb);
-//         Connection.connect();
-//         Connection.destroy();
-//     } catch (err) {
-//         rc = false;
-//     }
-
-//     expect( rc ).toBe(true);
-// });
+test('db/index  test', () => {
+    let rc = true;
+    
+    // this gives open handle error in jest due to Connection.connect()
+    try {
+        mongoClient.connect(config.url, function(err, client) {
+            if(err) {
+                console.log("MongoDB not responding");
+                // console.log(err);
+                rc = false;
+            } else {
+                console.log("Connected successfully to server");
+                const db = client.db(config.dbName);
+                client.close();
+                rc = true;
+            }
+        });
+    } catch (err) {
+        rc = false;
+    }
+    
+    expect( rc ).toBe(true);
+});
 
