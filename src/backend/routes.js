@@ -15,7 +15,13 @@ const api = require('./api');
 
 const router = express.Router();
 
-router.get('/api/hello', (req, res, next) => {
+// Frontend
+// router.get('/', (req, res) => {
+//     res.sendFile('index.html', { root: __dirname + '/../frontend'});
+// });
+
+// Backend API
+router.get('/api/hello', (req, res) => {
     res.json('World');
 });
 

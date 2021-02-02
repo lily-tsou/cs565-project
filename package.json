@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Note taking app",
   "license": "MIT",
-  "main": "dist/server.js",
+  "main": "src/backend/server.js",
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
