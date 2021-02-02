@@ -8,7 +8,7 @@
 const mongoClient = require('mongodb').MongoClient;
 const config = require('../config');
 
-mongoClient.connect(config.url, function(err, client) {
+mongoClient.connect(config.url, { useUnifiedTopology: true }, function(err, client) {
     if(err) {
         console.log("MongoDB not responding");
         // console.log(err);
