@@ -5,7 +5,7 @@
 *
 */
 
-const  mongoClient = require('../db').mongoClient;
+const  mongoClient = require('../db');
 
 const add = async (note) => {
     if (note == undefined) { note = "This is my test note"; }
@@ -15,7 +15,7 @@ const add = async (note) => {
     console.log(addQuery);  
 
     // return new Promise((resolve, reject) => {
-    //     mongoClient.query(addQuery, (err, results) => {
+    //     dbClient.query(addQuery, (err, results) => {
     //         if (err) {
     //             return reject(err);
     //         }
