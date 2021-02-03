@@ -1,5 +1,5 @@
-import express from 'express';
-import apiRouter from './routes';
+const express = require('express');
+const apiRouter = require('./routes');
 
 test('routes test', async () => {
     let rc = true;

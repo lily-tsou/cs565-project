@@ -1,37 +1,38 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const serverConfig = {
-  entry: './src/backend/server.js',
-  target: 'node',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'server.js'
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    filename: 'server.js',
-    port: 3000,
-  }
+// const backend = {
+//   entry: './src/backend/server.js',
+//   target: 'node',
+//   output: {
+//     path: path.resolve(__dirname, 'dist'),
+//     filename: 'server.js'
+//   },
+//   optimization: {
+//     minimize: false
+//   },
+//   devServer: {
+//     contentBase: path.join(__dirname, 'dist'),
+//     filename: 'server.js',
+//     port: 3000,
+//   }
 
-};
+// };
 
-const clientConfig = {
+const frontend = {
   entry: './src/frontend/index.js',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'client.js'
   },
+  optimization: {
+    minimize: false
+  },
   module: {
     rules: [
       {
         test: /\.js?$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"]
-      },
-      {
-        test: /\.svg?$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
       },
@@ -48,4 +49,5 @@ const clientConfig = {
   ]
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = frontend;
+// module.exports = [frontend, backend];

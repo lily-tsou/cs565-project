@@ -5,14 +5,7 @@
 *
 */
 
-export default {
+const url = 'mongodb://localhost:27017';
+const dbName = 'notequest';
 
-    mongodb: {
-        host: 'myhost.com',
-        port: 3306,
-        user: '<user>',
-        password: '<password>',
-        database: 'notes_db'
-    }
-
-}
+module.exports = { url, dbName };

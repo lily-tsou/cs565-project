@@ -1,6 +1,6 @@
-import StartServer from './server';
+const startServer = require('./server');
 
 test('Server test', () => {
-    expect( StartServer() ).toBe(true);
+    expect( startServer() ).toBe(true);
 });
 

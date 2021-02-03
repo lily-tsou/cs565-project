@@ -5,17 +5,18 @@
 *
 */
 
-import * as mongodb from 'mongodb';
-import config from '../config';
+const mongoClient = require('mongodb').MongoClient;
+const config = require('../config');
 
-import Add_note from './add_note';
-
-export const Connection = mongodb.createConnection(config.mongodb);
-
-Connection.connect(err => {
-    if(err) console.log(err);
+mongoClient.connect(config.url, { useUnifiedTopology: true }, function(err, client) {
+    if(err) {
+        console.log("MongoDB not responding");
+        // console.log(err);
+    } else {
+        console.log("Connected successfully to server");
+        const db = client.db(config.dbName);
+        client.close();
+    }
 });
 
-export default {
-    Add_note
-}
+module.exports = mongoClient;

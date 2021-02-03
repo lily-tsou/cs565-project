@@ -1,64 +1,28 @@
 {
-  "name": "galaxy-note",
+  "name": "notequest",
   "version": "0.1.0",
   "description": "Note taking app",
-  "repository": {
-    "type": "git",
-    "url": "git"
-  },
-  "license": "ISC",
-  "main": "dist/server.js",
+  "license": "MIT",
+  "main": "src/backend/server.js",
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.3",
+    "nodemon": "^2.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.1"
+    "react-dom": "^17.0.1"
   },
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "nodemon src/backend/server.js",
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode development",
     "test": "jest --silent --forceExit",
-    "clean": "rm -rf dist public"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.10@",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.6.0",
-    "babel-jest": "^26.6.3",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^3.2.0",
-    "html-webpack-plugin": "^4.5.1",
-    "jest": "^26.6.2",
-    "jest-transform-css": "^2.0.0",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.18.0",
-    "webpack-cli": "^4.4.0",
-    "webpack-dev-server": "^3.11.2"
+    "clean": "rm -rf dist public",
+    "debug": "nodemon --inspect src/backend/server.js"
   },
   "jest": {
     "transform": {
       "^.+\\.js$": "babel-jest",
       ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     }
-  },
-  "author": ""
+  }
 }

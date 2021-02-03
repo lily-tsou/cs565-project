@@ -10,23 +10,30 @@
 *
 */
 
-import express from 'express';
-// import DB from './db';
+const express = require('express');
+const api = require('./api');
 
 const router = express.Router();
 
-router.get('/api/hello', (req, res, next) => {
+// Frontend
+// router.get('/', (req, res) => {
+//     res.sendFile('index.html', { root: __dirname + '/../frontend'});
+// });
+
+// Backend API
+router.get('/api/hello', (req, res) => {
     res.json('World');
 });
 
 router.get('/api/add_note', async (req, res) => {
     try {
-        let add_note = await DB.add_note.all(req.query.note);
-        res.json(add_note);
+        let addNote = await api.add(req.query.note);
+        console.log("Adding: " + req.query.note);
+        res.json(addNote);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 })
 
-export default router;
+module.exports = router;
