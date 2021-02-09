@@ -6,5 +6,7 @@
 */
 
 const add = require('./add');
+const list = require('./list');
 
-module.exports = { add };
+
+module.exports = { add, list };

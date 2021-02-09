@@ -5,25 +5,18 @@
 *
 */
 
-const  mongoClient = require('../db');
+const  { dbAdd } = require('../db');
 
 const add = async (note) => {
     if (note == undefined) { note = "This is my test note"; }
 
-    let addQuery = `Query <tdb>: ` + note;
-
-    console.log(addQuery);  
-
-    // return new Promise((resolve, reject) => {
-    //     dbClient.query(addQuery, (err, results) => {
-    //         if (err) {
-    //             return reject(err);
-    //         }
-    //         resolve(results);
-    //     });
-    // });
-
-    return "Added: " + note;
+    try {
+        let result = await dbAdd(note);
+        return result;
+    } catch (err) {
+        console.log("Caught error: " + err);
+        return err;
+    }
 }
 
 module.exports = add;
