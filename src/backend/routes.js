@@ -22,13 +22,13 @@ router.get('/api/hello', (req, res) => {
 
 router.get('/api/add', async (req, res) => {
     try {
-        let addNote = await api.add(req.query.note);
-        res.json(addNote);
+        let note = await api.add(req.query.note);
+        res.json(note);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
-})
+});
 
 router.get('/api/list', async (req, res) => {
     try {
@@ -38,6 +38,56 @@ router.get('/api/list', async (req, res) => {
         console.log(err);
         res.sendStatus(500);
     }
-})
+});
+
+router.get('/api/retrieve', async (req, res) => {
+    try {
+        let note = await api.retrieve(req.query.id);
+        res.json(note);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/api/edit', async (req, res) => {
+    try {
+        let note = await api.edit(req.query.id);
+        res.json(note);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/api/find', async (req, res) => {
+    try {
+        let notes = await api.list(req.query.key);
+        res.json(notes);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/api/del', async (req, res) => {
+    try {
+        let note = await api.del(req.query.id);
+        res.json(note);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+router.get('/api/delall', async (req, res) => {
+    try {
+        let note = await api.delAll();
+        res.json(note);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
 
 module.exports = router;

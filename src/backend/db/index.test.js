@@ -1,5 +1,4 @@
 const mongoClient = require('mongodb').MongoClient;
-const config = require('../config');
 
 test('db/index  test', () => {
     let rc = true;
