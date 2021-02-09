@@ -14,7 +14,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         console.log("MongoDB not responding");
     } else {
         console.log("Connected successfully to server");
-        // db = client.db(dbName);
         client.close();
     }
 });
@@ -33,18 +32,19 @@ let dbAdd = (note) => {
     return "Added: " + note;
 }
 
-let dbList = async (callback) => {
-    await MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-        if(err) { throw err; }
-        const db = client.db(dbName);
-        db.collection('notes').find({}).toArray().then((docs) => {
-            callback(docs);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            client.close();
-        });
-    });
+let dbList = async () => {
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true })
+        .then((res) => { return res; })
+        .catch((err) => { console.log('DB connection failed', err) });
+
+    const db = await client.db(dbName);
+    const col = await db.collection('notes');
+    let results = await col.find({}).toArray()
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB find all failed', err); });
+    client.close();
+
+    return results;
 };
 
 module.exports = { dbAdd, dbList };
