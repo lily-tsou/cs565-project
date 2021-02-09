@@ -15,21 +15,25 @@ const api = require('./api');
 
 const router = express.Router();
 
-// Frontend
-// router.get('/', (req, res) => {
-//     res.sendFile('index.html', { root: __dirname + '/../frontend'});
-// });
-
 // Backend API
 router.get('/api/hello', (req, res) => {
     res.json('World');
 });
 
-router.get('/api/add_note', async (req, res) => {
+router.get('/api/add', async (req, res) => {
     try {
         let addNote = await api.add(req.query.note);
-        console.log("Adding: " + req.query.note);
         res.json(addNote);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+})
+
+router.get('/api/list', async (req, res) => {
+    try {
+        let notes = await api.list();
+        res.json(notes);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
