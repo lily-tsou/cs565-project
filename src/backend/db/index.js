@@ -7,38 +7,42 @@
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 const dbName = 'notequest';
+const dbColName = 'notes';
 
-// Test for MongoDB server connection
-MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
-    if(err) {
-        console.log("MongoDB not responding");
-    } else {
+let dbClient = async () => {
+    return await MongoClient.connect(url, { useUnifiedTopology: true })
+        .then((res) => { return res; })
+        .catch((err) => { console.log('DB connection failed', err) });
+}; 
+
+let dbCol = async (client) => {
+    const db = await client.db(dbName);
+    const col = await db.collection(dbColName);
+    return col;
+};
+
+dbClient()
+    .then((res) => { 
         console.log("Connected successfully to server");
-        client.close();
-    }
-});
+        res.close();
+     })
+    .catch((err) => { console.log("MongoDB not responding"); });
 
-let dbAdd = (note) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-        if(err) { throw err; }
-        db = client.db(dbName);
-        let newRec = { data: note };
-        db.collection('notes').insertOne(newRec, (err, res) => {
-            if(err) { throw err; }
-            console.log("Inserted document: " + newRec.data + " Inserted Count: " + res.insertedCount);
-            client.close();
-        });
-    });
-    return "Added: " + note;
+let dbAdd = async (note) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let newRec = { data: note };
+    let results = await col.insertOne(newRec)
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB insertOne failed', err); });
+    client.close();
+
+    return results;
 }
 
 let dbList = async () => {
-    const client = await MongoClient.connect(url, { useUnifiedTopology: true })
-        .then((res) => { return res; })
-        .catch((err) => { console.log('DB connection failed', err) });
-
-    const db = await client.db(dbName);
-    const col = await db.collection('notes');
+    const client = await dbClient();
+    const col = await dbCol(client);
     let results = await col.find({}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find all failed', err); });
