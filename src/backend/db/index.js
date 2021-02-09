@@ -33,13 +33,16 @@ let dbAdd = (note) => {
     return "Added: " + note;
 }
 
-let dbList = async (callback) => {
-    await MongoClient.connect(url, { useUnifiedTopology: true }, async (err, client) => {
+let dbList = (callback) => {
+    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
         if(err) { throw err; }
-        let db = client.db(dbName);
-        await db.collection('notes').find({}).toArray((err, result) => {
-            if (err) { throw err; }
-            callback(result);
+        const db = client.db(dbName);
+        db.collection('notes').find({}).toArray().then((docs) => {
+            docs.forEach((doc) => { console.log(doc.data) });
+            callback(docs);
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
             client.close();
         });
     });

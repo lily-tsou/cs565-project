@@ -10,8 +10,8 @@ const  { dbList } = require('../db');
 const list = async () => {
     try {
         let result = await dbList((res) => {
+            console.log("In list function");
             console.log(res);
-            // result = res;
         });
         // console.log(result);
 
