@@ -7,18 +7,36 @@
 
 const  { dbList } = require('../db');
 
-const list = async () => {
+let list = async () => {
+    let rc = null;
+
     try {
         let result = await dbList((res) => {
             console.log("In list function");
-            console.log(res);
+            res.forEach((note) => { console.log(note) });
         });
-        // console.log(result);
-
+        console.log("after dbList returns: " + result);      
+        rc = "got the list";
     } catch (err) {
         console.log("Caught error: " + err);
-        return err;
+        rc = err;
     }
-}
+
+    // let responseHandler = (response) => {
+    //     console.log("In response handler: ");
+    //     response.forEach((note) => { console.log(note) });
+
+    //     return "got the list";
+    // };
+
+    // let errorHandler = (error) => {
+    //     return console.log('Request failed', error);
+    // };
+
+    // let result = await dbList()
+    //     .then(responseHandler)
+    //     .catch(errorHandler);
+    return rc;
+};
 
 module.exports = list;

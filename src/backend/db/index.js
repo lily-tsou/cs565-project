@@ -33,12 +33,11 @@ let dbAdd = (note) => {
     return "Added: " + note;
 }
 
-let dbList = (callback) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
+let dbList = async (callback) => {
+    await MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
         if(err) { throw err; }
         const db = client.db(dbName);
         db.collection('notes').find({}).toArray().then((docs) => {
-            docs.forEach((doc) => { console.log(doc.data) });
             callback(docs);
         }).catch((err) => {
             console.log(err);
@@ -46,6 +45,6 @@ let dbList = (callback) => {
             client.close();
         });
     });
-}
+};
 
 module.exports = { dbAdd, dbList };
