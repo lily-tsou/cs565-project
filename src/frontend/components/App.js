@@ -8,45 +8,78 @@
 *
 */
 
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/App.css';
 
-export default class App extends Component {
+const url = 'http://localhost';
+
+export default class App extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const query = new URLSearchParams(window.location.search);
-        let note = query.get('note');
-        if (note == null) { note = 'My test note';}  // add a default value
+        // // get parms from the user
+        // const query = new URLSearchParams(window.location.search);
+        // let note = query.get('note');
+        // if (note == null) { note = 'My test note';}
 
         this.state = {
-            add_note: [],
-            note: note
+            list: [],
+            err: null,
+            isLoading: false
         };
     }
 
-    async componentDidMount() {
-        try {
-            const res = await fetch('/api/add_note?note=' + this.state.note);
-            if (!res.ok) {
-                throw Error(res.statusText);
+    componentDidMount() {
+        this.setState({ isLoading: true });
+        fetch(url + '/list')
+        .then(res => {
+            if(res.status >= 300) {
+                throw new Error(res.statusText);
             }
-            const json = await res.json();
-            this.setState({ add_note: json });
-        } catch (err) {
-            console.log(err);
-        }
+            return res.json();
+        })
+        .then(list => {
+            this.setState({
+                list,
+                isLoading: false
+            });
+        })
+        .catch(err => { 
+            this.setState({
+                err,
+                isLoading: false
+            });
+            console.log(err); 
+        });
+    
     }
 
     render() {
-
-         return (
+        let {list, err, isLoading} = this.state;
+        if(err) {
+            return (
+                <div> { err.message } </div>
+            );
+        }
+        if(isLoading) {
+            return (
+                <div> Loading... </div>
+            );
+        }
+        
+        return (
             <main className="container">
-                <h1 className="text-primary text-center">Galaxy Note</h1>
-
-                <h2>This is in App.js</h2>
-
+                <h1 className="text-primary text-center">NoteQuest</h1>
+                    <section>
+                        <ul>
+                            {list.map(item => {
+                                return <li id={item._id} >
+                                        { item.data }
+                                    </li>
+                            })}
+                        </ul>
+                    </section>
             </main>
         )
     }
