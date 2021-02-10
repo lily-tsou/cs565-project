@@ -8,18 +8,18 @@
 */
 
 const express = require('express');
-const apiRouter = require('./routes');
+const routes = require('./routes');
 
-function startServer() {
+let startServer = () => {
     const app = express();
 
     app.use(express.static('public'));
-    app.use(apiRouter);
+    app.use(routes);
 
     const port = process.env.PORT || 80;
     const rc = app.listen(port, () => console.log(`Server listening on port: ${port}`));
     return rc.listening;  // true if server is listening
-}
+};
 
 module.exports = startServer;
 startServer();
