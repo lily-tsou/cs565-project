@@ -5,8 +5,11 @@
 */
 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+// const url = 'mongodb://localhost:27017';
+const user = 'mongodb';
+const passwd = 'mongodb';
 const dbName = 'notequest';
+const url = "mongodb+srv://" + user + ":" + passwd + "@cluster0.cn7yg.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
 const dbColName = 'notes';
 
 // Private helper functions
