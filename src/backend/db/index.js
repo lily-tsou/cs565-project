@@ -4,8 +4,7 @@
 *
 */
 
-const MongoClient = require('mongodb').MongoClient;
-// const url = 'mongodb://localhost:27017';
+const mongodb = require('mongodb');
 const user = 'mongodb';
 const passwd = 'mongodb';
 const dbName = 'notequest';
@@ -14,7 +13,7 @@ const dbColName = 'notes';
 
 // Private helper functions
 let dbClient = async () => {
-    return await MongoClient.connect(url, { useUnifiedTopology: true })
+    return await mongodb.MongoClient.connect(url, { useUnifiedTopology: true })
         .then((res) => { return res; })
         .catch((err) => { console.log('DB connection failed', err) });
 }; 
@@ -60,7 +59,8 @@ let dbList = async () => {
 let dbRetrieve = async (id) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let results = await col.find({'_id': id}).toArray()
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.find({ '_id': oid}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find from id failed', err); });
     client.close();
@@ -71,8 +71,8 @@ let dbRetrieve = async (id) => {
 let dbEdit = async (id, note) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let newRec = { data: note };
-    let results = await col.updateOne({'_id' : id}, { $set: {'data': note}})
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.updateOne({ '_id' : oid}, { $set: {'data': note}})
         .then((res) => {return res; })
         .catch((err) => { console.log('DB updateOne failed', err); });
     client.close();
@@ -83,7 +83,7 @@ let dbEdit = async (id, note) => {
 let dbFind = async (key) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let results = await col.find({'data': key}).toArray()
+    let results = await col.find({'data': new RegExp(key)}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find from query filter failed', err); });
     client.close();
@@ -94,7 +94,8 @@ let dbFind = async (key) => {
 let dbDelete = async (id) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let results = await col.deleteOne({ 'data' : id.toString() })
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.deleteOne({'_id' : oid})
         .then((res) => {return res; })
         .catch((err) => { console.log('DB deleteOne failed', err); });
     client.close();

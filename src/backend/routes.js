@@ -12,78 +12,77 @@
 
 const express = require('express');
 const api = require('./api');
-
 const router = express.Router();
 
 // Backend API
-router.get('/api/hello', (req, res) => {
+router.get('/hello', (req, res) => {
     res.json('World');
 });
 
-router.get('/api/add', async (req, res) => {
+router.get('/add', async (req, res) => {
     try {
-        let note = await api.add(req.query.note);
-        res.json(note);
+        let response = await api.add(req.query.note);
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/list', async (req, res) => {
+router.get('/list', async (req, res) => {
     try {
-        let notes = await api.list();
-        res.json(notes);
+        let response = await api.list();
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/retrieve', async (req, res) => {
+router.get('/retrieve', async (req, res) => {
     try {
-        let note = await api.retrieve(req.query.id);
-        res.json(note);
+        let response = await api.retrieve(req.query.id);
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/edit', async (req, res) => {
+router.get('/edit', async (req, res) => {
     try {
-        let note = await api.edit(req.query.id);
-        res.json(note);
+        let response = await api.edit(req.query.id, req.query.note);
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/find', async (req, res) => {
+router.get('/find', async (req, res) => {
     try {
-        let notes = await api.list(req.query.key);
-        res.json(notes);
+        let response = await api.find(req.query.key);
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/del', async (req, res) => {
+router.get('/del', async (req, res) => {
     try {
-        let note = await api.del(req.query.id);
-        res.json(note);
+        let response = await api.del(req.query.id);
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
 
-router.get('/api/delall', async (req, res) => {
+router.get('/delall', async (req, res) => {
     try {
-        let note = await api.delAll();
-        res.json(note);
+        let response = await api.delAll();
+        res.json(response);
     } catch(err) {
         console.log(err);
         res.sendStatus(500);
