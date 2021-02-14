@@ -18,11 +18,6 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
 
-        // // get parms from the user
-        // const query = new URLSearchParams(window.location.search);
-        // let note = query.get('note');
-        // if (note == null) { note = 'My test note';}
-
         this.state = {
             list: [],
             err: null,
@@ -40,10 +35,7 @@ export default class App extends React.Component {
             return res.json();
         })
         .then(list => {
-            this.setState({
-                list,
-                isLoading: false
-            });
+            this.setState({ list, isLoading: false });
         })
         .catch(err => { 
             this.setState({
@@ -52,7 +44,6 @@ export default class App extends React.Component {
             });
             console.log(err); 
         });
-    
     }
 
     render() {
@@ -70,16 +61,26 @@ export default class App extends React.Component {
         
         return (
             <main className="container">
-                <h1 className="text-primary text-center">NoteQuest</h1>
-                    <section>
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"/>
+                <header>
+                    <h1>NoteQuest</h1>
+                </header>
+                <section className="grid-container">
+                    <nav className="grid-item grid-item1">nav bar goes here</nav>
+                    <aside className="grid-item grid-item2">
                         <ul>
                             {list.map(item => {
-                                return <li id={item._id} >
+                                return <li key={item._id} id={item._id} >
                                         { item.data }
                                     </li>
                             })}
                         </ul>
+                    </aside>
+                    <section className="grid-item grid-item3">
+                        note textbox goes here
                     </section>
+                    <footer className="grid-item grid-item4">footer goes here</footer>
+                </section>
             </main>
         )
     }

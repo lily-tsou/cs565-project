@@ -1,24 +1,22 @@
-.App {
-  text-align: center;
-}
+.grid-item1 { grid-area: item1; }
+.grid-item2 { grid-area: item2; }
+.grid-item3 { grid-area: item3; }
+.grid-item4 { grid-area: item4; }
+.grid-item5 { grid-area: item5; }
+.grid-item6 { grid-area: item6; }
+.grid-item7 { grid-area: item7; }
+.grid-item8 { grid-area: item8; }
+.grid-item9 { grid-area: item9; }
+.grid-item10 { grid-area: item10; }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    grid-template-areas:
+        'item1 item1 item1 item1 item1'
+        'item2 item3 item3 item3 item3'
+        'item2 item3 item3 item3 item3'        
+        'item4 item4 item4 item4 item4';
 }
