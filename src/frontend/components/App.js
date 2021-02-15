@@ -73,13 +73,17 @@ export default class App extends React.Component {
                         <ul className="notelist">
                             {list.map(item => {
                                 return <li className="noteitem" key={item._id} id={item._id} >
-                                        <a href="/"><img src={noteImg} width='50' height='50' /> { item.data.substr(0,5) } </a>
+                                        <a href="/"><img src={noteImg} width='50' height='50' /> { item.data.substr(0,6) } </a>
                                     </li>
                             })}
                         </ul>
                     </aside>
                     <section className="grid-item grid-item3">
-                        note textbox goes here
+                        <form>
+                            <div className="form-group">
+                                <textarea rows='20' name="notebody" className="form-control" id="notebody">  note body goes here</textarea>
+                            </div>
+                        </form>
                     </section>
                     <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
                 </section>
