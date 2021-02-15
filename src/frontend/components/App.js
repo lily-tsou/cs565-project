@@ -1,10 +1,6 @@
 /* App.js
 *
-    The core module of the client.  It defines a class component of React.
-    Fetching of data is done asynchronously via componentDidMount() which 
-    fetches via context routes defined in the server.  All response data
-    is stored as a React state.
-
+*    The core module of the client.  It defines a class component of React.
 *
 */
 
@@ -22,14 +18,13 @@ export default class App extends React.Component {
 
         this.state = {
             list: [],
-            value: ' ... your note goes here ...',
+            note: '',
             err: null,
             isLoading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
-
     };
 
     componentDidMount() {
@@ -47,18 +42,18 @@ export default class App extends React.Component {
     };
 
     handleChange(e) {
-        console.log("handleChange");
-        this.setState({ value: e.target.value });
-        console.log(e.target.value);
+        this.setState({ note: e.target.value });
+        console.log(this.state.note);
     };
 
     handleSubmit(e) {
-        alert('A note was submitted: ' + this.state.value);
+        alert('A note was submitted: ' + this.state.note);
         e.preventDefault();
     };
 
-    handleClick(e) {
-        console.log("handleClick: " + e);
+    handleClick(data) {
+        console.log("handleClick: " + data);
+        this.setState({ note: data});
     };
 
     render() {
@@ -85,7 +80,7 @@ export default class App extends React.Component {
                         <ul className="notelist">
                             {list.map(item => {
                                 return <li className="noteitem" key={item._id} id={item._id} >
-                                        <a onClick={this.handleClick} href="#"><img className="noteicon" src={noteImg}/>
+                                        <a onClick={() => this.handleClick(item.data)} href="#"><img className="noteicon" src={noteImg}/>
                                         { item.data.substr(0,6) } 
                                         </a>
                                     </li>
@@ -94,9 +89,7 @@ export default class App extends React.Component {
                     </aside>
                     <section className="grid-item grid-item3">
                         <form onSubmit={this.handleSubmit}>
-                            <textarea name="notebody" value={this.state.value} 
-                              onChange={(e) => this.handleChange(e)}
-                            />
+                            <textarea value={this.state.note} onChange={this.handleChange}/>
                             <div className="btn_row ">
                                 <input type="submit" className="btn btn_elem" value="Add" />
                                 <input type="submit" className="btn btn_elem" value="Edit" />
