@@ -22,10 +22,15 @@ export default class App extends React.Component {
 
         this.state = {
             list: [],
+            value: ' ... your note goes here ...',
             err: null,
             isLoading: false
         };
-    }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+
+    };
 
     componentDidMount() {
         this.setState({ isLoading: true });
@@ -39,20 +44,27 @@ export default class App extends React.Component {
             this.setState({ err, isLoading: false});
             console.log(err); 
         });
-    }
+    };
+
+    handleChange(e) {
+        console.log("handleChange");
+        this.setState({ value: e.target.value });
+        console.log(e.target.value);
+    };
+
+    handleSubmit(e) {
+        alert('A note was submitted: ' + this.state.value);
+        e.preventDefault();
+    };
+
+    handleClick(e) {
+        console.log("handleClick: " + e);
+    };
 
     render() {
-        let {list, err, isLoading} = this.state;
-        if(err) {
-            return (
-                <div> { err.message } </div>
-            );
-        }
-        if(isLoading) {
-            return (
-                <div> Loading... </div>
-            );
-        }
+        let {list, value, err, isLoading} = this.state;
+        if(err) { return (<div> { err.message } </div>); }
+        if(isLoading) { return (<div> Loading... </div>); }
         
         return (
             <main className="container">
@@ -73,17 +85,18 @@ export default class App extends React.Component {
                         <ul className="notelist">
                             {list.map(item => {
                                 return <li className="noteitem" key={item._id} id={item._id} >
-                                        <a href="/"><img src={noteImg} width='50' height='50' /> { item.data.substr(0,6) } </a>
+                                        <a onClick={this.handleClick} href="#"><img className="noteicon" src={noteImg}/>
+                                        { item.data.substr(0,6) } 
+                                        </a>
                                     </li>
                             })}
                         </ul>
                     </aside>
                     <section className="grid-item grid-item3">
-                        <form>
-                            <div className="form-group">
-                                <textarea rows='20' name="notebody" className="form-control" 
-                                  id="notebody" value="  note body"></textarea>
-                            </div>
+                        <form onSubmit={this.handleSubmit}>
+                            <textarea name="notebody" value={this.state.value} 
+                              onChange={(e) => this.handleChange(e)}
+                            />
                             <div className="btn_row ">
                                 <input type="submit" className="btn btn_elem" value="Add" />
                                 <input type="submit" className="btn btn_elem" value="Edit" />
@@ -96,5 +109,5 @@ export default class App extends React.Component {
                 </section>
             </main>
         )
-    }
-}
+    };
+};
