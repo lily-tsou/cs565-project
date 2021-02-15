@@ -42,6 +42,9 @@ a:active {
   border: 1px solid #888;
 }
 
+.btn_row { width: 100%; }
+.btn_elem { width: 20%; }
+
 .grid-item1 { grid-area: item1; border: 1px solid; }
 .grid-item2 { grid-area: item2; border: 1px solid; }
 .grid-item3 { grid-area: item3; border: 1px solid; }

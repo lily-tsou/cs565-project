@@ -81,7 +81,14 @@ export default class App extends React.Component {
                     <section className="grid-item grid-item3">
                         <form>
                             <div className="form-group">
-                                <textarea rows='20' name="notebody" className="form-control" id="notebody">  note body goes here</textarea>
+                                <textarea rows='20' name="notebody" className="form-control" 
+                                  id="notebody" value="  note body"></textarea>
+                            </div>
+                            <div className="btn_row ">
+                                <input type="submit" className="btn btn_elem" value="Add" />
+                                <input type="submit" className="btn btn_elem" value="Edit" />
+                                <input type="submit" className="btn btn_elem" value="Resubmit" />
+                                <input type="submit" className="btn btn_elem" value="Delete" />
                             </div>
                         </form>
                     </section>
