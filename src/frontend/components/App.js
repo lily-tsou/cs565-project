@@ -18,13 +18,13 @@ export default class App extends React.Component {
 
         this.state = {
             list: [],
-            note: '',
+            note: { id: null, data: '' },
             err: null,
             isLoading: false
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleButtonAction = this.handleButtonAction.bind(this);
+        this.handleListSelect = this.handleListSelect.bind(this);
     };
 
     componentDidMount() {
@@ -46,14 +46,28 @@ export default class App extends React.Component {
         console.log(this.state.note);
     };
 
-    handleSubmit(e) {
-        alert('A note was submitted: ' + this.state.note);
+    handleButtonAction(e) {
+        switch(e.target.name) {
+            case 'add':
+                console.log('Add: ' + this.state.note.data);
+                break;
+            case 'edit':
+                console.log('Edit: ' + this.state.note.id + ' ' + this.state.note.data);
+                break;
+            case 'resubmit':
+                console.log('Resubmit: ' + this.state.note.id + ' ' + this.state.note.data);
+                break;
+            case 'delete':
+                console.log('Delete: ' + this.state.note.id );
+                break;                
+            default:
+                break;
+        }
         e.preventDefault();
     };
 
-    handleClick(data) {
-        console.log("handleClick: " + data);
-        this.setState({ note: data});
+    handleListSelect(id, data) {
+        this.setState({ note: {id: id, data: data} });
     };
 
     render() {
@@ -80,7 +94,7 @@ export default class App extends React.Component {
                         <ul className="notelist">
                             {list.map(item => {
                                 return <li className="noteitem" key={item._id} id={item._id} >
-                                        <a onClick={() => this.handleClick(item.data)} href="#"><img className="noteicon" src={noteImg}/>
+                                        <a onClick={() => this.handleListSelect(item._id, item.data)} href="#"><img className="noteicon" src={noteImg}/>
                                         { item.data.substr(0,6) } 
                                         </a>
                                     </li>
@@ -88,15 +102,13 @@ export default class App extends React.Component {
                         </ul>
                     </aside>
                     <section className="grid-item grid-item3">
-                        <form onSubmit={this.handleSubmit}>
-                            <textarea value={this.state.note} onChange={this.handleChange}/>
-                            <div className="btn_row ">
-                                <input type="submit" className="btn btn_elem" value="Add" />
-                                <input type="submit" className="btn btn_elem" value="Edit" />
-                                <input type="submit" className="btn btn_elem" value="Resubmit" />
-                                <input type="submit" className="btn btn_elem" value="Delete" />
-                            </div>
-                        </form>
+                        <textarea value={this.state.note.data} onChange={this.handleChange}/>
+                        <div className="btn_row ">
+                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="add">Add</button>
+                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="edit">Edit</button>
+                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="resubmit">Resubmit</button>
+                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="delete">Delete</button>
+                        </div>
                     </section>
                     <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
                 </section>
