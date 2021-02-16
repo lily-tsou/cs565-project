@@ -27,8 +27,7 @@ export default class App extends React.Component {
         this.handleListSelect = this.handleListSelect.bind(this);
     };
 
-    componentDidMount() {
-        this.setState({ isLoading: true });
+    apiList() {
         fetch(url + '/list')
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
@@ -41,8 +40,45 @@ export default class App extends React.Component {
         });
     };
 
+    apiAdd(uri) {
+        fetch(uri)
+        .then(res => {
+            if(res.status >= 300) { throw new Error(res.statusText); }
+            return res.json();
+        })
+        .catch(err => { 
+            console.log(err); 
+        });    
+    }
+
+    apiEdit(uri) {
+        fetch(uri)
+        .then(res => {
+            if(res.status >= 300) { throw new Error(res.statusText); }
+            return res.json();
+        })
+        .catch(err => { 
+            console.log(err); 
+        });    
+    }
+
+    apiDel(uri) {
+        fetch(uri)
+        .then(res => {
+            if(res.status >= 300) { throw new Error(res.statusText); }
+            return res.json();
+        })
+        .catch(err => { 
+            console.log(err); 
+        });    
+    }
+
+    componentDidMount() {
+        this.apiList();
+    };
+
     handleChange(e) {
-        this.setState({ note: e.target.value });
+        this.setState({ note: {id: this.state.note.id, data: e.target.value }});
         console.log(this.state.note);
     };
 
@@ -50,15 +86,18 @@ export default class App extends React.Component {
         switch(e.target.name) {
             case 'add':
                 console.log('Add: ' + this.state.note.data);
-                break;
-            case 'edit':
-                console.log('Edit: ' + this.state.note.id + ' ' + this.state.note.data);
+                this.apiAdd(url + '/add?note=' + this.state.note.data);
+                this.apiList();
                 break;
             case 'resubmit':
                 console.log('Resubmit: ' + this.state.note.id + ' ' + this.state.note.data);
+                this.apiEdit(url + '/edit?id=' + this.state.note.id + '&note=' + this.state.note.data );
+                this.apiList();
                 break;
             case 'delete':
                 console.log('Delete: ' + this.state.note.id );
+                this.apiDel(url + '/del?id=' + this.state.note.id);
+                this.apiList();
                 break;                
             default:
                 break;
@@ -105,7 +144,6 @@ export default class App extends React.Component {
                         <textarea value={this.state.note.data} onChange={this.handleChange}/>
                         <div className="btn_row ">
                             <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="add">Add</button>
-                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="edit">Edit</button>
                             <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="resubmit">Resubmit</button>
                             <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="delete">Delete</button>
                         </div>
