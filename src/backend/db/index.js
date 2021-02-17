@@ -4,47 +4,114 @@
 *
 */
 
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
+const mongodb = require('mongodb');
+const user = 'mongodb';
+const passwd = 'mongodb';
 const dbName = 'notequest';
+const url = "mongodb+srv://" + user + ":" + passwd + "@cluster0.cn7yg.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
+const dbColName = 'notes';
 
-// Test for MongoDB server connection
-MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
-    if(err) {
-        console.log("MongoDB not responding");
-    } else {
-        console.log("Connected successfully to server");
-        // db = client.db(dbName);
-        client.close();
-    }
-});
+// Private helper functions
+let dbClient = async () => {
+    return await mongodb.MongoClient.connect(url, { useUnifiedTopology: true })
+        .then((res) => { return res; })
+        .catch((err) => { console.log('DB connection failed', err) });
+}; 
 
-let dbAdd = (note) => {
-    MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-        if(err) { throw err; }
-        db = client.db(dbName);
-        let newRec = { data: note };
-        db.collection('notes').insertOne(newRec, (err, res) => {
-            if(err) { throw err; }
-            console.log("Inserted document: " + newRec.data + " Inserted Count: " + res.insertedCount);
-            client.close();
-        });
-    });
-    return "Added: " + note;
-}
-
-let dbList = async (callback) => {
-    await MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-        if(err) { throw err; }
-        const db = client.db(dbName);
-        db.collection('notes').find({}).toArray().then((docs) => {
-            callback(docs);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            client.close();
-        });
-    });
+let dbCol = async (client) => {
+    const db = await client.db(dbName);
+    const col = await db.collection(dbColName);
+    return col;
 };
 
-module.exports = { dbAdd, dbList };
+// Test db server connect when module initializes
+dbClient()
+    .then((res) => { 
+        console.log("Connected successfully to server");
+        res.close();
+     })
+    .catch((err) => { console.log("MongoDB not responding"); });
+
+// API implementations
+let dbAdd = async (note) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let newRec = { data: note };
+    let results = await col.insertOne(newRec)
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB insertOne failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbList = async () => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let results = await col.find({}).toArray()
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB find all failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbRetrieve = async (id) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.find({ '_id': oid}).toArray()
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB find from id failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbEdit = async (id, note) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.updateOne({ '_id' : oid}, { $set: {'data': note}})
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB updateOne failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbFind = async (key) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let results = await col.find({'data': new RegExp(key)}).toArray()
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB find from query filter failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbDelete = async (id) => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let oid = new mongodb.ObjectID(id);
+    let results = await col.deleteOne({'_id' : oid})
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB deleteOne failed', err); });
+    client.close();
+
+    return results;
+};
+
+let dbDeleteAll = async () => {
+    const client = await dbClient();
+    const col = await dbCol(client);
+    let results = await col.deleteMany({})
+        .then((res) => {return res; })
+        .catch((err) => { console.log('DB deleteMany failed', err); });
+    client.close();
+
+    return results;
+};
+
+module.exports = { dbAdd, dbList, dbRetrieve, dbEdit, dbFind, dbDelete, dbDeleteAll };
