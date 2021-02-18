@@ -6,6 +6,9 @@
 
 import React from 'react';
 import '../styles/App.css';
+import NotePreview from './NotePreview';
+import Search from './Search'
+import {useState} from 'react';
 
 const url = 'http://localhost';
 const noteImg = 'https://icons.iconarchive.com/icons/johanchalibert/mac-osx-yosemite/1024/notes-icon.png';
@@ -20,7 +23,8 @@ export default class App extends React.Component {
             list: [],
             note: { id: null, data: '' },
             err: null,
-            isLoading: false
+            isLoading: false,
+            searchField: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonAction = this.handleButtonAction.bind(this);
@@ -39,7 +43,7 @@ export default class App extends React.Component {
             console.log(err); 
         });
     };
-
+    
     apiAdd(uri) {
         fetch(uri)
         .then(res => {
@@ -105,6 +109,19 @@ export default class App extends React.Component {
         e.preventDefault();
     };
 
+    findNotes(e){
+        console.log('hello ' + e);
+        fetch(url + '/find?key='+e)
+        .then(res => {
+            if(res.status >= 300) { throw new Error(res.statusText); }
+            return res.json();
+        })
+        .then(list => { this.setState({ list}); console.log(list) })
+        .catch(err => { 
+            console.log(err); 
+        });
+    }
+
     handleListSelect(id, data) {
         this.setState({ note: {id: id, data: data} });
     };
@@ -131,12 +148,14 @@ export default class App extends React.Component {
                     </nav>
                     <aside className="grid-item grid-item2">
                         <ul className="notelist">
+                            <Search handleChange={(e) => this.findNotes(e.target.value)}/>
                             {list.map(item => {
-                                return <li className="noteitem" key={item._id} id={item._id} >
-                                        <a onClick={() => this.handleListSelect(item._id, item.data)} href="#"><img className="noteicon" src={noteImg}/>
-                                        { item.data.substr(0,6) } 
-                                        </a>
-                                    </li>
+                                return <li className="noteitem" key={item._id} id={item._id}>
+                                    <a onClick={() => this.handleListSelect(item._id, item.data)} href="#"> 
+                                    { <NotePreview title = {item.data}
+                                      body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '/>} 
+                                </a>
+                                </li>
                             })}
                         </ul>
                     </aside>
