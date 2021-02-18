@@ -17,29 +17,45 @@ h1 {
 
 a {
   text-decoration: none;
+  color:black;
+}
+
+a:link {
+  text-decoration: none;
+  color:black;
+}
+
+a:visited {
+  text-decoration: none;
+  color:black;
 }
 
 a:hover {
-  color: var(--teal);
-  text-decoration: underline;
+  text-decoration: none;
+  color:black;
 }
 
 a:focus {
-  color: var(--teal);
-  text-decoration: underline;
+  text-decoration: none;
+  color:black;
 }
 
 a:active {
-  color: var(--teal);
-  text-decoration: underline;
+  text-decoration: none;
+  color:black;
 }
 
 .notelist {
   list-style-type: none;
+  padding: 5px;
+  text-align: center;
 }
 
 .noteitem {
-  border: 1px solid #888;
+  /* border: 1px solid #888; */
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .noteicon {
@@ -80,6 +96,12 @@ textarea {
         'item2 item3 item3 item3 item3'                
         'item4 item4 item4 item4 item4';
 }
+
+aside{
+  width:300px;
+  height: 500px;
+  overflow-y:scroll;
+  }
 
 footer {
   width: 100%;
