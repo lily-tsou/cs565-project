@@ -148,8 +148,7 @@ export default class App extends React.Component {
                     </nav>
                     <aside className="grid-item grid-item2">
                         <ul className="notelist">
-                            <Search placeholder = "Search Notes... #xf002" 
-                                handleChange={(e) => this.findNotes(e.target.value)}/>
+                            <Search handleChange={(e) => this.findNotes(e.target.value)}/>
                             {list.map(item => {
                                 return <li className="noteitem" key={item._id} id={item._id}>
                                     <a onClick={() => this.handleListSelect(item._id, item.data)} href="#"> 
