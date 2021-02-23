@@ -14,10 +14,11 @@ let startServer = () => {
     const app = express();
 
     app.use(express.static('public'));
-    app.use(routes);
     app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-    }); 
+        res.setHeader("Access-Control-Allow-Origin", "*");
+    });
+    app.use(routes);
+ 
 
     const port = process.env.PORT || 80;
     const rc = app.listen(port, () => console.log(`Server listening on port: ${port}`));
