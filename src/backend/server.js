@@ -15,6 +15,9 @@ let startServer = () => {
 
     app.use(express.static('public'));
     app.use(routes);
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+    }); 
 
     const port = process.env.PORT || 80;
     const rc = app.listen(port, () => console.log(`Server listening on port: ${port}`));
