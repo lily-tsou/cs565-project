@@ -1,0 +1,40 @@
+.editbar{
+    display:flex;
+    height: 50px;
+    width: 100%;
+    padding: 5px;
+    justify-content: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid black;
+}
+
+.editbar-button{
+    border: 2px solid #949494;
+    color: #F6F6F6;
+    background-color: #616161;
+    border-style: solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.editbar-button:hover{
+    background-color: #505050;
+}
+
+.editbar-button:disabled{
+    background-color: #E8E8E8;
+    color: #616161;
+    border: 2px solid #E1E1E1;
+}
+
+
+#editMode{
+    text-align: center;
+    margin-right: auto;
+
+}
