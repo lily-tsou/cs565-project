@@ -9,6 +9,7 @@ import '../styles/App.css';
 import NotePreview from './NotePreview';
 import Search from './Search'
 import {useState} from 'react';
+import EditBar from './EditBar'
 
 const url = 'http://localhost';
 const noteImg = 'https://icons.iconarchive.com/icons/johanchalibert/mac-osx-yosemite/1024/notes-icon.png';
@@ -24,11 +25,14 @@ export default class App extends React.Component {
             note: { id: null, data: '' },
             err: null,
             isLoading: false,
-            searchField: ''
+            searchField: '',
+            readonly: true
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleButtonAction = this.handleButtonAction.bind(this);
         this.handleListSelect = this.handleListSelect.bind(this);
+        this.editNote = this.editNote.bind(this);
+
     };
 
     apiList() {
@@ -79,6 +83,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         this.apiList();
+        document.getElementById('save').disabled = true;
     };
 
     handleChange(e) {
@@ -110,7 +115,7 @@ export default class App extends React.Component {
     };
 
     findNotes(e){
-        console.log('hello ' + e);
+        //console.log('hello ' + e);
         fetch(url + '/find?key='+e)
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
@@ -122,8 +127,22 @@ export default class App extends React.Component {
         });
     }
 
+    editNote(){
+        document.getElementById('note-title').readOnly = false;
+        document.getElementById('note-body').readOnly = false;
+        this.setState({readonly: false});
+        document.getElementById('editMode').disabled = true;
+        document.getElementById('save').disabled = false;
+        
+    }
+
     handleListSelect(id, data) {
         this.setState({ note: {id: id, data: data} });
+        this.setState({readonly: true});
+        document.getElementById('note-title').readOnly = true;
+        document.getElementById('note-body').readOnly = true;
+        document.getElementById('editMode').disabled = false;
+        document.getElementById('save').disabled = true;
     };
 
     render() {
@@ -160,12 +179,16 @@ export default class App extends React.Component {
                         </ul>
                     </aside>
                     <section className="grid-item grid-item3">
-                        <textarea value={this.state.note.data} onChange={this.handleChange}/>
-                        <div className="btn_row ">
-                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="add">Add</button>
-                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="resubmit">Resubmit</button>
-                            <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="delete">Delete</button>
-                        </div>
+                        <div className = "editor">
+                            {/* <div className="btn_row ">
+                                <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="add">Add</button>
+                                <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="delete">Delete</button>
+                                {editSave}
+                             </div> */}
+                             <EditBar readonly = {this.state.readonly} editAction = {this.editNote} buttonAction = {this.handleButtonAction}/>
+                            <textarea readOnly id = "note-title" value={this.state.note.data} onChange={this.handleChange}/>
+                            <textarea readOnly id = "note-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
+                        </div>   
                     </section>
                     <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
                 </section>

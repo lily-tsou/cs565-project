@@ -26,6 +26,10 @@
     overflow-y: hidden;
 }
 
+.card-content:hover{
+    text-decoration: none;
+}
+
 .card-body{
     margin: auto;
 }
