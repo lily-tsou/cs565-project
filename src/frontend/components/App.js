@@ -83,7 +83,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         this.apiList();
-        // document.getElementById('note-title').readOnly = true;
+        document.getElementById('save').disabled = true;
     };
 
     handleChange(e) {
