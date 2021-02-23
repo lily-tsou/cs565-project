@@ -35,7 +35,7 @@ export default class App extends React.Component {
     };
 
     apiList() {
-        fetch(url + '/list')
+        fetch(url + '/list', { mode: 'no-cors' })
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
             return res.json();
@@ -48,7 +48,7 @@ export default class App extends React.Component {
     };
     
     apiAdd(uri) {
-        fetch(uri)
+        fetch(uri, { mode: 'no-cors' } )
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
             return res.json();
@@ -59,7 +59,7 @@ export default class App extends React.Component {
     }
 
     apiEdit(uri) {
-        fetch(uri)
+        fetch(uri, { mode: 'no-cors' })
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
             return res.json();
@@ -70,7 +70,7 @@ export default class App extends React.Component {
     }
 
     apiDel(uri) {
-        fetch(uri)
+        fetch(uri, { mode: 'no-cors' })
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
             return res.json();
