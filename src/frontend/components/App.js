@@ -11,8 +11,8 @@ import Search from './Search'
 import {useState} from 'react';
 import EditBar from './EditBar'
 
-// const url = 'http://localhost';
-const url = 'http://35.233.240.239';
+const url = 'http://localhost';
+// const url = 'http://35.233.240.239';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 export default class App extends React.Component {
 
