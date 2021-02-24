@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/search.css';
+import '../styles/Search.css';
 
 
 function Search(props) {

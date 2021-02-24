@@ -6,14 +6,10 @@
 
 import React from 'react';
 import '../styles/HomePage.css';
-import NotePreview from './NotePreview';
-import Search from './Search'
-import {useState} from 'react';
 import EditBar from './EditBar'
 import SideBar from './SideBar'
 
-const url = 'http://localhost';
-const noteImg = 'https://icons.iconarchive.com/icons/johanchalibert/mac-osx-yosemite/1024/notes-icon.png';
+const url = '';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
 export default class HomePage extends React.Component {

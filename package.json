@@ -15,7 +15,6 @@
     "css-loader": "^5.0.2",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
-    "font-awesome": "^4.7.0",
     "html-webpack-plugin": "^5.0.0",
     "mongodb": "^3.6.3",
     "nodemon": "^2.0.7",
@@ -40,5 +39,6 @@
   },
   "devDependencies": {
     "webpack-cli": "^4.5.0"
-  }
+  },
+  "proxy": "http://localhost:80"
 }

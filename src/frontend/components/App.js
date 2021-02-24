@@ -6,8 +6,6 @@
 
 import React from 'react';
 import HomePage from './HomePage'
-import {useState} from 'react';
-
 export default class App extends React.Component {
 
     constructor(props) {
@@ -32,8 +30,6 @@ export default class App extends React.Component {
         
         else
             page = <p> Hello </p>
-
-        
 
         return(
             <div>
