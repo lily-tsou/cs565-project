@@ -8,12 +8,9 @@ import React from 'react';
 import '../styles/App.css';
 import NotePreview from './NotePreview';
 import Search from './Search'
-import {useState} from 'react';
 import EditBar from './EditBar'
 
 const url = '';
-// const url = 'http://localhost';
-// const url = 'http://35.233.240.239';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 export default class App extends React.Component {
 
@@ -115,7 +112,6 @@ export default class App extends React.Component {
     };
 
     findNotes(e){
-        //console.log('hello ' + e);
         fetch(url + '/find?key='+e)
         .then(res => {
             if(res.status >= 300) { throw new Error(res.statusText); }
@@ -180,11 +176,6 @@ export default class App extends React.Component {
                     </aside>
                     <section className="grid-item grid-item3">
                         <div className = "editor">
-                            {/* <div className="btn_row ">
-                                <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="add">Add</button>
-                                <button type="button" className="btn btn_elem" onClick={this.handleButtonAction} name="delete">Delete</button>
-                                {editSave}
-                             </div> */}
                              <EditBar readonly = {this.state.readonly} editAction = {this.editNote} buttonAction = {this.handleButtonAction}/>
                             <textarea readOnly id = "note-title" value={this.state.note.data} onChange={this.handleChange}/>
                             <textarea readOnly id = "note-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
