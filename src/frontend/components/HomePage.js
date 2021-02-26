@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/HomePage.css';
+import '../styles/App.css';
 import EditBar from './EditBar';
 import SideBar from './SideBar';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
+const sampleNote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
 export default function HomePage(props) {
 
@@ -35,10 +36,10 @@ export default function HomePage(props) {
             case 'save':
                 console.log('Edit: ' + note.id + ' ' + note.data);
                 await apiEdit(note.id, note.data);
-                setList( await apiList() );
                 document.getElementById('save').disabled = true;
                 setReadOnly(true);
                 document.getElementById('editMode').disabled = false;
+                setList( await apiList() );
                 break;
             case 'delete':
                 console.log('Delete: ' + note.id );
@@ -95,7 +96,7 @@ export default function HomePage(props) {
                     <div className = "editor">
                         <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>
                         <textarea readOnly id = "note-title" value={note.data} onChange={handleChange}/>
-                        <textarea readOnly id = "note-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
+                        <textarea readOnly id = "note-body" value={sampleNote}/>
                     </div>
                 </section>
                 <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>

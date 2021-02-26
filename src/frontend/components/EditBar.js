@@ -1,4 +1,4 @@
-import '../styles/EditBar.css'
+import '../styles/App.css'
 import React from 'react'
 
 export default function EditBar(props) {
