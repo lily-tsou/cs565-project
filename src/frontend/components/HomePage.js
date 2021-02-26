@@ -9,7 +9,8 @@ const sampleNote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 
 export default function HomePage(props) {
 
-    let [user, setUser] = useState('sang-il');
+    let [user, setUser] = useState('');
+    let [junk, setJunk] = useState('');
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
     let [err, setErr] = useState(null);
@@ -17,15 +18,19 @@ export default function HomePage(props) {
     let [readOnly, setReadOnly] = useState(true);
 
     useEffect( async () => {
+        setUser(props.user);  // this doesn't appear to stick, why??
         setIsLoading(true);
         setList( await apiList(props.user) );
         setIsLoading(false);
         document.getElementById('save').disabled = true;
-        setUser(props.user);
     }, []);
 
-    let handleChange = (e) => {
-        setNote( {id: note.id, data: e.target.value } );
+    let handleTitleChange = (e) => {
+        setCurrent( {id: current.id, title: e.target.value, note: current.note } );
+    };
+
+    let handleNoteChange = (e) => {
+        setCurrent( {id: current.id, title: current.title, note: e.target.value } );
     };
 
     let handleButtonAction = async (e) => {
@@ -97,8 +102,8 @@ export default function HomePage(props) {
                 <section className="grid-item grid-item3">
                     <div className = "editor">
                         <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>
-                        <textarea readOnly id = "note-title" value={current.title} onChange={handleChange}/>
-                        <textarea readOnly id = "note-body" value={current.note}/>
+                        <textarea readOnly id = "note-title" value={current.title} onChange={handleTitleChange}/>
+                        <textarea readOnly id = "note-body" value={current.note} onChange={handleNoteChange}/>
                     </div>
                 </section>
                 <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>

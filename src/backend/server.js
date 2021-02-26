@@ -24,8 +24,6 @@ app.post('/add', async (req, res) => {
 app.post('/list', async (req, res) => {
     try {
         const {user} = req.body;
-        console.log(`Incoming list ${user}`);
-
         let response = await api.list(user);
         res.json(response);
     } catch(err) {
