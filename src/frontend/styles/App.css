@@ -29,32 +29,7 @@ h1 {
     display: inline;
 }
 
-a {
-    text-decoration: none;
-    color:black;
-}
-
-a:link {
-    text-decoration: none;
-    color:black;
-}
-
-a:visited {
-    text-decoration: none;
-    color:black;
-}
-
-a:hover {
-    text-decoration: none;
-    color:black;
-}
-
-a:focus {
-    text-decoration: none;
-    color:black;
-}
-
-a:active {
+.notecard, .notecard:visited, .notecard:hover, .notecard:active, .notecard:link, .notecard:focus {
     text-decoration: none;
     color:black;
 }

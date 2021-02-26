@@ -11,7 +11,7 @@ function SideBar(props) {
                 <Search handleChange={props.handleSearchChange}/>
                     {props.NoteList.map(item => {
                         return <li className="noteitem" key={item._id} id={item._id}>
-                            <a onClick={() => props.handleOnClick(item._id, item.data)} href="#"> 
+                            <a className="notecard" onClick={() => props.handleOnClick(item._id, item.data)} href="#"> 
                             { <NotePreview title = {item.data} body = {samplePreview} /> }
                             </a>
                         </li>
