@@ -9,17 +9,19 @@ const sampleNote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 
 export default function HomePage(props) {
 
+    let [user, setUser] = useState('sang-il');
     let [list, setList] = useState([]);
-    let [note, setNote] = useState({ id: null, data: '' });
+    let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
     let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
 
     useEffect( async () => {
         setIsLoading(true);
-        setList( await apiList() );
+        setList( await apiList(props.user) );
         setIsLoading(false);
         document.getElementById('save').disabled = true;
+        setUser(props.user);
     }, []);
 
     let handleChange = (e) => {
@@ -29,22 +31,22 @@ export default function HomePage(props) {
     let handleButtonAction = async (e) => {
         switch(e.target.name) {
             case 'add':
-                console.log('Add: ' + note.data);
-                await apiAdd(note.data);
-                setList( await apiList() );
+                console.log('Add: ' + current.title);
+                await apiAdd(user, current.title, current.note);
+                setList( await apiList(user) );
                 break;
             case 'save':
-                console.log('Edit: ' + note.id + ' ' + note.data);
-                await apiEdit(note.id, note.data);
+                console.log('Edit: ' + current.id + ' ' + current.title);
+                await apiEdit(user, current.id, current.title, current.note);
                 document.getElementById('save').disabled = true;
                 setReadOnly(true);
                 document.getElementById('editMode').disabled = false;
-                setList( await apiList() );
+                setList( await apiList(user) );
                 break;
             case 'delete':
-                console.log('Delete: ' + note.id );
-                await apiDel(note.id);
-                setList( await apiList() );
+                console.log('Delete: ' + current.id );
+                await apiDel(user, current.id);
+                setList( await apiList(user) );
                 break;                
             default:
                 break;
@@ -60,8 +62,8 @@ export default function HomePage(props) {
         document.getElementById('save').disabled = false;
     };
 
-    let handleListSelect = (id, data) => {
-        setNote( {id: id, data: data} );
+    let handleListSelect = (id, title, note) => {
+        setCurrent( {id: id, title: title, note: note} );
         setReadOnly(true);
         document.getElementById('note-title').readOnly = true;
         document.getElementById('note-body').readOnly = true;
@@ -70,7 +72,7 @@ export default function HomePage(props) {
     };
 
     let handleSearchChange = async (e) => {
-        setList( await apiFind(e.target.value) );
+        setList( await apiFind(user, e.target.value) );
     };
 
     if(err) { return (<div> { err.message } </div>); }
@@ -95,8 +97,8 @@ export default function HomePage(props) {
                 <section className="grid-item grid-item3">
                     <div className = "editor">
                         <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>
-                        <textarea readOnly id = "note-title" value={note.data} onChange={handleChange}/>
-                        <textarea readOnly id = "note-body" value={sampleNote}/>
+                        <textarea readOnly id = "note-title" value={current.title} onChange={handleChange}/>
+                        <textarea readOnly id = "note-body" value={current.note}/>
                     </div>
                 </section>
                 <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>

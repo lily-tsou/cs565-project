@@ -6,8 +6,8 @@
 
 const  { dbEdit } = require('../db');
 
-const edit = async (id, note) => {
-    let result = await dbEdit(id, note)
+const edit = async (user, id, title, note) => {
+    let result = await dbEdit(user, id, title, note)
     .then((res) => { return res; })
     .catch((err) => { return console.log('dbEdit failed', err) });
 

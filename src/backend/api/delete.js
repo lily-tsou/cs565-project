@@ -6,9 +6,9 @@
 
 const  { dbDelete } = require('../db');
 
-const del = async (id) => {
+const del = async (user, id) => {
 
-    let result = await dbDelete(id)
+    let result = await dbDelete(user, id)
     .then((res) => { return res; })
     .catch((err) => { return console.log('dbDelete failed', err) });
 

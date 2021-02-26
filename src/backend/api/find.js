@@ -6,9 +6,9 @@
 
 const  { dbFind } = require('../db');
 
-let find = async (key) => {
+let find = async (user, key) => {
 
-    let result = await dbFind(key)
+    let result = await dbFind(user, key)
         .then((res) => { return res; })
         .catch((err) => { return console.log('dbFind failed', err) });
 
