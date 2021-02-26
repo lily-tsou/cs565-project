@@ -1,109 +1,49 @@
-/* App.js
-*
-*    The core module of the client.  It defines a class component of React.
-*
-*/
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/HomePage.css';
-import EditBar from './EditBar'
-import SideBar from './SideBar'
+import EditBar from './EditBar';
+import SideBar from './SideBar';
+import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
-const url = '';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
-export default class HomePage extends React.Component {
+export default function HomePage(props) {
 
-    constructor(props) {
-        super(props);
+    let [list, setList] = useState([]);
+    let [note, setNote] = useState({ id: null, data: '' });
+    let [err, setErr] = useState(null);
+    let [isLoading, setIsLoading] = useState(false);
+    let [readOnly, setReadOnly] = useState(true);
 
-        this.state = {
-            list: [],
-            note: { id: null, data: '' },
-            err: null,
-            isLoading: false,
-            readonly: true
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleButtonAction = this.handleButtonAction.bind(this);
-        this.handleListSelect = this.handleListSelect.bind(this);
-        this.editNote = this.editNote.bind(this);
-
-    };
-
-    apiList() {
-        fetch(url + '/list')
-        .then(res => {
-            if(res.status >= 300) { throw new Error(res.statusText); }
-            return res.json();
-        })
-        .then(list => { this.setState({ list, isLoading: false }); })
-        .catch(err => { 
-            this.setState({ err, isLoading: false});
-            console.log(err); 
-        });
-    };
-    
-    apiAdd(uri) {
-        fetch(uri)
-        .then(res => {
-            if(res.status >= 300) { throw new Error(res.statusText); }
-            return res.json();
-        })
-        .catch(err => { 
-            console.log(err); 
-        });    
-    }
-
-    apiEdit(uri) {
-        fetch(uri)
-        .then(res => {
-            if(res.status >= 300) { throw new Error(res.statusText); }
-            return res.json();
-        })
-        .catch(err => { 
-            console.log(err); 
-        });    
-    }
-
-    apiDel(uri) {
-        fetch(uri)
-        .then(res => {
-            if(res.status >= 300) { throw new Error(res.statusText); }
-            return res.json();
-        })
-        .catch(err => { 
-            console.log(err); 
-        });    
-    }
-
-    componentDidMount() {
-        this.apiList();
-        console.log("Mount");
+    useEffect( async () => {
+        setIsLoading(true);
+        setList( await apiList() );
+        setIsLoading(false);
         document.getElementById('save').disabled = true;
+    }, []);
+
+    let handleChange = (e) => {
+        setNote( {id: note.id, data: e.target.value } );
     };
 
-    handleChange(e) {
-        this.setState({ note: {id: this.state.note.id, data: e.target.value }});
-        console.log(this.state.note);
-    };
-
-    handleButtonAction(e) {
+    let handleButtonAction = async (e) => {
         switch(e.target.name) {
             case 'add':
-                console.log('Add: ' + this.state.note.data);
-                this.apiAdd(url + '/add?note=' + this.state.note.data);
-                this.apiList();
+                console.log('Add: ' + note.data);
+                await apiAdd(note.data);
+                setList( await apiList() );
                 break;
-            case 'resubmit':
-                console.log('Resubmit: ' + this.state.note.id + ' ' + this.state.note.data);
-                this.apiEdit(url + '/edit?id=' + this.state.note.id + '&note=' + this.state.note.data );
-                this.apiList();
+            case 'save':
+                console.log('Edit: ' + note.id + ' ' + note.data);
+                await apiEdit(note.id, note.data);
+                setList( await apiList() );
+                document.getElementById('save').disabled = true;
+                setReadOnly(true);
+                document.getElementById('editMode').disabled = false;
                 break;
             case 'delete':
-                console.log('Delete: ' + this.state.note.id );
-                this.apiDel(url + '/del?id=' + this.state.note.id);
-                this.apiList();
+                console.log('Delete: ' + note.id );
+                await apiDel(note.id);
+                setList( await apiList() );
                 break;                
             default:
                 break;
@@ -111,67 +51,55 @@ export default class HomePage extends React.Component {
         e.preventDefault();
     };
 
-    findNotes(e){
-        fetch(url + '/find?key='+e)
-        .then(res => {
-            if(res.status >= 300) { throw new Error(res.statusText); }
-            return res.json();
-        })
-        .then(list => { this.setState({ list}); console.log(list) })
-        .catch(err => { 
-            console.log(err); 
-        });
-    }
-
-    editNote(){
+    let editNote = () => {
         document.getElementById('note-title').readOnly = false;
         document.getElementById('note-body').readOnly = false;
-        this.setState({readonly: false});
+        setReadOnly(false);
         document.getElementById('editMode').disabled = true;
         document.getElementById('save').disabled = false;
-        
-    }
+    };
 
-    handleListSelect(id, data) {
-        this.setState({ note: {id: id, data: data} });
-        this.setState({readonly: true});
+    let handleListSelect = (id, data) => {
+        setNote( {id: id, data: data} );
+        setReadOnly(true);
         document.getElementById('note-title').readOnly = true;
         document.getElementById('note-body').readOnly = true;
         document.getElementById('editMode').disabled = false;
         document.getElementById('save').disabled = true;
     };
 
-    render() {
-        let {list, value, err, isLoading} = this.state;
-        if(err) { return (<div> { err.message } </div>); }
-        if(isLoading) { return (<div> Loading... </div>); }
-        
-        return (
-            <main className="container">
-                <link rel="stylesheet" type="text/css" href={bootstrap}/>
-                <header>
-                    <h1>NoteQuest</h1>
-                </header>
-                <section className="grid-container">
-                    <nav className="grid-item grid-item1">
-                        <ul className="navbar">
-                            <li className="navitem"><a href="#">New</a></li>
-                            <li className="navitem"><a href="#">Sort</a></li>
-                            <li className="navitem"><a href="#">Dark Mode</a></li>
-                            <li className="navitem"><a href="#">Contact</a></li>
-                        </ul>
-                    </nav>
-                    <SideBar handleSearchChange = {(e) => this.findNotes(e.target.value)} NoteList = {this.state.list} handleOnClick = {this.handleListSelect}/>
-                    <section className="grid-item grid-item3">
-                        <div className = "editor">
-                             <EditBar readonly = {this.state.readonly} editAction = {this.editNote} buttonAction = {this.handleButtonAction}/>
-                            <textarea readOnly id = "note-title" value={this.state.note.data} onChange={this.handleChange}/>
-                            <textarea readOnly id = "note-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
-                        </div>   
-                    </section>
-                    <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
-                </section>
-            </main>
-        )
+    let handleSearchChange = async (e) => {
+        setList( await apiFind(e.target.value) );
     };
+
+    if(err) { return (<div> { err.message } </div>); }
+    if(isLoading) { return (<div> Loading... </div>); }
+        
+    return (
+        <main className="container">
+            <link rel="stylesheet" type="text/css" href={bootstrap}/>
+            <header>
+                <h1>NoteQuest</h1>
+            </header>
+            <section className="grid-container">
+                <nav className="grid-item grid-item1">
+                    <ul className="navbar">
+                        <li className="navitem"><a href="#">New</a></li>
+                        <li className="navitem"><a href="#">Sort</a></li>
+                        <li className="navitem"><a href="#">Dark Mode</a></li>
+                        <li className="navitem"><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect}/>
+                <section className="grid-item grid-item3">
+                    <div className = "editor">
+                        <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>
+                        <textarea readOnly id = "note-title" value={note.data} onChange={handleChange}/>
+                        <textarea readOnly id = "note-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </textarea>
+                    </div>
+                </section>
+                <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
+            </section>
+        </main>
+    )
 };
