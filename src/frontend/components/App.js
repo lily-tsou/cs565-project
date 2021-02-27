@@ -13,20 +13,15 @@ export default class App extends React.Component {
 
         this.state = {
             loggedIn: true,
-          
+            user: '',
         };
-
-    };
-
-    componentDidMount() {
-
     };
 
     render() {
         let page;
 
         if(this.state.loggedIn === true)
-            page = <HomePage/>
+            page = <HomePage user='sang-il' />
         
         else
             page = <p> Hello </p>

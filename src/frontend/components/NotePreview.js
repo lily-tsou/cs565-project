@@ -1,7 +1,7 @@
 import React from 'react'
-import '../styles/NotePreview.css';
+import '../styles/App.css';
 
-function NotePreview(props) {
+export default function NotePreview(props) {
     return (
         <div className = 'card-container'>
             
@@ -10,12 +10,10 @@ function NotePreview(props) {
                     {props.title}
                 </div>
                 <div className = 'card-body'>
-                    <p>{props.body}</p>
+                    <p>{props.note}</p>
                 </div>
             </div>
 
         </div>
     )
 }
-
-export default NotePreview

@@ -6,10 +6,10 @@
 
 const  { dbAdd } = require('../db');
 
-const add = async (note) => {
+const add = async (user, title, note) => {
     if (note == undefined) { note = "This is my test note"; }
 
-    let result = await dbAdd(note)
+    let result = await dbAdd(user, title, note)
     .then((res) => { return res; })
     .catch((err) => { return console.log('dbAdd failed', err) });
 

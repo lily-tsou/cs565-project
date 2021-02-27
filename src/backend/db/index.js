@@ -33,10 +33,10 @@ dbClient()
     .catch((err) => { console.log("MongoDB not responding"); });
 
 // API implementations
-let dbAdd = async (note) => {
+let dbAdd = async (user, title, note) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let newRec = { data: note };
+    let newRec = { 'user': user, 'title': title, 'note': note };
     let results = await col.insertOne(newRec)
         .then((res) => {return res; })
         .catch((err) => { console.log('DB insertOne failed', err); });
@@ -45,9 +45,10 @@ let dbAdd = async (note) => {
     return results;
 };
 
-let dbList = async () => {
+let dbList = async (user) => {
     const client = await dbClient();
     const col = await dbCol(client);
+    // TBD: find for user: user only
     let results = await col.find({}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find all failed', err); });
@@ -56,10 +57,11 @@ let dbList = async () => {
     return results;
 };
 
-let dbRetrieve = async (id) => {
+let dbRetrieve = async (user, id) => {
     const client = await dbClient();
     const col = await dbCol(client);
     let oid = new mongodb.ObjectID(id);
+    // TBD: find for user: user only
     let results = await col.find({ '_id': oid}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find from id failed', err); });
@@ -68,11 +70,12 @@ let dbRetrieve = async (id) => {
     return results;
 };
 
-let dbEdit = async (id, note) => {
+let dbEdit = async (user, id, title, note) => {
     const client = await dbClient();
     const col = await dbCol(client);
     let oid = new mongodb.ObjectID(id);
-    let results = await col.updateOne({ '_id' : oid}, { $set: {'data': note}})
+    // TBD: find for user: user only
+    let results = await col.updateOne({ '_id' : oid}, { $set: {'title': title, 'note': note}})
         .then((res) => {return res; })
         .catch((err) => { console.log('DB updateOne failed', err); });
     client.close();
@@ -80,10 +83,11 @@ let dbEdit = async (id, note) => {
     return results;
 };
 
-let dbFind = async (key) => {
+let dbFind = async (user, key) => {
     const client = await dbClient();
     const col = await dbCol(client);
-    let results = await col.find({'data': new RegExp(key)}).toArray()
+    // TBD: find for user: user only
+    let results = await col.find({'note': new RegExp(key)}).toArray()
         .then((res) => {return res; })
         .catch((err) => { console.log('DB find from query filter failed', err); });
     client.close();
@@ -91,10 +95,11 @@ let dbFind = async (key) => {
     return results;
 };
 
-let dbDelete = async (id) => {
+let dbDelete = async (user, id) => {
     const client = await dbClient();
     const col = await dbCol(client);
     let oid = new mongodb.ObjectID(id);
+    // TBD: find for user: user only
     let results = await col.deleteOne({'_id' : oid})
         .then((res) => {return res; })
         .catch((err) => { console.log('DB deleteOne failed', err); });
@@ -103,9 +108,10 @@ let dbDelete = async (id) => {
     return results;
 };
 
-let dbDeleteAll = async () => {
+let dbDeleteAll = async (user) => {
     const client = await dbClient();
     const col = await dbCol(client);
+    // TBD: find for user: user only
     let results = await col.deleteMany({})
         .then((res) => {return res; })
         .catch((err) => { console.log('DB deleteMany failed', err); });

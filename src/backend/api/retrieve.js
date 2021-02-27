@@ -6,9 +6,9 @@
 
 const  { dbRetrieve } = require('../db');
 
-const retrieve = async (id) => {
+const retrieve = async (user, id) => {
 
-    let result = await dbRetrieve(id)
+    let result = await dbRetrieve(user, id)
     .then((res) => { return res; })
     .catch((err) => { return console.log('dbRetrieve failed', err) });
 
