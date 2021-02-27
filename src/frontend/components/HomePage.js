@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
 import EditBar from './EditBar';
 import SideBar from './SideBar';
+import Navbar from './Navbar'
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
@@ -75,9 +76,27 @@ export default function HomePage(props) {
         document.getElementById('save').disabled = true;
     };
 
+    let openNew = (id, title, note) => {
+        setCurrent( {id: id, title: title, note: note} );
+        setReadOnly(false);
+        document.getElementById('note-title').readOnly = false;
+        document.getElementById('note-body').readOnly = false;
+        document.getElementById('editMode').disabled = true;
+        document.getElementById('save').disabled = false;
+        document.getElementById('note-body').placeholder = "Type your note here";
+    };
+
     let handleSearchChange = async (e) => {
         setList( await apiFind(user, e.target.value) );
     };
+
+    let AddButton = async() => {
+        console.log("add");
+        const res = await apiAdd(user, "New note 2", "");
+        setList( await apiList(user) );
+        console.log(res);
+        openNew(res.insertedId, "New Note", "");
+    }
 
     if(err) { return (<div> { err.message } </div>); }
     if(isLoading) { return (<div> Loading... </div>); }
@@ -89,15 +108,8 @@ export default function HomePage(props) {
                 <h1>NoteQuest</h1>
             </header>
             <section className="grid-container">
-                <nav className="grid-item grid-item1">
-                    <ul className="navbar">
-                        <li className="navitem"><a href="#">New</a></li>
-                        <li className="navitem"><a href="#">Sort</a></li>
-                        <li className="navitem"><a href="#">Dark Mode</a></li>
-                        <li className="navitem"><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
-                <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect}/>
+                <div className = "grid-item grid-item1">{<Navbar/>}</div>
+                <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton}/>
                 <section className="grid-item grid-item3">
                     <div className = "editor">
                         <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>

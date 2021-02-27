@@ -4,13 +4,13 @@ import '../styles/App.css';
 
 function Search(props) {
     return (
-        <div className = "wrapper"> 
+        // <div className = "wrapper"> 
             <input type = 'search'
             className = 'search'
             placeholder = "Search Notes..."
             onChange = {props.handleChange}
             /> 
-        </div>
+        // </div>
     )
 }
 
