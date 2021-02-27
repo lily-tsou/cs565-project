@@ -27,8 +27,9 @@ const frontend = {
     filename: 'client.js'
   },
   optimization: {
-    minimize: false
+    minimize: true
   },
+  devtool: "source-map", 
   module: {
     rules: [
       {
