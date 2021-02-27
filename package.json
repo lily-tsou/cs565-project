@@ -28,7 +28,7 @@
     "start": "nodemon src/backend/server.js",
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode development",
-    "test": "jest --silent --forceExit",
+    "test": "jest --silent --forceExit --detectOpenHandles",
     "clean": "rm -rf dist public",
     "debug": "nodemon --inspect src/backend/server.js"
   },
@@ -39,7 +39,10 @@
     }
   },
   "devDependencies": {
-    "webpack-cli": "^4.5.0"
+    "jest": "^26.6.3",
+    "jest-transform-css": "^2.1.0",
+    "webpack-cli": "^4.5.0",
+    "babel-jest": "^26.6.3"
   },
   "proxy": "http://localhost:80"
 }
