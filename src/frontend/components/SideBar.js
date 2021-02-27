@@ -10,7 +10,7 @@ export default function SideBar(props) {
                     {props.NoteList.map(item => {
                         return <li className="noteitem" key={item._id} id={item._id}>
                             <a className="notecard" onClick={() => props.handleOnClick(item._id, item.title, item.note)} href="#"> 
-                            { <NotePreview title = {item.title} /*note = {item.note}*/ /> }
+                            { <NotePreview title = {item.title} note = {item.note} /> }
                             </a>
                         </li>
                 })}

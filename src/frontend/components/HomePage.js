@@ -10,7 +10,6 @@ const sampleNote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 export default function HomePage(props) {
 
     let [user, setUser] = useState('');
-    let [junk, setJunk] = useState('');
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
     let [err, setErr] = useState(null);

@@ -9,9 +9,9 @@ export default function NotePreview(props) {
                 <div className = 'card-title'>
                     {props.title}
                 </div>
-                {/* <div className = 'card-body'>
+                <div className = 'card-body'>
                     <p>{props.note}</p>
-                </div> */}
+                </div>
             </div>
 
         </div>
