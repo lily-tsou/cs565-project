@@ -16,7 +16,7 @@
     "start": "nodemon src/backend/server.js",
     "watch": "webpack --mode development --watch",
     "build": "webpack --mode development",
-    "test": "jest --silent --forceExit --detectOpenHandles",
+    "test": "jest --silent --forceExit",
     "clean": "rm -rf dist public",
     "debug": "nodemon --inspect src/backend/server.js"
   },
