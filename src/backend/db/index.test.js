@@ -3,65 +3,71 @@ const {dbAdd, dbList, dbRetrieve, dbEdit, dbFind, dbDelete, dbDeleteAll} = requi
 const user = 'sang-il';
 const title = 'Test note title';
 const note = 'Test note';
-const id = '60397b292671e6bcb5db5331';
 const key = 'Test';
 
-test('dbAdd  test', () => {
-    let rc = true;
-    try {
-        let results = dbAdd(user, title, note);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
-});
+describe('Test db API round trip', () => {
 
-test('dbList  test', () => {
-    let rc = true;
-    try {
-        let results = dbList(user);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
-});
+    let newNoteId = '';
+    test('dbAdd  test', async () => {
+        let rc = true;
+        try {
+            let results = await dbAdd(user, title, note);
+            newNoteId = results.insertedId;
+        } catch (err) {
+            rc = false;
+        }
+        console.log("results: " + newNoteId);
+        expect( rc ).toBe(true);
+    });
 
-test('dbRetrieve  test', () => {
-    let rc = true;
-    try {
-        let results = dbRetrieve(user, id);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
-});
+    test('dbList  test', async () => {
+        let rc = true;
+        try {
+            let results = await dbList(user);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
 
-test('dbEdit  test', () => {
-    let rc = true;
-    try {
-        let results = dbEdit(user, id, title, note);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
-});
+    test('dbRetrieve  test', async () => {
+        let rc = true;
+        try {
+            let results = await dbRetrieve(user, newNoteId);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
 
-test('dbFind  test', () => {
-    let rc = true;
-    try {
-        let results = dbFind(user, key);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
-});
+    test('dbEdit  test', async () => {
+        let rc = true;
+        try {
+            let results = await dbEdit(user, newNoteId, title + ' edited', note + ' edited');
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+    
+    test('dbFind  test', async () => {
+        let rc = true;
+        try {
+            let results = await dbFind(user, key);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+    
+    test('dbDel test', async () => {
+        let rc = true;
+        try {
+            let results = await dbDelete(user, newNoteId);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
 
-test('dbDel test', () => {
-    let rc = true;
-    try {
-        let results = dbDelete(user, id);
-    } catch (err) {
-        rc = false;
-    }
-    expect( rc ).toBe(true);
 });
