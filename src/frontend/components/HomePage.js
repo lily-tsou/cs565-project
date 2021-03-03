@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
-import EditBar from './EditBar';
-import SideBar from './SideBar';
 import Navbar from './Navbar'
+import Editor from './Editor'
+import SideBar from './SideBar';
+import Footer from './Footer'
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
@@ -46,13 +47,18 @@ export default function HomePage(props) {
                 document.getElementById('save').disabled = true;
                 setReadOnly(true);
                 document.getElementById('editMode').disabled = false;
+                document.getElementById('note-title').readOnly = true;
+                document.getElementById('note-body').readOnly = true;
                 setList( await apiList(user) );
                 break;
             case 'delete':
-                console.log('Delete: ' + current.id );
-                await apiDel(user, current.id);
-                setList( await apiList(user) );
-                break;                
+                let result = confirm("Are you sure you want to delete this note?");
+                if (result) {
+                    console.log('Delete: ' + current.id );
+                    await apiDel(user, current.id);
+                    setList( await apiList(user) );
+                    break;      
+                }          
             default:
                 break;
         }
@@ -91,33 +97,28 @@ export default function HomePage(props) {
     };
 
     let AddButton = async() => {
+        let newNote = "New Note"
         console.log("add");
-        const res = await apiAdd(user, "New note 2", "");
+        const res = await apiAdd(user, newNote, "");
         setList( await apiList(user) );
         console.log(res);
-        openNew(res.insertedId, "New Note", "");
+        openNew(res.insertedId, newNote, "");
     }
 
     if(err) { return (<div> { err.message } </div>); }
     if(isLoading) { return (<div> Loading... </div>); }
         
     return (
-        <main className="container">
+        <main className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <header>
-                <h1>NoteQuest</h1>
-            </header>
             <section className="grid-container">
-                <div className = "grid-item grid-item1">{<Navbar/>}</div>
-                <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton}/>
+                <div className = "grid-item grid-item1"><Navbar/></div>
+                <div className = "grid-item grid-item2"><SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton}/></div>
                 <section className="grid-item grid-item3">
-                    <div className = "editor">
-                        <EditBar readOnly = {readOnly} editAction = {editNote} buttonAction = {handleButtonAction}/>
-                        <textarea readOnly id = "note-title" value={current.title} onChange={handleTitleChange}/>
-                        <textarea readOnly id = "note-body" value={current.note} onChange={handleNoteChange}/>
-                    </div>
+                    <Editor editReadOnly = {readOnly} editNoteAction = {editNote} buttonAction = {handleButtonAction}
+                    title = {current.title} body = {current.note} handleNoteChange = {handleNoteChange} handleTitleChange = {handleTitleChange}/>
                 </section>
-                <footer className="grid-item grid-item4">@Copyright: The NoteQuest Team </footer>
+                <Footer/>
             </section>
         </main>
     )

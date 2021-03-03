@@ -13,20 +13,21 @@ export default function Navbar(props) {
         if(!dark){
             document.documentElement.setAttribute('data-theme', 'dark');
             dark = true;
-            darkText = "Dark Mode";
+            darkText = "Light Mode";
         }
+
         else {
             document.documentElement.setAttribute('data-theme', 'light');
             dark = false;
             //Not working?
-            darkText = "Light Mode";
+            darkText = "Dark Mode";
         }
     }
 
     return (
         <nav className = "main-navbar">
             <img className = "logo" src={logo} alt="logo"></img>
-            <button type="button" className="navbar-button" name="darkmode" onClick = {switchTheme}>{darkText}</button>
+            <button type="button" className="navbar-button" name="darkmode" onClick = {switchTheme}>{dark ? "Light Mode" : "Dark Mode"}</button>
             <button type="button" className="navbar-button" name="contact">Contact</button>
             <button type="button" className="navbar-button" name="about">About</button>
         </nav>

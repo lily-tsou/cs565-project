@@ -8,6 +8,8 @@ export default function SideBar(props) {
         <aside className="grid-item grid-item2">
             <div className = "search-add">
                 <AddButton action = {props.AddAction}/>
+            </div>
+            <div className = "search-add">
                 <Search handleChange={props.handleSearchChange}/>
             </div>
             <ul className="notelist">
