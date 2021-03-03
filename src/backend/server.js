@@ -12,6 +12,6 @@ app.use( bodyParser.json());
 app.use(routes);
 
 const port = process.env.PORT || 80;
-const running = app.listen(port, () => console.log(`Server listening on port: ${port}`));
+const server = app.listen(port, () => console.log(`Server listening on port: ${port}`));
 
-module.exports = running;
+module.exports = server;

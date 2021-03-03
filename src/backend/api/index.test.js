@@ -1,17 +1,17 @@
-const {dbAdd, dbList, dbRetrieve, dbEdit, dbFind, dbDelete, dbDeleteAll} = require('./index');
+const {add, list, retrieve, edit, find, del, delAll} = require('./index');
 
 const user = 'sang-il';
 const title = 'Test note title';
 const note = 'Test note';
 const key = 'Test';
 
-describe('Test db API round trip', () => {
+describe('Test API round trip', () => {
 
     let newNoteId = '';
-    test('dbAdd  test', async () => {
+    test('add  test', async () => {
         let rc = true;
         try {
-            let results = await dbAdd(user, title, note);
+            let results = await add(user, title, note);
             newNoteId = results.insertedId;
         } catch (err) {
             rc = false;
@@ -20,50 +20,50 @@ describe('Test db API round trip', () => {
         expect( rc ).toBe(true);
     });
 
-    test('dbList  test', async () => {
+    test('list  test', async () => {
         let rc = true;
         try {
-            let results = await dbList(user);
+            let results = await list(user);
         } catch (err) {
             rc = false;
         }
         expect( rc ).toBe(true);
     });
 
-    test('dbRetrieve  test', async () => {
+    test('retrieve  test', async () => {
         let rc = true;
         try {
-            let results = await dbRetrieve(user, newNoteId);
+            let results = await retrieve(user, newNoteId);
         } catch (err) {
             rc = false;
         }
         expect( rc ).toBe(true);
     });
 
-    test('dbEdit  test', async () => {
+    test('edit  test', async () => {
         let rc = true;
         try {
-            let results = await dbEdit(user, newNoteId, title + ' edited', note + ' edited');
+            let results = await edit(user, newNoteId, title + ' edited', note + ' edited');
         } catch (err) {
             rc = false;
         }
         expect( rc ).toBe(true);
     });
     
-    test('dbFind  test', async () => {
+    test('find  test', async () => {
         let rc = true;
         try {
-            let results = await dbFind(user, key);
+            let results = await find(user, key);
         } catch (err) {
             rc = false;
         }
         expect( rc ).toBe(true);
     });
     
-    test('dbDel test', async () => {
+    test('del test', async () => {
         let rc = true;
         try {
-            let results = await dbDelete(user, newNoteId);
+            let results = await del(user, newNoteId);
         } catch (err) {
             rc = false;
         }
