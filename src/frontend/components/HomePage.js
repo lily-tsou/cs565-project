@@ -45,12 +45,12 @@ export default function HomePage(props) {
                 break;
             case 'save':
                 console.log('Edit: ' + current.id + ' ' + current.title);
-                await apiEdit(user, current.id, current.title, current.note);
                 document.getElementById('save').disabled = true;
                 setReadOnly(true);
                 document.getElementById('editMode').disabled = false;
                 document.getElementById('note-title').readOnly = true;
                 document.getElementById('note-body').readOnly = true;
+                await apiEdit(user, current.id, current.title, current.note);
                 setList( await apiList(user) );
                 break;
             case 'delete':

@@ -22,10 +22,10 @@ export default function Navbar() {
     return (
         <nav className = "main-navbar">
             <img id = "logo" src={logo} alt="logo"></img>
-            <button type="button" className="navbar-button" name="darkmode" onClick = {switchTheme}>{dark ? "Light Mode" : "Dark Mode"}</button>
             <Link to = "/" className ="navbar-button">
                 <button type="button" className="navbar-button" name="home">Home</button>
             </Link>
+            <button type="button" className="navbar-button" name="darkmode" onClick = {switchTheme}>{dark ? "Light" : "Dark"}</button>
             <Link to = "/Contact" className ="navbar-button">
                 <button type="button" className="navbar-button" name="contact">Contact</button>
             </Link>

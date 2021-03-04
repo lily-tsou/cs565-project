@@ -359,10 +359,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 /* NavBar.js */
 
-[type=button], [type=reset], [type=submit], button {
+/* [type=button], [type=reset], [type=submit], button {
     -webkit-appearance: button;
     padding: 10px;
-}
+} */
 
 .main-navbar{
     display: flex;
@@ -376,7 +376,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .navbar-button{
     padding: 0% 1% 0% 1%;
-    width: auto;
+    width: 6%;
     height: 100%;
     background-color: inherit;
     border: none;
