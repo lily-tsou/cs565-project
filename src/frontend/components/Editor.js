@@ -8,9 +8,8 @@ function Editor(props) {
             <EditBar readOnly = {props.editReadOnly} editAction = {props.editNoteAction} buttonAction = {props.buttonAction}/>
             <textarea readOnly id = "note-title" value={props.title} onChange={props.handleTitleChange}/>
             <textarea readOnly id = "note-body" value={props.body} onChange={props.handleNoteChange}/>
-        
         </div>
         )
     }
     
-    export default Editor
+export default Editor

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import '../styles/App.css';
 import Navbar from './Navbar'
 import Editor from './Editor'
@@ -17,6 +18,7 @@ export default function HomePage(props) {
     let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
+
 
     useEffect( async () => {
         setUser(props.user);  // this doesn't appear to stick, why??
