@@ -1,5 +1,5 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 // const backend = {
 //   entry: './src/backend/server.js',
@@ -46,12 +46,12 @@ const frontend = {
         loader: 'file-loader'
       }
     ]
-  }//,
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: "./src/frontend/index.html"
-  //   })
-  // ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/frontend/index.html"
+    })
+  ]
 };
 
 module.exports = frontend;
