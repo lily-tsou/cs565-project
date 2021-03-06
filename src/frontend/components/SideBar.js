@@ -5,9 +5,11 @@ import AddButton from './AddButton'
 
 export default function SideBar(props) {
     return (
-        <aside className="grid-item grid-item2">
+        <aside className="sidebar" style={{display: props.isHidden ? 'none' : 'block' }}>
             <div className = "search-add">
                 <AddButton action = {props.AddAction}/>
+            </div>
+            <div className = "search-add">
                 <Search handleChange={props.handleSearchChange}/>
             </div>
             <ul className="notelist">
