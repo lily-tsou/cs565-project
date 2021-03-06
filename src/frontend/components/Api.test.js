@@ -1,25 +1,75 @@
-const {apiAdd, apiList, apiEdit, apiFind, apiDel} = require('./Api');
+import  {apiAdd, apiList, apiEdit, apiFind, apiDel} from './Api';
+global.fetch = require('jest-fetch-mock');
 
 const user = 'sang-il';
-const title = 'Api test note title';
-const body = 'Api test note';
-const key = 'test';
+const title = 'Frontend API test note title';
+const note = 'Frontend API test note';
+const key = 'Test';
 
-//const fetch = require("node-fetch");
+describe('Frontend API test round trip', () => {
 
-
-describe('Api.test round trip', () =>{
-    let testID = '';
-    test('Api.test  test', async () => {
-        let didPass = true;
-        try{
-            let res = await apiAdd(user, title, body);
-            testID = res.insertedId;
-        } catch(err){
-            didPass = false;
-            console.log(err);
-        }
-        console.log("Added " + testID);
-        expect(didPass).toBe(true);
+    beforeEach(() => {
+        fetch.resetMocks();
     });
+
+    let newNoteId = '';
+    const onResponse = jest.fn();
+    const onError = jest.fn();
+    
+    test('apiAdd  test', async () => {
+        fetch.mockResponseOnce(JSON.stringify({ id: "xyz123" }));
+        let rc = true;
+        try {
+            let result = await apiAdd(user, title, note);
+            newNoteId = result.id;
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+
+    test('apiList test', async () => {
+        fetch.mockResponseOnce(JSON.stringify([{ _id: newNoteId, user: user, title: title, note: note }]));
+        let rc = true;
+        try {
+            let result = await apiList(user);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+
+    test('apiEdit test', async () => {
+        fetch.mockResponseOnce(JSON.stringify({ _id: newNoteId, user: user, title: title, note: note }));
+        let rc = true;
+        try {
+            let results = await apiEdit(user, newNoteId, title + ' edited', note + ' edited');
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+    
+    test('apiFind test', async () => {
+        fetch.mockResponseOnce(JSON.stringify([{ _id: newNoteId, user: user, title: title, note: note }]));
+        let rc = true;
+        try {
+            let results = await apiFind(user, key);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+    
+    test('apiDel test', async () => {
+        fetch.mockResponseOnce(JSON.stringify({ ok: 1 }));
+        let rc = true;
+        try {
+            let results = await apiDel(user, newNoteId);
+        } catch (err) {
+            rc = false;
+        }
+        expect( rc ).toBe(true);
+    });
+
 });

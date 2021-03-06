@@ -112,36 +112,148 @@ textarea {
 
 /* HomePage.js */
 
-.grid-item1 { 
-    grid-area: item1; 
-}
-
-.grid-item2 { grid-area: item2; border: 1px solid; }
-.grid-item3 { grid-area: item3; border: 1px solid; }
-.grid-item4 { grid-area: item4; border: 1px solid; }
-.grid-item5 { grid-area: item5; }
-.grid-item6 { grid-area: item6; }
-.grid-item7 { grid-area: item7; }
-.grid-item8 { grid-area: item8; }
-.grid-item9 { grid-area: item9; }
-.grid-item10 { grid-area: item10; }
-
-.my-container{
-    height: 92vh;
-}
-
 .grid-container {
     height: 100vh;
     display: grid;
-    grid-template-rows: auto 1fr 1fr 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas:
-    'item1 item1 item1 item1 item1'
-    'item2 item3 item3 item3 item3'
-    'item2 item3 item3 item3 item3' 
-    'item2 item3 item3 item3 item3'
-    'item2 item3 item3 item3 item3'                
-    'item4 item4 item4 item4 item4';
+    grid-template-rows: 8vh repeat(20, auto);
+    grid-template-columns: repeat(5, 20%);
+}
+
+/* Mobile screen */
+@media (max-width: 768px) {
+    .main-navbar { 
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        grid-column: span 5;
+        grid-row: 2/21;
+    }
+
+    .add-note {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        width: 100%;
+        margin: 1px auto 1px auto;
+    }
+
+    .search-notes {
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+        margin: 1px auto 1px auto;
+    }
+
+    .notelist {
+        grid-column: 1;
+        grid-row: 3 / 20;
+        height: 100%;
+        width: 100%;
+    }
+
+    .noteitem{
+        display: inline-block;
+        width: 40%;
+    }
+
+    .editbar {
+        grid-column: 0;
+        grid-row: 0;
+    }
+
+    .editor {
+        width: 100vw;
+        grid-row: 2/21;
+        grid-column: span 5;
+    }
+
+    .myfooter {
+        grid-column: span 5;
+    }
+
+    .contact-card{
+        width: 70%;
+    }
+
+    .contact-container{
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+}
+
+/* Laptop screen */
+@media (min-width: 769px) {
+ 
+    .main-navbar { 
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-column: 1;
+        grid-row: 2 / 20;
+    }
+
+    .add-note {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        width: 100%;
+        margin: 10%;
+    }
+
+    .search-notes {
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+        margin: 10%;
+    }
+
+    .notelist {
+        grid-column: 1;
+        grid-row: 3 / 20;
+        height: 100%;
+        width: 100%;
+    }
+
+    .edit-section {
+        display: grid;
+        grid-column: 2 / 6;
+        grid-row: 2 / 20;
+    }
+
+    .editbar {
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .editor {
+        grid-column: span 5;
+        grid-row: 2 / 20;
+    }
+
+    .myfooter {
+        grid-column: span 5;
+        grid-row: 20;
+    }
+
+    .contact-card{
+        width: 30%
+    }
+
+    .contact-container{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height: 92vh;
+    }
 }
 
 .myfooter {
@@ -154,7 +266,7 @@ textarea {
 
 #note-body{
     width: 100%;
-    height: 80%;
+    height: 73vh;
     border: none;
     overflow: auto;
     outline: none;
@@ -195,6 +307,11 @@ aside{
     background-color: var(--main-background);  
 }
 
+.search-add{
+    display: flex;
+    justify-content: center;
+}
+
 .notecard, .notecard:visited, .notecard:hover, .notecard:active, .notecard:link, .notecard:focus {
     text-decoration: none;
     color: var(--note-text);
@@ -204,6 +321,7 @@ aside{
     list-style-type: none;
     padding: 2%;
     align-items: center;
+    text-align: center;
 }
 
 .noteitem {
@@ -215,8 +333,8 @@ aside{
 
 .editbar{
     display:flex;
-    height: 8%;
     width: 100%;
+    height: 6vh;
     justify-content: flex-end;
     padding: 0% 2% 0% 2%;
     background-color: var(--edit-bar);
@@ -243,19 +361,12 @@ aside{
 }
 
 #editMode{
-    text-align: center;
     margin-right: auto;
-    
 }
 
-.search-add {
-    position: relative;
-    display: flex;
-    height: 10%;
+.search-notes .add-note {
     min-width: 80%;
-    align-items: center;
     justify-content: space-around;
-    margin-bottom: 2%;
 }
 
 .search {
@@ -296,8 +407,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     color: white;
     background-color: var(--active-button1);
     width: 70%;
-    height: 70%;
-    margin: 10% 2% 0% 2%;
+    height: 7vh;
+    margin: 10% 2% 2% 2%;
     white-space: nowrap;
     font-size: 1.2em;
     line-height: 100%;
@@ -319,14 +430,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 75%;
     height: 35%;
     overflow: hidden;
-    /* box-shadow: 0px 0px 5px -5px; */
     margin: auto;
-    margin-top: 5%;
-    margin-bottom: 10%; 
+    margin-top: 5% 0% 10% 0%;
+    padding-bottom: 4%;
     border: 1px solid black;
     border-radius: 5px;
     background-color: var(--preview-background);
-
+    overflow: hidden;
 }
 
 .card-container:hover{
@@ -337,7 +447,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .card-content{
     margin: 0px;
     margin-top: 0.2rem;
-    overflow-y: hidden;
+    border-bottom: solid 5px var(--preview-background);
 }
 
 .card-content:hover{
@@ -359,14 +469,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 /* NavBar.js */
 
-/* [type=button], [type=reset], [type=submit], button {
-    -webkit-appearance: button;
-    padding: 10px;
-} */
-
 .main-navbar{
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-content: end;
     height: 8vh;
     width: 100%;
     align-items: center;
@@ -374,9 +480,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     padding: 0% 2% 0% 2%;
 }
 
+
+
 .navbar-button{
-    padding: 0% 1% 0% 1%;
-    width: 6%;
+    width: 100%;
     height: 100%;
     background-color: inherit;
     border: none;
@@ -398,6 +505,26 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin-right: auto;
     height: auto;
     width: 5vh;
+    grid-row: 1;
+}
+
+#home-button{
+    grid-column: 5;
+}
+
+
+#dark-button{
+    grid-column: 6;
+}
+
+
+#contact-button{
+    grid-column: 7;
+}
+
+
+#about-button{
+    grid-column: 8;
 }
 
 /* About.js */
@@ -431,18 +558,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .contact-container{
     display:flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
     background: var(--main-background)
 }
 
 /* ContactCard.js */
   
 .contact-card{
-    display: inline-block;
-    width: 30%;
-    font-size: 1.5vw; 
+    font-size: 1.25em; 
     margin: 5%; 
     border: 1px solid black;
     border-radius: 8px;

@@ -18,11 +18,11 @@ function Contact() {
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <Navbar/>    
-            <div className = "contact-container">               
+            <div className = "contact-container">         
+                <ContactCard name = "Michael" body = {text} image = {michael} background = {background2} 
+                github = "https://github.com/zemar" email = "mihoward@pdx.edu"/>      
                 <ContactCard name = "Lily" body = {text} image = {lily} background = {background1} 
                 github = "https://github.com/lily-tsou" email = "tsou@pdx.edu"/>
-                <ContactCard name = "Michael" body = {text} image = {michael} background = {background2} 
-                github = "https://github.com/zemar" email = "mihoward@pdx.edu"/>
             </div>
         </div>
         )
