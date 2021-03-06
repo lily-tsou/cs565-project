@@ -13,11 +13,13 @@
     --track-shadow: gray;
     --active-scroll: #808080;
     --scroll-color: #A4A4A4;
-    --button-text: white;
-    --gradient1: #7e33c9;
+    --gradient1: #a12eff;
     --gradient2: #962eff;
-    --gradient3: #7e02fb;
-    --navbar-hover: #5900B3;
+    --gradient3: #5f2eff;
+    --navbar-hover: #5800B1;
+    --card-shadow: #7B7B7B;
+    --about-footer: #B66EFF;
+    --about-icon: #E0E0E0;
 }
 
 [data-theme="dark"]{
@@ -27,7 +29,7 @@
     --search-button: #A8A8A8;
     --edit-bar: #2B2B2B;
     --active-button1: #962EFF;
-    --active-button2: #A64DFF;
+    --active-button2: #D2A6FF;
     --disable-button: #ACACAC;
     --editbar-hover: #111111;
     --active-search: #B2B2B2;
@@ -35,9 +37,36 @@
     --track-shadow: #2F2F2F;
     --active-scroll: #808080;
     --scroll-color: #676767;
+    --card-shadow: #A8A8A8;
+    --about-footer: #1E1E1E;
+    --about-icon: #C286FF;
 }
 
-/*******/
+/* HomePage.js */
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+    background: var(--track-color);
+    box-shadow: inset 0 0 5px var(--track-shadow);
+    border-radius: 10px;
+}
+
+/* Scrollbar Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--scroll-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:active, ::-webkit-scrollbar-thumb:hover{ 
+    background-color: var(--active-scroll);
+}  
+
 * {
     margin: 0;
     padding: 0;
@@ -83,42 +112,181 @@ textarea {
 
 /* HomePage.js */
 
-.grid-item1 { 
-    grid-area: item1; 
-}
-
-.grid-item2 { grid-area: item2; border: 1px solid; }
-.grid-item3 { grid-area: item3; border: 1px solid; }
-.grid-item4 { grid-area: item4; border: 1px solid; }
-.grid-item5 { grid-area: item5; }
-.grid-item6 { grid-area: item6; }
-.grid-item7 { grid-area: item7; }
-.grid-item8 { grid-area: item8; }
-.grid-item9 { grid-area: item9; }
-.grid-item10 { grid-area: item10; }
-
-
 .grid-container {
-    height: 100%;
+    height: 100vh;
     display: grid;
-    grid-template-rows: auto 1fr 1fr 1fr 1fr;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas:
-    'item1 item1 item1 item1 item1'
-    'item2 item3 item3 item3 item3'
-    'item2 item3 item3 item3 item3' 
-    'item2 item3 item3 item3 item3'
-    'item2 item3 item3 item3 item3'                
-    'item4 item4 item4 item4 item4';
+    grid-template-rows: 8vh repeat(20, auto);
+    grid-template-columns: repeat(5, 20%);
 }
 
+/* Mobile screen */
+@media (max-width: 768px) {
+    .main-navbar { 
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        grid-column: span 5;
+        grid-row: 2/21;
+    }
+
+    .add-note {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        width: 100%;
+        margin: 1px auto 1px auto;
+    }
+
+    .search-notes {
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+        margin: 1px auto 1px auto;
+    }
+
+    .notelist {
+        grid-column: 1;
+        grid-row: 3 / 20;
+        height: 100%;
+        width: 100%;
+    }
+
+    .noteitem{
+        display: inline-block;
+        width: 40%;
+    }
+
+    .editbar {
+        grid-column: 0;
+        grid-row: 0;
+    }
+
+    .editor {
+        width: 100vw;
+        grid-row: 2/21;
+        grid-column: span 5;
+    }
+
+    .myfooter {
+        grid-column: span 5;
+    }
+
+    .card-container{
+        width: 90%;
+        height: 48%;
+    }
+
+    .contact-card{
+        width: 70%;
+    }
+
+    .contact-container{
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+}
+
+/* Laptop screen */
+@media (min-width: 769px) {
+ 
+    .main-navbar { 
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-column: 1;
+        grid-row: 2 / 20;
+    }
+
+    .add-note {
+        grid-column: 1;
+        grid-row: 1;
+        height: 100%;
+        width: 100%;
+        margin: 10%;
+    }
+
+    .search-notes {
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+        margin: 10%;
+    }
+
+    .notelist {
+        grid-column: 1;
+        grid-row: 3 / 20;
+        height: 100%;
+        width: 100%;
+    }
+
+    .edit-section {
+        display: grid;
+        grid-column: 2 / 6;
+        grid-row: 2 / 20;
+    }
+
+    .editbar {
+        grid-column: span 5;
+        grid-row: 1;
+    }
+
+    .editor {
+        grid-column: span 5;
+        grid-row: 2 / 20;
+    }
+
+    .myfooter {
+        grid-column: span 5;
+        grid-row: 20;
+    }
+
+    .card-container{
+        width: 75%;
+        height: 35%;
+    }
+
+    .contact-card{
+        width: 30%
+    }
+
+    .contact-container{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height: 92vh;
+    }
+}
 
 .myfooter {
     width: 100%;
     text-align: center;
-    color: var(--indigo);  
+    color: var(--active-button1);  
     background-color: var(--main-background);
     border: none;
+}
+
+#note-body{
+    width: 100%;
+    height: 73vh;
+    border: none;
+    overflow: auto;
+    outline: none;
+    padding-left: 2%;    
+    color: var(--note-text);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+    overflow-y: scroll;
 }
 
 #note-title{
@@ -139,21 +307,6 @@ textarea {
     font-size: 1.5em;
 }
 
-#note-body{
-    width: 100%;
-    height: 78%;
-    border: none;
-    overflow: auto;
-    outline: none;
-    padding-left: 2%;    
-    color: var(--note-text);
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    resize: none;
-    overflow-y: scroll;
-}
-
 /* SideBar.js */
 
 aside{
@@ -162,6 +315,11 @@ aside{
     overflow-y:scroll;
     align-items: center;
     background-color: var(--main-background);  
+}
+
+.search-add{
+    display: flex;
+    justify-content: center;
 }
 
 .notecard, .notecard:visited, .notecard:hover, .notecard:active, .notecard:link, .notecard:focus {
@@ -173,6 +331,7 @@ aside{
     list-style-type: none;
     padding: 2%;
     align-items: center;
+    text-align: center;
 }
 
 .noteitem {
@@ -180,34 +339,12 @@ aside{
     margin-bottom: 4%;
 }
 
-/* Scrollbar width */
-::-webkit-scrollbar {
-    width: 15px;
-}
-
-/* Scrollbar Track */
-::-webkit-scrollbar-track {
-    background: var(--track-color);
-    box-shadow: inset 0 0 5px var(--track-shadow);
-    border-radius: 10px;
-}
-
-/* Scrollbar Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--scroll-color);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:active, ::-webkit-scrollbar-thumb:hover{ 
-    background-color: var(--active-scroll);
-}  
-
 /* EditBar.js */
 
 .editbar{
     display:flex;
-    height: 10%;
     width: 100%;
+    height: 6vh;
     justify-content: flex-end;
     padding: 0% 2% 0% 2%;
     background-color: var(--edit-bar);
@@ -234,19 +371,12 @@ aside{
 }
 
 #editMode{
-    text-align: center;
     margin-right: auto;
-    
 }
 
-.search-add {
-    position: relative;
-    display: flex;
-    height: 10%;
+.search-notes .add-note {
     min-width: 80%;
-    align-items: center;
     justify-content: space-around;
-    margin-bottom: 2%;
 }
 
 .search {
@@ -273,17 +403,22 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
+/* Editor.js */
+.editor{
+    height: 100%;
+}
+
 /* AddButton.js */
 
 .add-button{
     align-items: center; 
     border: none;
     border-radius: 50px;
-    color: var(--button-text);
+    color: white;
     background-color: var(--active-button1);
     width: 70%;
-    height: 70%;
-    margin: 10% 2% 0% 2%;
+    height: 7vh;
+    margin: 10% 2% 2% 2%;
     white-space: nowrap;
     font-size: 1.2em;
     line-height: 100%;
@@ -302,17 +437,14 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 /* NotePreview.js */
 
 .card-container{
-    width: 75%;
-    height: 35%;
     overflow: hidden;
-    /* box-shadow: 0px 0px 5px -5px; */
     margin: auto;
-    margin-top: 5%;
-    margin-bottom: 10%; 
+    margin-top: 5% 0% 10% 0%;
+    padding-bottom: 4%;
     border: 1px solid black;
     border-radius: 5px;
     background-color: var(--preview-background);
-
+    overflow: hidden;
 }
 
 .card-container:hover{
@@ -323,7 +455,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .card-content{
     margin: 0px;
     margin-top: 0.2rem;
-    overflow-y: hidden;
+    border-bottom: solid 5px var(--preview-background);
 }
 
 .card-content:hover{
@@ -332,36 +464,41 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .card-body{
     margin: auto;
+    padding: 2%;
+    overflow: hidden;
 }
 
 .card-title{
     font-size: 1.5em;
     text-align: center;
+    padding: 2%;
+    overflow: hidden;
 }
 
 /* NavBar.js */
 
 .main-navbar{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-content: end;
     height: 8vh;
     width: 100%;
-    justify-content: flex-end;
-    background: rgb(150,46,255);
-    background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 50%, var(--gradient3) 100%);
-    padding: 0% 2% 0% 2%;
     align-items: center;
-
+    background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 56%, var(--gradient3) 100%);
+    padding: 0% 2% 0% 2%;
 }
 
+
+
 .navbar-button{
-    padding: 0% 2% 0% 2%;
-    width: auto;
+    width: 100%;
     height: 100%;
     background-color: inherit;
     border: none;
     font-weight: bold;
     white-space: nowrap;
     color: white;
+
 }
 
 .navbar-button:hover{
@@ -372,11 +509,108 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     outline: 0 !important;
 }
 
-img{
+#logo{
     margin-right: auto;
-    height: 60%;
+    height: auto;
+    width: 5vh;
+    grid-row: 1;
+}
+
+#home-button{
+    grid-column: 5;
 }
 
 
+#dark-button{
+    grid-column: 6;
+}
 
 
+#contact-button{
+    grid-column: 7;
+}
+
+
+#about-button{
+    grid-column: 8;
+}
+
+/* About.js */
+
+.about-container{
+    height: 76vh;
+    padding: 8%;
+    font-size: 1.5em;
+    background-color: var(--main-background);
+    overflow-y: scroll;
+}
+
+.about-text{
+    color: var(--note-text);
+}
+
+.about-icon{
+    display: inline-block;
+    padding: 2%;
+    color: var(--about-icon);
+    font-size: 1.75em;
+}
+
+.about-footer{
+    height: 16vh;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--about-footer);
+}
+
+/* Contact.js */
+
+.contact-container{
+    display:flex;
+    background: var(--main-background)
+}
+
+/* ContactCard.js */
+  
+.contact-card{
+    font-size: 1.25em; 
+    margin: 5%; 
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px var(--track-shadow);
+    padding: 2%;
+    color: var(--note-text);
+    background-color: var(--preview-background);
+}
+
+.content-box{
+    text-align: center;
+}
+
+.contact-title{
+  text-align: center;
+  color: var(--note-text);
+}
+
+h2{
+  padding: 0px;
+  margin: 0px;
+}
+
+.contact-image{
+  display:block;
+  max-width: 50%;
+  margin: 5% auto 5% auto;
+  border-radius: 50%;
+}
+
+.contact-link{
+    text-align: center;
+    color: var(--note-text);
+    margin: 5%;
+}
+
+.contact-link:hover{
+    text-align: center;
+    text-decoration: none;
+}

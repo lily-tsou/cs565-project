@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 import '../styles/App.css';
-import Navbar from './Navbar'
-import Editor from './Editor'
+import Navbar from './Navbar';
+import Editor from './Editor';
 import SideBar from './SideBar';
-import Footer from './Footer'
+import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
@@ -17,6 +18,10 @@ export default function HomePage(props) {
     let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
+    let [width, setWidth] = useState(window.innerWidth);
+    let [hideEditor, setHideEditor] = useState(false);
+    let [hideSideBar, setHideSideBar] = useState(false);
+    let [backButton, setBackButton] = useState(false);
 
     useEffect( async () => {
         setUser(props.user);  // this doesn't appear to stick, why??
@@ -24,7 +29,29 @@ export default function HomePage(props) {
         setList( await apiList(props.user) );
         setIsLoading(false);
         document.getElementById('save').disabled = true;
+        if(width <= 768){
+            setHideEditor(true);
+            setHideSideBar(false);
+            setBackButton(true);
+        }
+        window.addEventListener("resize", handleWindowResize);
+        console.log(width);
     }, []);
+
+    const handleWindowResize = () => {
+        setWidth(window.innerWidth);
+        if(window.innerWidth <= 768){
+            setHideEditor(true);
+            setHideSideBar(false);
+            setBackButton(true);
+        }
+        else{
+            setHideEditor(false);
+            setHideSideBar(false);
+            setBackButton(false);
+        }
+        console.log("resized " + window.innerWidth);
+    }
 
     let handleTitleChange = (e) => {
         setCurrent( {id: current.id, title: e.target.value, note: current.note } );
@@ -43,12 +70,12 @@ export default function HomePage(props) {
                 break;
             case 'save':
                 console.log('Edit: ' + current.id + ' ' + current.title);
-                await apiEdit(user, current.id, current.title, current.note);
                 document.getElementById('save').disabled = true;
                 setReadOnly(true);
                 document.getElementById('editMode').disabled = false;
                 document.getElementById('note-title').readOnly = true;
                 document.getElementById('note-body').readOnly = true;
+                await apiEdit(user, current.id, current.title, current.note);
                 setList( await apiList(user) );
                 break;
             case 'delete':
@@ -80,6 +107,10 @@ export default function HomePage(props) {
         document.getElementById('note-body').readOnly = true;
         document.getElementById('editMode').disabled = false;
         document.getElementById('save').disabled = true;
+        if(hideEditor === true){
+            setHideEditor(false)
+            setHideSideBar(true)
+        }
     };
 
     let openNew = (id, title, note) => {
@@ -105,21 +136,25 @@ export default function HomePage(props) {
         openNew(res.insertedId, newNote, "");
     }
 
+    let backClick = () =>{
+        setHideEditor(true);
+        setHideSideBar(false);
+    }
+
     if(err) { return (<div> { err.message } </div>); }
     if(isLoading) { return (<div> Loading... </div>); }
-        
+
     return (
         <main className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <section className="grid-container">
-                <div className = "grid-item grid-item1"><Navbar/></div>
-                <div className = "grid-item grid-item2"><SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton}/></div>
-                <section className="grid-item grid-item3">
-                    <Editor editReadOnly = {readOnly} editNoteAction = {editNote} buttonAction = {handleButtonAction}
-                    title = {current.title} body = {current.note} handleNoteChange = {handleNoteChange} handleTitleChange = {handleTitleChange}/>
-                </section>
+                <Navbar/>
+                <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton} isHidden = {hideSideBar}/>
+                <Editor editReadOnly = {readOnly} editNoteAction = {editNote} buttonAction = {handleButtonAction} title = {current.title} body = {current.note} 
+                handleNoteChange = {handleNoteChange} handleTitleChange = {handleTitleChange} isHidden = {hideEditor} backButton = {backButton} backClick = {backClick}/>
                 <Footer/>
             </section>
         </main>
     )
+
 };
