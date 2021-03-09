@@ -4,7 +4,7 @@ import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa'
 import {SiKubernetes, SiMongodb} from 'react-icons/si'
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
-function About(props) {
+function About() {
     return (
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
