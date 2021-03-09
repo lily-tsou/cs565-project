@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import '../styles/App.css';
-import Navbar from './Navbar';
 import Editor from './Editor';
 import SideBar from './SideBar';
 import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
-const sampleNote = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+const sampleNote = 'Welcome to NoteQuest! Click on a note or create a new note to begin.';
 
 export default function HomePage(props) {
 
@@ -148,7 +147,6 @@ export default function HomePage(props) {
         <main className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <section className="grid-container">
-                <Navbar/>
                 <SideBar handleSearchChange = {handleSearchChange} NoteList = {list} handleOnClick = {handleListSelect} AddAction = {AddButton} isHidden = {hideSideBar}/>
                 <Editor editReadOnly = {readOnly} editNoteAction = {editNote} buttonAction = {handleButtonAction} title = {current.title} body = {current.note} 
                 handleNoteChange = {handleNoteChange} handleTitleChange = {handleTitleChange} isHidden = {hideEditor} backButton = {backButton} backClick = {backClick}/>

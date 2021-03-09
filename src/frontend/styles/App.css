@@ -111,24 +111,22 @@ textarea {
 .btn_elem { width: 20%; }
 
 /* HomePage.js */
-
+.mycontainer{
+    height: 92vh;
+}
 .grid-container {
-    height: 100vh;
+    height: 92vh;
     display: grid;
-    grid-template-rows: 8vh repeat(20, auto);
+    grid-template-rows:  repeat(20, auto);
     grid-template-columns: repeat(5, 20%);
 }
 
 /* Mobile screen */
 @media (max-width: 768px) {
-    .main-navbar { 
-        grid-column: span 5;
-        grid-row: 1;
-    }
 
     .sidebar {
         grid-column: span 5;
-        grid-row: 2/21;
+        grid-row: 1/21;
     }
 
     .add-note {
@@ -141,7 +139,7 @@ textarea {
 
     .search-notes {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 1;
         height: 100%;
         width: 100%;
         margin: 1px auto 1px auto;
@@ -166,7 +164,7 @@ textarea {
 
     .editor {
         width: 100vw;
-        grid-row: 2/21;
+        grid-row: 1/21;
         grid-column: span 5;
     }
 
@@ -193,16 +191,10 @@ textarea {
 
 /* Laptop screen */
 @media (min-width: 769px) {
- 
-    .main-navbar { 
-        grid-column: span 5;
-        grid-row: 1;
-    }
-
     .sidebar {
         display: grid;
         grid-column: 1;
-        grid-row: 2 / 20;
+        grid-row: 1 / 20;
     }
 
     .add-note {
@@ -215,7 +207,7 @@ textarea {
 
     .search-notes {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 1;
         height: 100%;
         width: 100%;
         margin: 10%;
@@ -223,7 +215,7 @@ textarea {
 
     .notelist {
         grid-column: 1;
-        grid-row: 3 / 20;
+        grid-row: 2 / 20;
         height: 100%;
         width: 100%;
     }
@@ -241,7 +233,7 @@ textarea {
 
     .editor {
         grid-column: span 5;
-        grid-row: 2 / 20;
+        grid-row: 1 / 20;
     }
 
     .myfooter {
@@ -432,6 +424,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .add-button:hover{
     border: none;
     transform: scale(1.05);
+}
+
+.visually-hidden{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 
 /* NotePreview.js */

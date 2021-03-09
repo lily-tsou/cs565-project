@@ -8,7 +8,6 @@ function About() {
     return (
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <Navbar/>
             <div className = "about-container">
                 <p className = "about-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus integer feugiat scelerisque varius morbi. Morbi tristique senectus et netus et malesuada fames. Sem et tortor consequat id porta nibh venenatis. Nec ullamcorper sit amet risus nullam eget felis eget. 

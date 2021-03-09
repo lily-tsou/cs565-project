@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar'
 import ContactCard from './ContactCard'
 import background1 from '../styles/code1.jpg'
 import background2 from '../styles/code2.png'
@@ -17,7 +16,6 @@ function Contact() {
     return (
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <Navbar/>    
             <div className = "contact-container">         
                 <ContactCard name = "Michael" body = {text} image = {michael} background = {background2} 
                 github = "https://github.com/zemar" email = "mihoward@pdx.edu"/>      
