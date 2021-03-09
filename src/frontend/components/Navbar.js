@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import logo from "../styles/logo.png"
 import {Link} from "react-router-dom";
 
-
 export default function Navbar() {
     let [dark, setDark] = useState(false);
 
@@ -21,7 +20,7 @@ export default function Navbar() {
 
     return (
         <nav className = "main-navbar">
-            <img id = "logo" src={logo} alt="logo"></img>
+            <img id = "logo" src={logo} alt="NoteQuest logo image shows an open notebook in a circle"></img>
             <Link to = "/" className ="navbar-button" id = "home-button">
                 <button type="button" className="navbar-button" name="home">Home</button>
             </Link>

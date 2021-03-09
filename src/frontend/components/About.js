@@ -4,11 +4,10 @@ import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa'
 import {SiKubernetes, SiMongodb} from 'react-icons/si'
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
-function About() {
+function About(props) {
     return (
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <Navbar/>
             <div className = "about-container">
                 <p className = "about-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus integer feugiat scelerisque varius morbi. Morbi tristique senectus et netus et malesuada fames. Sem et tortor consequat id porta nibh venenatis. Nec ullamcorper sit amet risus nullam eget felis eget. 
