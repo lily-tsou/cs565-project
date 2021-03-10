@@ -28,6 +28,7 @@ function HomePage(props) {
     let [hideEditor, setHideEditor] = useState(false);
     let [hideSideBar, setHideSideBar] = useState(false);
     let [backButton, setBackButton] = useState(false);
+    let [onEditor, setOnEditor] = useState(false)
 
     useEffect( async () => {
         setUser(props.user);  // this doesn't appear to stick, why??
@@ -35,20 +36,9 @@ function HomePage(props) {
         setList( await apiList(props.user) );
         setIsLoading(false);
         document.getElementById('save').disabled = true;
-        //only happening on mount..
         if(width <= 768){
-            setHideEditor(true);
-            setHideSideBar(false);
-            setBackButton(true);
-        }
-        //but happening every time??
-        window.addEventListener("resize", handleWindowResize);
-    }, []);
-
-    const handleWindowResize = () => {
-        setWidth(window.innerWidth);
-        if(window.innerWidth <= 768){
-            if(hideEditor){
+            console.log("Called from use effect " + hideEditor)
+            if(!onEditor){
                 setHideEditor(true);
                 setHideSideBar(false);
             }
@@ -63,6 +53,12 @@ function HomePage(props) {
             setHideSideBar(false);
             setBackButton(false);
         }
+        window.addEventListener("resize", handleWindowResize);
+    }, [hideEditor, width]);
+
+    const handleWindowResize = () => {
+        console.log("Called from window resize " + hideEditor)
+        setWidth(window.innerWidth);
     }
 
     let titleChange = (e) => {
@@ -87,6 +83,7 @@ function HomePage(props) {
         if(hideEditor === true) {
             setHideEditor(false)
             setHideSideBar(true)
+            setOnEditor(true)
         }
     };
 
@@ -138,6 +135,7 @@ function HomePage(props) {
     let backAction = () =>{
         setHideEditor(true);
         setHideSideBar(false);
+        setOnEditor(false);
     };
 
     if(err) { return (<div> { err.message } </div>); }

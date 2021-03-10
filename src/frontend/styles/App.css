@@ -110,7 +110,7 @@ textarea {
 .btn_elem { width: 20%; }
 
 /* HomePage.js */
-.mycontainer{
+.my-container{
     height: 92vh;
 }
 .grid-container {
@@ -188,6 +188,7 @@ textarea {
         flex-flow: column;
         align-items: center;
         justify-content: flex-start;
+        height: 200%;
     }
 
     .contact-title{
@@ -262,6 +263,7 @@ textarea {
     .contact-container{
         justify-content: center; 
         align-items: center;
+        height: 100%;
     }
 }
 
@@ -289,8 +291,9 @@ textarea {
 }
 
 #note-title{
+    width: 100%;
     height: 12%;
-    overflow: auto;
+    overflow: none;
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -563,7 +566,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .contact-container{
     display:flex;
-    background: var(--main-background)
+    background: var(--main-background);
 }
 
 /* ContactCard.js */
