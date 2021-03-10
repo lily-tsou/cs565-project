@@ -15,6 +15,7 @@ import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 const sampleNote = 'Welcome to NoteQuest!  Click on a note or create a new note to begin.';
+const deletedNote = 'Looks like you do not have any saved notes. Please create a new note!';
 
 function HomePage(props) {
 
@@ -28,16 +29,21 @@ function HomePage(props) {
     let [hideEditor, setHideEditor] = useState(false);
     let [hideSideBar, setHideSideBar] = useState(false);
     let [backButton, setBackButton] = useState(false);
-    let [onEditor, setOnEditor] = useState(false)
+    let [onEditor, setOnEditor] = useState(false);
+    let [didLoad, setDidLoad] = useState(false);
 
     useEffect( async () => {
         setUser(props.user);  // this doesn't appear to stick, why??
         setIsLoading(true);
         setList( await apiList(props.user) );
         setIsLoading(false);
+        // if(!didLoad && list.length > 0){
+        //     console.log(list.length)
+        //     setCurrent({id: list[0]._id, title: list[0].title, note:list[0].note});
+        //     setDidLoad(true);
+        // }
         document.getElementById('save').disabled = true;
         if(width <= 768){
-            console.log("Called from use effect " + hideEditor)
             if(!onEditor){
                 setHideEditor(true);
                 setHideSideBar(false);
@@ -57,7 +63,6 @@ function HomePage(props) {
     }, [hideEditor, width]);
 
     const handleWindowResize = () => {
-        console.log("Called from window resize " + hideEditor)
         setWidth(window.innerWidth);
     }
 
@@ -95,6 +100,11 @@ function HomePage(props) {
         document.getElementById('editMode').disabled = true;
         document.getElementById('save').disabled = false;
         document.getElementById('note-body').placeholder = "Type your note here";
+        if(hideEditor === true) {
+            setHideEditor(false)
+            setHideSideBar(true)
+            setOnEditor(true)
+        }
     };
 
     let addAction = async() => {
@@ -129,6 +139,22 @@ function HomePage(props) {
             console.log('Delete: ' + current.id );
             await apiDel(user, current.id);
             setList( await apiList(user) );
+            if(width > 768){
+                if(list.length === 1)
+                    setCurrent( {id: null, title: "", note: deletedNote} );
+                else{
+
+                    if(list[0]._id === current.id)
+                        setCurrent( {id: list[1]._id, title: list[1].title, note: list[1].note} );
+                    else
+                        setCurrent( {id: list[0]._id, title: list[0].title, note: list[0].note} );
+                }
+            }
+            else{
+                setHideEditor(true);
+                setHideSideBar(false);
+                setOnEditor(false);
+            }
         }           
     };
 

@@ -362,7 +362,13 @@ aside{
 }
 
 #editMode{
-    margin-right: auto;
+    /* margin-right: auto; */
+}
+
+.edit-text{
+    margin-right:auto;
+    color: var(--active-button2);
+    align-self:center;
 }
 
 .search-notes .add-note {
