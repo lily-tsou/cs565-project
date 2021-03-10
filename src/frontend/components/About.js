@@ -1,3 +1,12 @@
+/*
+About.js
+
+Component is called from App.js when users navigate to /About
+
+Contains information about NoteQuest in body and icons for relevant technology on footer.
+
+*/
+
 import React from 'react'
 import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa'
 import {SiKubernetes, SiMongodb} from 'react-icons/si'
