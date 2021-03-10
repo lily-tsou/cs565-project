@@ -1,23 +1,34 @@
+/*
+  webpack.config.js
+
+  The configuration file for the webpack bundler.  The bundling was originally for both frontend and backend 
+  packages but the backend is commented out.  Node.js source code is executed directly without bundling first.
+  Frontend code requires bundling to allow for minification, ES6->CommonJS transpiling and adding of react libraries.
+
+*/
+
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// const backend = {
-//   entry: './src/backend/server.js',
-//   target: 'node',
-//   output: {
-//     path: path.resolve(__dirname, 'dist'),
-//     filename: 'server.js'
-//   },
-//   optimization: {
-//     minimize: false
-//   },
-//   devServer: {
-//     contentBase: path.join(__dirname, 'dist'),
-//     filename: 'server.js',
-//     port: 3000,
-//   }
+/*
+const backend = {
+  entry: './src/backend/server.js',
+  target: 'node',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'server.js'
+  },
+  optimization: {
+    minimize: false
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    filename: 'server.js',
+    port: 3000,
+  }
 
-// };
+};
+*/
 
 const frontend = {
   entry: './src/frontend/index.js',
@@ -51,7 +62,12 @@ const frontend = {
     new HtmlWebpackPlugin({
       template: "./src/frontend/index.html"
     })
-  ]
+  ],
+  resolve: {
+    fallback: {
+      "crypto": false
+    }
+  }
 };
 
 module.exports = frontend;
