@@ -16,7 +16,7 @@ import {RiDeleteBin6Line} from 'react-icons/ri'
 import {BiArrowBack} from 'react-icons/bi'
 
 function EditBar(props) {
-    let text = props.readOnly ? "Read-only" : "Editing.."
+    let text = props.readOnly ? "Read-only" : "Editing"
     return (
         <div className = "editbar">
             <button type="button" className="editbar-button" onClick ={props.backAction} name="backClick" id="backClick" label = "back"
