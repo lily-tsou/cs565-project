@@ -1,6 +1,6 @@
 /* index.js
 *
-    Handles incoming API requests
+    The entry point to the api module.  This simply collects all the api functions together and exports.
 *
 */
 
