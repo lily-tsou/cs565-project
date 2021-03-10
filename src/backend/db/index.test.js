@@ -1,3 +1,11 @@
+/* 
+    index.test.js
+
+    Jest tests for the db module.  In most of the tests, we rely on an exception by the target 
+    function to indicate if the test should pass.
+
+*/
+
 const {dbAdd, dbList, dbRetrieve, dbEdit, dbFind, dbDelete, dbDeleteAll} = require('./index');
 
 const user = 'sang-il';

@@ -1,3 +1,10 @@
+/* 
+    routes.test.js
+
+    Jest tests for routes module.  In most of the tests, the response code is checked as the expected result.
+
+*/
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
