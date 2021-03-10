@@ -1,11 +1,8 @@
 /*
     HomePage.js
-
     The HomePage react component.  This encapsulates the SideBar, Editor and Footer components.
-
     As this component is the direct parent of SideBar and Editor, many of the button actions
     are handled here as a logical place to coordinate the props flow between them. 
-
 */
 
 import React, { useState, useEffect } from 'react';
@@ -38,19 +35,27 @@ function HomePage(props) {
         setList( await apiList(props.user) );
         setIsLoading(false);
         document.getElementById('save').disabled = true;
+        //only happening on mount..
         if(width <= 768){
             setHideEditor(true);
             setHideSideBar(false);
             setBackButton(true);
         }
+        //but happening every time??
         window.addEventListener("resize", handleWindowResize);
     }, []);
 
     const handleWindowResize = () => {
         setWidth(window.innerWidth);
         if(window.innerWidth <= 768){
-            setHideEditor(true);
-            setHideSideBar(false);
+            if(hideEditor){
+                setHideEditor(true);
+                setHideSideBar(false);
+            }
+            else{
+                setHideEditor(false);
+                setHideSideBar(true);
+            }
             setBackButton(true);
         }
         else{
