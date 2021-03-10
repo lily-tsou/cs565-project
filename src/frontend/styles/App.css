@@ -44,7 +44,6 @@
 
 /* HomePage.js */
 
-
 /* Scrollbar width */
 ::-webkit-scrollbar {
     width: 15px;
@@ -110,7 +109,6 @@ textarea {
 .btn_row { width: 100%; }
 .btn_elem { width: 20%; }
 
-/* HomePage.js */
 .mycontainer{
     height: 92vh;
 }
@@ -124,6 +122,10 @@ textarea {
 
 /* Mobile screen */
 @media (max-width: 768px) {
+
+    .navbar-button{
+        font-size: small;
+    }
 
     .sidebar {
         grid-column: span 5;
@@ -187,13 +189,20 @@ textarea {
         align-items: center;
         justify-content: flex-start;
     }
+
+    .contact-title{
+        font-size: 1.2em;
+    }
     
 }
 
 /* Laptop screen */
 @media (min-width: 769px) {
+    .navbar-button{
+        font-size: 1em;
+    }
+
     .sidebar {
-        display: grid;
         grid-column: 1;
         grid-row: 1 / 20;
     }
@@ -252,10 +261,11 @@ textarea {
     }
 
     .contact-container{
-        display:flex;
         justify-content: center;
-        align-items: center;
-        height: 92vh;
+    }
+
+    .contact-title{
+        font-size: 1.5em;
     }
 }
 
@@ -283,9 +293,6 @@ textarea {
 }
 
 #note-title{
-    height: 12%;
-    width: 100%;
-    border: none;
     overflow: auto;
     outline: none;
     -webkit-box-shadow: none;
@@ -293,26 +300,22 @@ textarea {
     box-shadow: none;
     resize: none;
     font-weight: 500;
-    text-decoration-color: #A4A4A4;
     color: var(--note-text);
-    padding-top: 1%;
-    padding-left: 2%;
+    padding: 2% 0% 0% 2%;
     font-size: 1.5em;
 }
 
 /* SideBar.js */
 
 aside{
-    width:100%;
-    height: 100%;
     overflow-y:scroll;
-    align-items: center;
     background-color: var(--main-background);  
 }
 
 .search-add{
     display: flex;
     justify-content: center;
+    height: 8vh;
 }
 
 .notecard, .notecard:visited, .notecard:hover, .notecard:active, .notecard:link, .notecard:focus {
@@ -322,21 +325,18 @@ aside{
 
 .notelist {
     list-style-type: none;
-    padding: 2%;
     align-items: center;
-    text-align: center;
+    text-align: center; 
 }
 
 .noteitem {
-    margin-top: 4%;
-    margin-bottom: 4%;
+    margin: 2% 2% 4% 2%;
 }
 
 /* EditBar.js */
 
 .editbar{
     display:flex;
-    width: 100%;
     height: 6vh;
     justify-content: flex-end;
     padding: 0% 2% 0% 2%;
@@ -344,10 +344,8 @@ aside{
 }
 
 .editbar-button{
-    border: none;
     padding: 0% 2% 0% 2%;
     font-size: 1.5em;
-    font-weight: 900;
     color: var(--active-button2);
     background-color: var(--edit-bar)
 }
@@ -378,11 +376,10 @@ aside{
     background-color: var(--search-button);
     width: 70%;
     height: 70%;
-    margin: 0% 2% 0% 2%;
+    margin: 2vh;
     font-size: 1.2em;
     padding: 4%;
 }
-
 
 .search:hover, .search:focus {
     transform: scaleX(1.075);
@@ -397,6 +394,7 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 /* Editor.js */
+
 .editor{
     height: 100%;
 }
@@ -404,15 +402,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 /* AddButton.js */
 
 .add-button{
-    align-items: center; 
-    border: none;
     border-radius: 50px;
     color: white;
     background-color: var(--active-button1);
     width: 70%;
     height: 7vh;
-    margin: 10% 2% 2% 2%;
-    white-space: nowrap;
+    margin: 2vh;
     font-size: 1.2em;
     line-height: 100%;
 }
@@ -484,25 +479,18 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .main-navbar{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    justify-content: end;
     height: 8vh;
-    width: 100%;
     align-items: center;
     background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 56%, var(--gradient3) 100%);
     padding: 0% 2% 0% 2%;
 }
 
-
-
 .navbar-button{
     width: 100%;
     height: 100%;
     background-color: inherit;
-    border: none;
     font-weight: bold;
-    white-space: nowrap;
     color: white;
-
 }
 
 .navbar-button:hover, .navbar-button:focus{
@@ -510,26 +498,20 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 #logo{
-    margin-right: auto;
-    height: auto;
     width: 5vh;
-    grid-row: 1;
 }
 
 #home-button{
     grid-column: 5;
 }
 
-
 #dark-button{
     grid-column: 6;
 }
 
-
 #contact-button{
     grid-column: 7;
 }
-
 
 #about-button{
     grid-column: 8;
@@ -545,8 +527,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     overflow-y: scroll;
 }
 
+.about-header{
+    color: var(--note-text);
+}
+
 .about-text{
     color: var(--note-text);
+    margin-bottom: 5%;
 }
 
 .about-icon{
@@ -571,7 +558,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 /* ContactCard.js */
-  
+
 .contact-card{
     font-size: 1.25em; 
     margin: 5%; 
