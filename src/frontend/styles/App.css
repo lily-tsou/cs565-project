@@ -3,7 +3,7 @@
     --note-text: black;
     --preview-background: #f2f2f2;
     --search-button: #e6e6e6;
-    --edit-bar: #E4E4E4;
+    --edit-bar: #F1F1F1;
     --active-button1: #962EFF;
     --active-button2: #962EFF;
     --disable-button: #898989;
@@ -24,7 +24,7 @@
 
 [data-theme="dark"]{
     --main-background: #1B1B1B;
-    --note-text: #D1D1D1D1;
+    --note-text: #DEDEDE;
     --preview-background: #4D4D4D;
     --search-button: #A8A8A8;
     --edit-bar: #2B2B2B;
@@ -149,17 +149,11 @@ textarea {
     }
 
     .notelist {
-        grid-column: 1;
-        grid-row: 3 / 20;
-        height: 100%;
-        width: 100%;
+        margin-top: 4%;
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        justify-content: center;
     }
-
-    .noteitem{
-        display: inline-block;
-        width: 40%;
-    }
-
     .editbar {
         grid-column: 0;
         grid-row: 0;
@@ -176,8 +170,8 @@ textarea {
     }
 
     .card-container{
-        width: 90%;
-        height: 48%;
+        width: 45vw;
+        height: 55vw;
     }
 
     .contact-card{
@@ -188,16 +182,23 @@ textarea {
         flex-flow: column;
         align-items: center;
         justify-content: flex-start;
-        height: 200%;
+        min-height: 100%;
+        height:auto !important; /* cross-browser */
+        height: 100%; /* cross-browser */
     }
 
     .contact-title{
+        padding-top: 5vh;
         font-size: 1.2em;
     }
 }
 
 /* Laptop screen */
 @media (min-width: 769px) {
+    aside{
+        overflow-y:scroll;
+    }
+
     .navbar-button{
         font-size: 1em;
     }
@@ -228,6 +229,8 @@ textarea {
         grid-row: 2 / 20;
         height: 100%;
         width: 100%;
+        text-align: center;
+        margin: auto;
     }
 
     .edit-section {
@@ -270,7 +273,7 @@ textarea {
 .myfooter {
     width: 100%;
     text-align: center;
-    color: var(--active-button1);  
+    color: var(--active-button2);  
     background-color: var(--main-background);
     border: none;
 }
@@ -303,18 +306,25 @@ textarea {
     color: var(--note-text);
     padding: 2% 0% 0% 2%;
     font-size: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: var(--note-text);
 }
 
 /* SideBar.js */
 
 aside{
-    overflow-y:scroll;
     background-color: var(--main-background);  
 }
 
 .search-add{
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+    height: 8vh;
+    text-align: center;
+}
+
+.notelist{
+    list-style-type: none;
 }
 
 .notecard, .notecard:visited, .notecard:hover, .notecard:active, .notecard:link, .notecard:focus {
@@ -322,14 +332,8 @@ aside{
     color: var(--note-text);
 }
 
-.notelist {
-    list-style-type: none;
-    align-items: center;
-    text-align: center;
-}
-
 .noteitem {
-    margin: 2% 2% 4% 2%;
+    margin: 2%;
 }
 
 /* EditBar.js */
@@ -361,14 +365,11 @@ aside{
     border: none;
 }
 
-#editMode{
-    /* margin-right: auto; */
-}
-
 .edit-text{
     margin-right:auto;
     color: var(--active-button2);
     align-self:center;
+    font-weight: 500;
 }
 
 .search-notes .add-note {
@@ -461,6 +462,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin: 0px;
     margin-top: 0.2rem;
     border-bottom: solid 5px var(--preview-background);
+    overflow:hidden;
 }
 
 .card-content:hover, .card-content:focus{
@@ -468,6 +470,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .card-body{
+    display:block;
     margin: auto;
     padding: 2%;
     overflow: hidden;
@@ -488,6 +491,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: 8vh;
     width: 100%;
     align-items: center;
+    /* background-color: var(--gradient2); */
     background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 56%, var(--gradient3) 100%);
     padding: 0% 2% 0% 2%;
 }
