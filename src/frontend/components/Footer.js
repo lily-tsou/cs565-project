@@ -1,3 +1,9 @@
+/*
+    Footer.js
+
+    Footer for NoteQuest app.
+*/
+
 import React from 'react'
 
 function Footer() {

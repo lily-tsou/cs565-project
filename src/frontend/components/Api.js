@@ -1,3 +1,31 @@
+/*
+    Api.js
+
+    All API function calls. 
+
+    apiList: Return a list of all notes in database
+        parameters: 
+                user: this is not a current feature of the app, but would
+                eventually be used for user authentication
+    apiAdd: Add a note to the database
+        parameters: 
+                user: user ID
+                title: string to be stored as note title
+                body: string to be stored as note body
+    apiEdit: Edit and save a note to the database
+        parameters:
+                user, id, title (see apiAdd)
+                id: note ID
+    apiFind: Find a specific note given a search string
+        parameters:
+                user: user ID
+                key: search key
+    apiDel: Delete a specific note
+        parameters:
+                id: note ID
+                user: user ID
+*/
+
 export const apiList = async (user) => {
     let result = await fetch('/list', {
         headers: {

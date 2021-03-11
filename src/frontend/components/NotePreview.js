@@ -1,3 +1,10 @@
+/*
+    NotePreview.js
+
+    Container for note list preview
+*/
+
+
 import React from 'react'
 import '../styles/App.css';
 
