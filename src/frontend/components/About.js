@@ -1,24 +1,44 @@
+/*
+About.js
+
+Component is called from App.js when users navigate to /About
+
+Contains information about NoteQuest in body and icons for relevant technology on footer.
+
+*/
+
 import React from 'react'
-import Navbar from './Navbar'
 import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa'
 import {SiKubernetes, SiMongodb} from 'react-icons/si'
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
+
+const t1 = `About NoteQuest`
+const p1 = `
+NoteQuest is an application created by Michael Howard and Lily Tsou for Portland State University's CS 565: Full-stack Web Development. 
+Both Michael and Lily were inspired by various note taking applications that they have used in the past, namely Evernote, and wanted to
+create a lightweight version of a fully-functional note taking application. 
+The main operations this app supports are adding a new note, editing an existing note, and deleting a note. Users are also able to see a list 
+of all saved notes as well as retrieve any existing note from the database.
+`
+
+const t2 = `System Architecture: The MERN Stack`
+const p2 = `
+The front end of this application was created with React (a JavaScript library written by Facebook) and styled with CSS. 
+The back end uses Node.js, which is a JavaScript runtime environment, and Express.js, an open-source back-end framework built on node.js. 
+All of the note data is held in a MongoDB database, which is hosted by MongoDB Atlas. 
+Using GitHub Actions, NoteQuest is deployed to a Google Kubernetes Engine container, and is hosted via the Google Cloud Platform. 
+`
+
 
 function About() {
     return (
         <div className = "my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <Navbar/>
             <div className = "about-container">
-                <p className = "about-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus integer feugiat scelerisque varius morbi. Morbi tristique senectus et netus et malesuada fames. Sem et tortor consequat id porta nibh venenatis. Nec ullamcorper sit amet risus nullam eget felis eget. 
-                Ac tortor vitae purus faucibus ornare. Egestas congue quisque egestas diam in arcu cursus euismod quis. Morbi tristique senectus et netus et malesuada. Etiam non quam lacus suspendisse faucibus interdum posuere lorem. Blandit massa enim nec dui nunc mattis. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. 
-                Penatibus et magnis dis parturient montes nascetur ridiculus mus. Donec adipiscing tristique risus nec feugiat in. Ultrices dui sapien eget mi proin sed libero. Neque gravida in fermentum et sollicitudin ac orci phasellus. Eu turpis egestas pretium aenean pharetra. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. 
-                Malesuada fames ac turpis egestas sed tempus urna et pharetra. Purus non enim praesent elementum. Pharetra massa massa ultricies mi quis hendrerit dolor magna. Ut sem viverra aliquet eget sit amet tellus cras. Purus non enim praesent elementum facilisis. Malesuada nunc vel risus commodo viverra maecenas accumsan lacus. 
-                Quisque id diam vel quam elementum. Lorem donec massa sapien faucibus et molestie ac feugiat. Nunc sed blandit libero volutpat sed. Ullamcorper malesuada proin libero nunc consequat. Mi tempus imperdiet nulla malesuada. Elit eget gravida cum sociis natoque penatibus. Blandit cursus risus at ultrices mi tempus. 
-                Nec tincidunt praesent semper feugiat nibh sed. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. Sed felis eget velit aliquet sagittis id consectetur. Arcu ac tortor dignissim convallis aenean et tortor. Risus commodo viverra maecenas accumsan lacus vel facilisis. Erat nam at lectus urna duis convallis convallis tellus id. 
-                At consectetur lorem donec massa sapien faucibus.
-                </p>
+                <h4 className = "about-header">{t1}</h4>
+                <p className = "about-text">{p1}</p>
+                <h4 className = "about-header">{t2}</h4>
+                <p className = "about-text">{p2}</p>
             </div>
             <footer className = "about-footer">
                 <div className = "about-icon"><FaReact/></div>

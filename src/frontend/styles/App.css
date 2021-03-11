@@ -44,7 +44,6 @@
 
 /* HomePage.js */
 
-
 /* Scrollbar width */
 ::-webkit-scrollbar {
     width: 15px;
@@ -111,24 +110,26 @@ textarea {
 .btn_elem { width: 20%; }
 
 /* HomePage.js */
-
+.my-container{
+    height: 92vh;
+}
 .grid-container {
-    height: 100vh;
+    height: 92vh;
     display: grid;
-    grid-template-rows: 8vh repeat(20, auto);
+    grid-template-rows:  repeat(20, auto);
     grid-template-columns: repeat(5, 20%);
+    background-color: var(--main-background);
 }
 
 /* Mobile screen */
 @media (max-width: 768px) {
-    .main-navbar { 
-        grid-column: span 5;
-        grid-row: 1;
+    .navbar-button{
+        font-size: small;
     }
 
     .sidebar {
         grid-column: span 5;
-        grid-row: 2/21;
+        grid-row: 1/21;
     }
 
     .add-note {
@@ -141,7 +142,7 @@ textarea {
 
     .search-notes {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 1;
         height: 100%;
         width: 100%;
         margin: 1px auto 1px auto;
@@ -166,7 +167,7 @@ textarea {
 
     .editor {
         width: 100vw;
-        grid-row: 2/21;
+        grid-row: 1/21;
         grid-column: span 5;
     }
 
@@ -187,22 +188,23 @@ textarea {
         flex-flow: column;
         align-items: center;
         justify-content: flex-start;
+        height: 200%;
     }
-    
+
+    .contact-title{
+        font-size: 1.2em;
+    }
 }
 
 /* Laptop screen */
 @media (min-width: 769px) {
- 
-    .main-navbar { 
-        grid-column: span 5;
-        grid-row: 1;
+    .navbar-button{
+        font-size: 1em;
     }
 
     .sidebar {
-        display: grid;
         grid-column: 1;
-        grid-row: 2 / 20;
+        grid-row: 1 / 20;
     }
 
     .add-note {
@@ -215,7 +217,7 @@ textarea {
 
     .search-notes {
         grid-column: 1;
-        grid-row: 2;
+        grid-row: 1;
         height: 100%;
         width: 100%;
         margin: 10%;
@@ -223,7 +225,7 @@ textarea {
 
     .notelist {
         grid-column: 1;
-        grid-row: 3 / 20;
+        grid-row: 2 / 20;
         height: 100%;
         width: 100%;
     }
@@ -241,7 +243,7 @@ textarea {
 
     .editor {
         grid-column: span 5;
-        grid-row: 2 / 20;
+        grid-row: 1 / 20;
     }
 
     .myfooter {
@@ -259,10 +261,9 @@ textarea {
     }
 
     .contact-container{
-        display:flex;
-        justify-content: center;
+        justify-content: center; 
         align-items: center;
-        height: 92vh;
+        height: 100%;
     }
 }
 
@@ -276,7 +277,7 @@ textarea {
 
 #note-body{
     width: 100%;
-    height: 73vh;
+    height: 82%;
     border: none;
     overflow: auto;
     outline: none;
@@ -290,30 +291,24 @@ textarea {
 }
 
 #note-title{
-    height: 12%;
     width: 100%;
-    border: none;
-    overflow: auto;
+    height: 12%;
+    overflow: none;
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     resize: none;
     font-weight: 500;
-    text-decoration-color: #A4A4A4;
     color: var(--note-text);
-    padding-top: 1%;
-    padding-left: 2%;
+    padding: 2% 0% 0% 2%;
     font-size: 1.5em;
 }
 
 /* SideBar.js */
 
 aside{
-    width:100%;
-    height: 100%;
     overflow-y:scroll;
-    align-items: center;
     background-color: var(--main-background);  
 }
 
@@ -329,14 +324,12 @@ aside{
 
 .notelist {
     list-style-type: none;
-    padding: 2%;
     align-items: center;
     text-align: center;
 }
 
 .noteitem {
-    margin-top: 4%;
-    margin-bottom: 4%;
+    margin: 2% 2% 4% 2%;
 }
 
 /* EditBar.js */
@@ -344,22 +337,20 @@ aside{
 .editbar{
     display:flex;
     width: 100%;
-    height: 6vh;
+    height: 6%;
     justify-content: flex-end;
     padding: 0% 2% 0% 2%;
     background-color: var(--edit-bar);
 }
 
 .editbar-button{
-    border: none;
     padding: 0% 2% 0% 2%;
     font-size: 1.5em;
-    font-weight: 900;
     color: var(--active-button2);
     background-color: var(--edit-bar)
 }
 
-.editbar-button:hover:enabled{
+.editbar-button:hover:enabled, .editbar-button:focus:enabled{
     border-radius: 5px;
     background-color: var(--editbar-hover);
 }
@@ -371,7 +362,13 @@ aside{
 }
 
 #editMode{
-    margin-right: auto;
+    /* margin-right: auto; */
+}
+
+.edit-text{
+    margin-right:auto;
+    color: var(--active-button2);
+    align-self:center;
 }
 
 .search-notes .add-note {
@@ -385,7 +382,7 @@ aside{
     background-color: var(--search-button);
     width: 70%;
     height: 70%;
-    margin: 0% 2% 0% 2%;
+    margin: 2vh;
     font-size: 1.2em;
     padding: 4%;
 }
@@ -411,15 +408,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 /* AddButton.js */
 
 .add-button{
-    align-items: center; 
-    border: none;
     border-radius: 50px;
     color: white;
     background-color: var(--active-button1);
     width: 70%;
     height: 7vh;
-    margin: 10% 2% 2% 2%;
-    white-space: nowrap;
+    margin: 2vh;
     font-size: 1.2em;
     line-height: 100%;
 }
@@ -429,9 +423,20 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     font-weight: 900;
 }
 
-.add-button:hover{
+.add-button:hover, .add-button:focus{
     border: none;
     transform: scale(1.05);
+}
+
+.visually-hidden{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 
 /* NotePreview.js */
@@ -447,7 +452,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     overflow: hidden;
 }
 
-.card-container:hover{
+.card-container:hover, .card-container:focus{
     transform: scale(1.025);
     text-decoration: none;
 }
@@ -458,7 +463,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     border-bottom: solid 5px var(--preview-background);
 }
 
-.card-content:hover{
+.card-content:hover, .card-content:focus{
     text-decoration: none;
 }
 
@@ -480,7 +485,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .main-navbar{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    justify-content: end;
     height: 8vh;
     width: 100%;
     align-items: center;
@@ -494,26 +498,18 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 100%;
     height: 100%;
     background-color: inherit;
-    border: none;
     font-weight: bold;
     white-space: nowrap;
     color: white;
 
 }
 
-.navbar-button:hover{
+.navbar-button:hover, .navbar-button:focus{
     background-color: var(--navbar-hover);
 }
 
-*:focus {
-    outline: 0 !important;
-}
-
 #logo{
-    margin-right: auto;
-    height: auto;
     width: 5vh;
-    grid-row: 1;
 }
 
 #home-button{
@@ -563,11 +559,20 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: var(--about-footer);
 }
 
+.about-header{
+    color: var(--note-text);
+}
+
+.about-text{
+    color: var(--note-text);
+    margin-bottom: 5%;
+}
+
 /* Contact.js */
 
 .contact-container{
     display:flex;
-    background: var(--main-background)
+    background: var(--main-background);
 }
 
 /* ContactCard.js */
@@ -610,7 +615,7 @@ h2{
     margin: 5%;
 }
 
-.contact-link:hover{
+.contact-link:hover, .contact-link:focus{
     text-align: center;
     text-decoration: none;
 }

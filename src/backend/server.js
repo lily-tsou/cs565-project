@@ -1,5 +1,11 @@
-/*  server.js
-*
+/*  
+    server.js
+
+    The entry point to our Node.js server.  This module uses Express to listen on port 80 for http requests
+    and handles all routing.
+
+    Body-Parser is used to parse body of PUT/POST/DELETE methods.
+    
 */
 
 const express = require('express');

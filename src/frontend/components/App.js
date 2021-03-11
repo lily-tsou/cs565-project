@@ -7,6 +7,8 @@ import React from 'react';
 import HomePage from './HomePage'
 import About from './About'
 import Contact from './Contact'
+import Navbar from './Navbar'
+import '../styles/App.css'
 import  {HashRouter as Router, Route} from 'react-router-dom'
 export default class App extends React.Component {
     constructor(props) {
@@ -14,14 +16,15 @@ export default class App extends React.Component {
 
         this.state = {
             loggedIn: true,
-            user: '',
-            
+            user: ''
         };
     }
 
     render() {
         return(
         <Router>
+            <h1 className = "visually-hidden">NoteQuest</h1>
+            <Navbar/>
             <Route exact path="/" render={() => <HomePage user="sang-il"/>}/>
             <Route exact path="/About" render={() => <About/>}/>
             <Route exact path="/Contact" render={() => <Contact/>}/>
