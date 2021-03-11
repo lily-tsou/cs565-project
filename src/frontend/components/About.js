@@ -1,10 +1,9 @@
 /*
-About.js
+    About.js
 
-Component is called from App.js when users navigate to /About
-
-Contains information about NoteQuest in body and icons for relevant technology on footer.
-
+    About component is called from App.js when users navigate to /About
+    Contains a description of the NoteQuest app.
+    
 */
 
 import React from 'react'
@@ -12,9 +11,11 @@ import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa'
 import {SiKubernetes, SiMongodb} from 'react-icons/si'
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
+let version = `0.8.0`
+
 const t1 = `About NoteQuest`
 const p1 = `
-NoteQuest is an application created by Michael Howard and Lily Tsou for Portland State University's CS 565: Full-stack Web Development. 
+NoteQuest (version ${version}) is an application created by Michael Howard and Lily Tsou for Portland State University's CS 565: Full-stack Web Development. 
 Both Michael and Lily were inspired by various note taking applications that they have used in the past, namely Evernote, and wanted to
 create a lightweight version of a fully-functional note taking application. 
 The main operations this app supports are adding a new note, editing an existing note, and deleting a note. Users are also able to see a list 
@@ -28,8 +29,6 @@ The back end uses Node.js, which is a JavaScript runtime environment, and Expres
 All of the note data is held in a MongoDB database, which is hosted by MongoDB Atlas. 
 Using GitHub Actions, NoteQuest is deployed to a Google Kubernetes Engine container, and is hosted via the Google Cloud Platform. 
 `
-
-
 function About() {
     return (
         <div className = "my-container">

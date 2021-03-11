@@ -1,3 +1,10 @@
+/*
+    Contact.js
+
+    Contact component is rendered in App.js when users navigate to /Contact
+    Shows information about NoteQuest developers and their GitHub's and emails
+*/
+
 import React from 'react'
 import ContactCard from './ContactCard'
 import background1 from '../styles/code1.jpg'
@@ -18,9 +25,9 @@ function Contact() {
     let michaelText = `
     Michael has a bachelor's degree in electrical engineering, and industry experience as a software manager. 
     During his career, he realized that he was happiest when writing his own code. He was able to gather programming 
-    experience while working on projects, but was interested in learning about the theory behind what 
-    he was writing. He enrolled in Portland State's master's program to fill some of the gaps in his knowledge 
-    before he transitions from the management to the developer side of the industry.
+    experience while working on projects, but was interested to learn the theory behind what 
+    he was writing. He enrolled in Portland State's master's program to transition from the management
+    to the developer side of the industry.
     `;
 
     return (

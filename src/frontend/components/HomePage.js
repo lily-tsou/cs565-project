@@ -30,18 +30,12 @@ function HomePage(props) {
     let [hideSideBar, setHideSideBar] = useState(false);
     let [backButton, setBackButton] = useState(false);
     let [onEditor, setOnEditor] = useState(false);
-    let [didLoad, setDidLoad] = useState(false);
 
     useEffect( async () => {
-        setUser(props.user);  // this doesn't appear to stick, why??
+        setUser(props.user);  
         setIsLoading(true);
         setList( await apiList(props.user) );
         setIsLoading(false);
-        // if(!didLoad && list.length > 0){
-        //     console.log(list.length)
-        //     setCurrent({id: list[0]._id, title: list[0].title, note:list[0].note});
-        //     setDidLoad(true);
-        // }
         document.getElementById('save').disabled = true;
         if(width <= 768){
             if(!onEditor){
@@ -104,6 +98,7 @@ function HomePage(props) {
             setHideEditor(false)
             setHideSideBar(true)
             setOnEditor(true)
+            setReadOnly(true)
         }
     };
 

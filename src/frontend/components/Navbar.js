@@ -1,3 +1,9 @@
+/*
+    Navbar.js
+
+    Rendered at the top of all pages. Links users to /, /Contact, /About and allows to toggle between light and dark mode
+*/
+
 import '../styles/App.css'
 import React, { useState } from "react";
 import logo from "../styles/logo.png"

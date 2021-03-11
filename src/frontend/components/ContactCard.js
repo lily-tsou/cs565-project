@@ -1,3 +1,9 @@
+/*
+    Contact.js
+
+    Container for contact information. 
+*/
+
 import React from 'react'
 import {FaGithub} from 'react-icons/fa'
 import {AiOutlineMail} from 'react-icons/ai'
