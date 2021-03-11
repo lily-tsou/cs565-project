@@ -21,5 +21,5 @@ describe('Search component test', () => {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});

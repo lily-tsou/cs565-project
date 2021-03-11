@@ -5,12 +5,12 @@
     Shows information about NoteQuest developers and their GitHub's and emails
 */
 
-import React from 'react'
-import ContactCard from './ContactCard'
-import background1 from '../styles/code1.jpg'
-import background2 from '../styles/code2.png'
-import lily from '../styles/lily.jpg'
-import michael from '../styles/michael.jpeg'
+import React from 'react';
+import ContactCard from './ContactCard';
+import background1 from '../styles/code1.jpg';
+import background2 from '../styles/code2.png';
+import lily from '../styles/lily.jpg';
+import michael from '../styles/michael.jpeg';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
 function Contact() {
@@ -31,16 +31,16 @@ function Contact() {
     `;
 
     return (
-        <div className = "my-container">
+        <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <div className = "contact-container">         
-                <ContactCard name = "Michael" body = {michaelText} image = {michael} background = {background2} 
-                github = "https://github.com/zemar" email = "mihoward@pdx.edu"/>      
-                <ContactCard name = "Lily" body = {lilyText} image = {lily} background = {background1} 
-                github = "https://github.com/lily-tsou" email = "tsou@pdx.edu"/>
+            <div className="contact-container">         
+                <ContactCard name="Michael" body={michaelText} image={michael} background={background2} 
+                github="https://github.com/zemar" email="mihoward@pdx.edu"/>      
+                <ContactCard name="Lily" body={lilyText} image={lily} background={background1} 
+                github="https://github.com/lily-tsou" email="tsou@pdx.edu"/>
             </div>
         </div>
-        )
-    }
+    );
+};
     
-    export default Contact
+export default Contact;

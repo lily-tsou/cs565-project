@@ -3,7 +3,7 @@
 
     All API function calls. 
 
-    apiList: Return a list of all notes in database
+    apiList: Return a list of all notes in the database collection
         parameters: 
                 user: this is not a current feature of the app, but would
                 eventually be used for user authentication
