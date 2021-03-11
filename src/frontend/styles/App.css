@@ -481,7 +481,9 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     grid-template-columns: repeat(8, 1fr);
     height: 8vh;
     align-items: center;
-    background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 56%, var(--gradient3) 100%);
+    background-color: var(--gradient2);
+    /* Gradient giving wave errors so got rid of it */
+    /* background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 56%, var(--gradient3) 100%); */
     padding: 0% 2% 0% 2%;
 }
 
