@@ -19,7 +19,6 @@ const deletedNote = 'Looks like you do not have any saved notes. Please create a
 
 function HomePage(props) {
 
-    let [user, setUser] = useState('');
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
     let [err, setErr] = useState(null);
@@ -32,7 +31,6 @@ function HomePage(props) {
     let [onEditor, setOnEditor] = useState(false);
 
     useEffect( async () => {
-        setUser(props.user);  
         setIsLoading(true);
         setList( await apiList(props.user) );
         setIsLoading(false);
@@ -58,7 +56,7 @@ function HomePage(props) {
 
     const handleWindowResize = () => {
         setWidth(window.innerWidth);
-    }
+    };
 
     let titleChange = (e) => {
         setCurrent( {id: current.id, title: e.target.value, note: current.note } );
@@ -104,8 +102,8 @@ function HomePage(props) {
 
     let addAction = async() => {
         let newNote = "New Note"
-        const res = await apiAdd(user, newNote, "");
-        setList( await apiList(user) );
+        const res = await apiAdd(props.user, newNote, "");
+        setList( await apiList(props.user) );
         openNew(res.insertedId, newNote, "");
     };
 
@@ -124,16 +122,16 @@ function HomePage(props) {
         document.getElementById('editMode').disabled = false;
         document.getElementById('note-title').readOnly = true;
         document.getElementById('note-body').readOnly = true;
-        await apiEdit(user, current.id, current.title, current.note);
-        setList( await apiList(user) );
+        await apiEdit(props.user, current.id, current.title, current.note);
+        setList( await apiList(props.user) );
     };
 
     let deleteAction = async () => {
         let result = confirm("Are you sure you want to delete this note?");
         if (result) {
             console.log('Delete: ' + current.id );
-            await apiDel(user, current.id);
-            setList( await apiList(user) );
+            await apiDel(props.user, current.id);
+            setList( await apiList(props.user) );
             if(width > 768){
                 if(list.length === 1)
                     setCurrent( {id: null, title: "", note: deletedNote} );
@@ -166,14 +164,14 @@ function HomePage(props) {
         <main className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <section className="grid-container">
-                <SideBar searchChange = {searchChange} noteList = {list} listSelect = {listSelect} addAction = {addAction} isHidden = {hideSideBar}/>
-                <Editor readOnly = {readOnly} editAction = {editAction} saveAction = {saveAction} title = {current.title} body = {current.note} 
-                    noteChange = {noteChange} titleChange = {titleChange} isHidden = {hideEditor} backButton = {backButton} backAction = {backAction}
-                    deleteAction = {deleteAction}/>
+                <SideBar searchChange={searchChange} noteList={list} listSelect={listSelect} addAction={addAction} isHidden={hideSideBar}/>
+                <Editor readOnly={readOnly} editAction={editAction} saveAction={saveAction} title={current.title} body={current.note} 
+                    noteChange={noteChange} titleChange={titleChange} isHidden={hideEditor} backButton={backButton} backAction={backAction}
+                    deleteAction={deleteAction}/>
                 <Footer/>
             </section>
         </main>
-    )
+    );
 };
 
-export default HomePage
+export default HomePage;

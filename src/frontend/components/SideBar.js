@@ -14,27 +14,27 @@
 
 */
 
-import React from 'react'
-import Search from './Search'
-import NotePreview from './NotePreview'
-import AddButton from './AddButton'
+import React from 'react';
+import Search from './Search';
+import NotePreview from './NotePreview';
+import AddButton from './AddButton';
 
 function SideBar(props) {
     return (
-        <aside className = "sidebar" style = {{display: props.isHidden ? 'none' : 'block' }}>
-            <AddButton addAction = {props.addAction}/>            
-            <Search searchChange = {props.searchChange}/>
+        <aside className="sidebar" style={{display: props.isHidden ? 'none' : 'block' }}>
+            <AddButton addAction={props.addAction}/>            
+            <Search searchChange={props.searchChange}/>
             <ul className="notelist">
                     {props.noteList.map(item => {
-                        return <li className = "noteitem" key = {item._id} id = {item._id}>
-                            <a className = "notecard" onClick={() => props.listSelect(item._id, item.title, item.note)} href="#"> 
-                            { <NotePreview title = {item.title} note = {item.note} /> }
+                        return <li className="noteitem" key={item._id} id={item._id}>
+                            <a className="notecard" onClick={() => props.listSelect(item._id, item.title, item.note)} href="#"> 
+                            { <NotePreview title={item.title} note={item.note} /> }
                             </a>
                         </li>
                 })}
             </ul>
         </aside>
-    )
-}
+    );
+};
 
-export default SideBar
+export default SideBar;

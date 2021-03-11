@@ -21,5 +21,5 @@ describe('App component test', () => {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});
