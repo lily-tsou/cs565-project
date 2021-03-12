@@ -12,6 +12,7 @@ import Editor from './Editor';
 import SideBar from './SideBar';
 import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
+import Loader from "react-loader-spinner";
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 const sampleNote = 'Welcome to NoteQuest!  Click on a note or create a new note to begin.';
@@ -157,8 +158,17 @@ function HomePage(props) {
         setOnEditor(false);
     };
 
-    if(err) { return (<div> { err.message } </div>); }
-    if(isLoading) { return (<div> Loading... </div>); }
+    if(isLoading) { 
+        return (
+            <Loader
+                type="Oval"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={3000} //3 secs
+            />
+        );
+    }
 
     return (
         <main className="my-container">
