@@ -37,9 +37,9 @@ function About() {
             </header>
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <main className="about-container">
-                <h4 className="about-header">{t1}</h4>
+                <h2 className="about-header">{t1}</h2>
                 <p className="about-text">{p1}</p>
-                <h4 className="about-header">{t2}</h4>
+                <h2 className="about-header">{t2}</h2>
                 <p className="about-text">{p2}</p>
             </main>
             <footer className="about-footer">
