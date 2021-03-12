@@ -629,5 +629,8 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
+    /* margin-top: 20%; */
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-background);
 }
