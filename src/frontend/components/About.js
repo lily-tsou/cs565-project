@@ -1,5 +1,6 @@
 /*
     About.js
+    
     About component is called from App.js when users navigate to /About
     Contains a description of the NoteQuest app.
     
