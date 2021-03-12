@@ -30,7 +30,6 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <h1 className="visually-hidden">NoteQuest</h1>
                 <NavBar/>
                 <Route exact path="/" render={() => <HomePage user={this.state.user}/>}/>
                 <Route exact path="/About" render={() => <About version={this.state.version}/>}/>
