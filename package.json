@@ -1,6 +1,6 @@
 {
   "name": "notequest",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Note taking app",
   "license": "MIT",
   "main": "src/backend/server.js",
