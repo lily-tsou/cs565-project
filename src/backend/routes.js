@@ -16,9 +16,14 @@
 const express = require('express');
 const api = require('./api');
 const router = express.Router();
+const path = require('path');
 
 router.get('/hello', (req, res, next) => {
     res.json('World');
+});
+
+router.get('/|about|contact', (req,res) => {
+    res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
 
 router.post('/add', async (req, res) => {
