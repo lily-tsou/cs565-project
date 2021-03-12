@@ -33,12 +33,15 @@ function Contact() {
     return (
         <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <div className="contact-container">         
+            <header>
+                <h1 className="visually-hidden">Contact</h1>
+            </header>
+            <main className="contact-container">         
                 <ContactCard name="Michael" body={michaelText} image={michael} background={background2} 
                 github="https://github.com/zemar" email="mihoward@pdx.edu"/>      
                 <ContactCard name="Lily" body={lilyText} image={lily} background={background1} 
                 github="https://github.com/lily-tsou" email="tsou@pdx.edu"/>
-            </div>
+            </main>
         </div>
     );
 };

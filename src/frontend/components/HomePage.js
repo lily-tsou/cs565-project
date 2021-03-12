@@ -171,16 +171,19 @@ function HomePage(props) {
     }
 
     return (
-        <main className="my-container">
+        <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
+            <header>
+                <h1 className="visually-hidden">NoteQuest</h1>
+            </header>
             <section className="grid-container">
                 <SideBar searchChange={searchChange} noteList={list} listSelect={listSelect} addAction={addAction} isHidden={hideSideBar}/>
                 <Editor readOnly={readOnly} editAction={editAction} saveAction={saveAction} title={current.title} body={current.note} 
                     noteChange={noteChange} titleChange={titleChange} isHidden={hideEditor} backButton={backButton} backAction={backAction}
                     deleteAction={deleteAction}/>
-                <Footer/>
+                {/* <Footer/> */}
             </section>
-        </main>
+        </div>
     );
 };
 

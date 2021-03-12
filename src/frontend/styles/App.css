@@ -116,6 +116,11 @@ textarea {
 
 /* Mobile screen */
 @media (max-width: 768px) {
+    .main-panel{
+        grid-column: 2/6;
+        grid-row: 1/20;
+    }
+
     .navbar-button{
         font-size: small;
     }
@@ -188,6 +193,11 @@ textarea {
 
 /* Laptop screen */
 @media (min-width: 769px) {
+    .main-panel{
+        grid-column: 2/6;
+        grid-row: 1/20;
+    }
+
     aside{
         overflow-y:scroll;
     }

@@ -10,7 +10,7 @@ import About from './About';
 import Contact from './Contact';
 import NavBar from './NavBar';
 import '../styles/App.css';
-import  {HashRouter as Router, Route} from 'react-router-dom';
+import  {BrowserRouter as Router, Route} from 'react-router-dom';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -30,7 +30,6 @@ class App extends React.Component {
     render() {
         return(
             <Router>
-                <h1 className="visually-hidden">NoteQuest</h1>
                 <NavBar/>
                 <Route exact path="/" render={() => <HomePage user={this.state.user}/>}/>
                 <Route exact path="/About" render={() => <About version={this.state.version}/>}/>

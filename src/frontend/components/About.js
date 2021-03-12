@@ -1,6 +1,6 @@
 /*
     About.js
-
+    
     About component is called from App.js when users navigate to /About
     Contains a description of the NoteQuest app.
     
@@ -32,12 +32,15 @@ function About(props) {
     return (
         <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <div className="about-container">
+            <header>
+                <h1 className="visually-hidden">About</h1>
+            </header>
+            <main className="about-container">
                 <h2 className="about-header">{t1}</h2>
                 <p className="about-text">{p1}</p>
                 <h2 className="about-header">{t2}</h2>
                 <p className="about-text">{p2}</p>
-            </div>
+            </main>
             <footer className="about-footer">
                 <div className="about-icon"><FaReact/></div>
                 <div className="about-icon"><SiMongodb/></div>
