@@ -31,23 +31,23 @@ Using GitHub Actions, NoteQuest is deployed to a Google Kubernetes Engine contai
 `
 function About() {
     return (
-        <div className = "my-container">
+        <div className="my-container">
             <header>
                 <h1 className="visually-hidden">About</h1>
             </header>
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <main className = "about-container">
-                <h4 className = "about-header">{t1}</h4>
-                <p className = "about-text">{p1}</p>
-                <h4 className = "about-header">{t2}</h4>
-                <p className = "about-text">{p2}</p>
+            <main className="about-container">
+                <h4 className="about-header">{t1}</h4>
+                <p className="about-text">{p1}</p>
+                <h4 className="about-header">{t2}</h4>
+                <p className="about-text">{p2}</p>
             </main>
-            <footer className = "about-footer">
-                <div className = "about-icon"><FaReact/></div>
-                <div className = "about-icon"><SiMongodb/></div>
-                <div className = "about-icon"><FaNodeJs/></div>
-                <div className = "about-icon"><SiKubernetes/></div>
-                <div className = "about-icon"><FaGoogle/></div>
+            <footer className="about-footer">
+                <div className="about-icon"><FaReact/></div>
+                <div className="about-icon"><SiMongodb/></div>
+                <div className="about-icon"><FaNodeJs/></div>
+                <div className="about-icon"><SiKubernetes/></div>
+                <div className="about-icon"><FaGoogle/></div>
             </footer>
         </div>
     )
