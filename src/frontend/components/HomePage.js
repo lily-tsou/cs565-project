@@ -12,6 +12,7 @@ import Editor from './Editor';
 import SideBar from './SideBar';
 import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
+import Loader from "react-loader-spinner";
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 const sampleNote = 'Welcome to NoteQuest!  Click on a note or create a new note to begin.';
@@ -21,7 +22,6 @@ function HomePage(props) {
 
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
-    let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
     let [width, setWidth] = useState(window.innerWidth);
@@ -157,8 +157,20 @@ function HomePage(props) {
         setOnEditor(false);
     };
 
-    if(err) { return (<div> { err.message } </div>); }
-    // if(isLoading) { return (<div> Loading... </div>); }
+    if(isLoading) { 
+        return (
+            <main className="spinner">
+                <h1 className="visually-hidden">NoteQuest</h1>
+                <Loader
+                    type="Oval"
+                    color="#962eff"
+                    height={200}
+                    width={200}
+                    timeout={3000} //3 secs
+                />
+            </main>
+        );
+    }
 
     return (
         <div className="my-container">
