@@ -38,9 +38,9 @@ function Contact() {
             </header>
             <main className="contact-container">         
                 <ContactCard name="Michael" body={michaelText} image={michael} background={background2} 
-                github="https://github.com/zemar" email="mihoward@pdx.edu"/>      
+                github="https://github.com/zemar" email="mihoward@pdx.edu" alt = "NoteQuest developer Michael with his daughter"/>      
                 <ContactCard name="Lily" body={lilyText} image={lily} background={background1} 
-                github="https://github.com/lily-tsou" email="tsou@pdx.edu"/>
+                github="https://github.com/lily-tsou" email="tsou@pdx.edu" alt = "NoteQuest developer Lily standing in front of a bush"/>
             </main>
         </div>
     );

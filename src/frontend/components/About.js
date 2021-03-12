@@ -7,8 +7,8 @@
 */
 
 import React from 'react';
-import {FaReact, FaNodeJs,FaGoogle} from 'react-icons/fa';
-import {SiKubernetes, SiMongodb} from 'react-icons/si';
+import {FaReact, FaNodeJs,FaGoogle, FaGithub} from 'react-icons/fa';
+import {DiMongodb} from 'react-icons/di'
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
@@ -43,9 +43,9 @@ function About(props) {
             </main>
             <footer className="about-footer">
                 <div className="about-icon"><FaReact/></div>
-                <div className="about-icon"><SiMongodb/></div>
+                <div className="about-icon"><DiMongodb/></div>
                 <div className="about-icon"><FaNodeJs/></div>
-                <div className="about-icon"><SiKubernetes/></div>
+                <div className="about-icon"><FaGithub/></div>
                 <div className="about-icon"><FaGoogle/></div>
             </footer>
         </div>

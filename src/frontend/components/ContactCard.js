@@ -20,12 +20,12 @@ function ContactCard(props) {
     return (
             <div className="contact-card" style={cardStyle}>
                 <div className="contact-content">
-                    <img src={props.image} className="contact-image" alt="Image of NoteQuest development team member."/> 
+                    <img src={props.image} className="contact-image" alt={props.alt}/> 
                     <h2 className="contact-title">{props.name}</h2>
                     <div className="content-box">
                         <p> {props.body}</p>
-                        <a className="contact-link" href={props.github}><span className="visually-hidden">Click here to view {props.name}'s Github</span><FaGithub/></a>
-                        <a className="contact-link" href={`mailto:${props.email}`}><span className="visually-hidden">Click here to send {props.name} email</span><AiOutlineMail/></a>
+                        <a className="contact-link" href={props.github}><span className="visually-hidden">View {props.name}'s Github account</span><FaGithub/></a>
+                        <a className="contact-link" href={`mailto:${props.email}`}><span className="visually-hidden">Send {props.name} email</span><AiOutlineMail/></a>
                     </div>
                 </div>
         </div> 
