@@ -27,17 +27,11 @@ function NavBar(props) {
     return (
         <nav className="main-navbar">
             <img id="logo" src={logo} alt="NoteQuest logo image shows an open notebook in a circle"></img>
-            <Link to="/" className ="navbar-button" id="home-button">
-                <button type="button" className="navbar-button" name="home">Home</button>
-            </Link>
+            <Link to="/" className ="navbar-button" id="home-button"> Home </Link>  
             <button type="button" className="navbar-button" name="darkmode" id="dark-button"
-            onClick={switchTheme}>{dark ? "Light" : "Dark"}</button>
-            <Link to="/Contact" className ="navbar-button" id="contact-button">
-                <button type="button" className="navbar-button" name="contact">Contact</button>
-            </Link>
-            <Link to="/About" className ="navbar-button" id="about-button">
-                <button type="button" className="navbar-button" name="about">About</button>
-            </Link>
+            onClick={switchTheme}>{dark ? "Light" : "Dark"}</button>      
+            <Link to="/Contact" className ="navbar-button" id="contact-button"> Contact </Link>       
+            <Link to="/About" className ="navbar-button" id="about-button"> About </Link>
         </nav>
     );
 };
