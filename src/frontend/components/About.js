@@ -36,6 +36,7 @@ function About() {
                 <h1 className="visually-hidden">About</h1>
             </header>
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
+            <link rel="stylesheet" type="text/css" href={bootstrap}/>
             <main className="about-container">
                 <h2 className="about-header">{t1}</h2>
                 <p className="about-text">{p1}</p>
