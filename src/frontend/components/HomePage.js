@@ -22,7 +22,6 @@ function HomePage(props) {
 
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
-    let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
     let [width, setWidth] = useState(window.innerWidth);
@@ -160,13 +159,16 @@ function HomePage(props) {
 
     if(isLoading) { 
         return (
-            <Loader
-                type="Oval"
-                color="#00BFFF"
-                height={100}
-                width={100}
-                timeout={3000} //3 secs
-            />
+            <main className="spinner">
+                <h1 className="visually-hidden">NoteQuest</h1>
+                <Loader
+                    type="Oval"
+                    color="#962eff"
+                    height={200}
+                    width={200}
+                    timeout={3000} //3 secs
+                />
+            </main>
         );
     }
 
