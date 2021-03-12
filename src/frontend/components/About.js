@@ -51,7 +51,7 @@ function About() {
                 <div className="about-icon"><FaGoogle/></div>
             </footer>
         </div>
-    )
-}
+    );
+};
 
 export default About
