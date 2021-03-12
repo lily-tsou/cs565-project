@@ -245,13 +245,13 @@ textarea {
 
     .editor {
         grid-column: span 5;
-        grid-row: 1 / 20;
+        grid-row: 1 / 21;
     }
 
-    .myfooter {
+    /* .myfooter {
         grid-column: span 5;
         grid-row: 20;
-    }
+    } */
 
     .card-container{
         width: 75%;
@@ -278,7 +278,7 @@ textarea {
 
 #note-body{
     width: 100%;
-    height: 82%;
+    height: 78%;
     border: none;
     overflow: auto;
     outline: none;
