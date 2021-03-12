@@ -35,7 +35,7 @@ function About(props) {
             <header>
                 <h1 className="visually-hidden">About</h1>
             </header>
-            <main className="about-container">
+            <main className="about-container" tabIndex="0">
                 <h2 className="about-header">{t1}</h2>
                 <p className="about-text">{p1}</p>
                 <h2 className="about-header">{t2}</h2>
