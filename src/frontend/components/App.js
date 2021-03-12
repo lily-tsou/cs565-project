@@ -10,7 +10,7 @@ import About from './About';
 import Contact from './Contact';
 import NavBar from './NavBar';
 import '../styles/App.css';
-import  {HashRouter as Router, Route} from 'react-router-dom';
+import  {BrowserRouter as Router, Route} from 'react-router-dom';
 class App extends React.Component {
     constructor(props) {
         super(props);
