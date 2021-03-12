@@ -1,19 +1,27 @@
-import React from 'react'
+/*
+    NotePreview.js
+
+    Component for note list preview.
+
+*/
+
+import React from 'react';
 import '../styles/App.css';
 
-export default function NotePreview(props) {
+function NotePreview(props) {
     return (
-        <div className = 'card-container'>
+        <div className='card-container'>
             
-            <div className = 'card-content'>
-                <div className = 'card-title'>
+            <div className='card-content'>
+                <div className='card-title'>
                     {props.title}
                 </div>
-                <div className = 'card-body'>
-                    <p>{props.note}</p>
+                <div className='card-body'>
+                   {props.note}
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
+
+export default NotePreview;

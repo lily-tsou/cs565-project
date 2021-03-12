@@ -1,9 +1,16 @@
-import React from 'react'
-import ContactCard from './ContactCard'
-import background1 from '../styles/code1.jpg'
-import background2 from '../styles/code2.png'
-import lily from '../styles/lily.jpg'
-import michael from '../styles/michael.jpeg'
+/*
+    Contact.js
+
+    Contact component is rendered in App.js when users navigate to /Contact
+    Shows information about NoteQuest developers and their GitHub's and emails
+*/
+
+import React from 'react';
+import ContactCard from './ContactCard';
+import background1 from '../styles/code1.jpg';
+import background2 from '../styles/code2.png';
+import lily from '../styles/lily.jpg';
+import michael from '../styles/michael.jpeg';
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 
 function Contact() {
@@ -18,22 +25,25 @@ function Contact() {
     let michaelText = `
     Michael has a bachelor's degree in electrical engineering, and industry experience as a software manager. 
     During his career, he realized that he was happiest when writing his own code. He was able to gather programming 
-    experience while working on projects, but was interested in learning about the theory behind what 
-    he was writing. He enrolled in Portland State's master's program to fill some of the gaps in his knowledge 
-    before he transitions from the management to the developer side of the industry.
+    experience while working on projects, but was interested to learn the theory behind what 
+    he was writing. He enrolled in Portland State's master's program to transition from the management
+    to the developer side of the industry.
     `;
 
     return (
-        <div className = "my-container">
+        <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
-            <div className = "contact-container">         
-                <ContactCard name = "Michael" body = {michaelText} image = {michael} background = {background2} 
-                github = "https://github.com/zemar" email = "mihoward@pdx.edu"/>      
-                <ContactCard name = "Lily" body = {lilyText} image = {lily} background = {background1} 
-                github = "https://github.com/lily-tsou" email = "tsou@pdx.edu"/>
-            </div>
+            <header>
+                <h1 className="visually-hidden">Contact</h1>
+            </header>
+            <main className="contact-container">         
+                <ContactCard name="Michael" body={michaelText} image={michael} background={background2} 
+                github="https://github.com/zemar" email="mihoward@pdx.edu" alt="NoteQuest developer Michael with his daughter"/>      
+                <ContactCard name="Lily" body={lilyText} image={lily} background={background1} 
+                github="https://github.com/lily-tsou" email="tsou@pdx.edu" alt="NoteQuest developer Lily standing in front of a bush"/>
+            </main>
         </div>
-        )
-    }
+    );
+};
     
-    export default Contact
+export default Contact;

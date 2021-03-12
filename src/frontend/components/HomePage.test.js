@@ -10,7 +10,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import  {HashRouter as Router, Route} from 'react-router-dom'
+import  {HashRouter as Router, Route} from 'react-router-dom';
 import HomePage from './HomePage';
 
 describe('HomePage component test', () => {
@@ -26,5 +26,5 @@ describe('HomePage component test', () => {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});

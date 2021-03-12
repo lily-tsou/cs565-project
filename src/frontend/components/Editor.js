@@ -9,21 +9,23 @@
 
 */
 
-import React from 'react'
-import EditBar from "./EditBar"
-import '../styles/App.css'
+import React from 'react';
+import EditBar from './EditBar';
+import Footer from './Footer';
+import '../styles/App.css';
 
 function Editor(props) {
     return (
-        <div className = "editor" style={{display: props.isHidden ? 'none' : 'block' }}>
-            <EditBar readOnly = {props.readOnly} editAction = {props.editAction} saveAction = {props.saveAction} 
-            backButton = {props.backButton} backAction = {props.backAction} deleteAction = {props.deleteAction}/>
-            <label htmlFor="note-title"><span className = "visually-hidden">Note title</span></label>
-            <textarea readOnly id = "note-title" label = "title" value={props.title} onChange={props.titleChange}/>
-            <label htmlFor="note-body"><span className = "visually-hidden">Note body</span></label>
-            <textarea readOnly id = "note-body" label = "body" value={props.body} onChange={props.noteChange}/>
-        </div>
-        )
-    }
+        <main className="editor" style={{display: props.isHidden ? 'none' : 'block' }}>
+            <EditBar readOnly={props.readOnly} editAction={props.editAction} saveAction={props.saveAction} 
+            backButton={props.backButton} backAction={props.backAction} deleteAction={props.deleteAction}/>
+            <label htmlFor="note-title"><span className="visually-hidden">Note title</span></label>
+            <textarea readOnly id="note-title" label="title" value={props.title} onChange={props.titleChange}/>
+            <label htmlFor="note-body"><span className="visually-hidden">Note body</span></label>
+            <textarea readOnly id="note-body" label="body" value={props.body} onChange={props.noteChange}/>
+            <Footer/>
+        </main>
+    );
+};
     
-export default Editor
+export default Editor;

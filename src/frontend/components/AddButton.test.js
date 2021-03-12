@@ -21,5 +21,5 @@ describe('AddButton component test', () => {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});

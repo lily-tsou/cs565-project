@@ -10,7 +10,7 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import  {HashRouter as Router, Route} from 'react-router-dom'
+import  {HashRouter as Router, Route} from 'react-router-dom';
 import About from './About';
 
 describe('About component test', () => {

@@ -9,20 +9,19 @@
 */
 
 import React from 'react';
-import renderer from 'react-test-renderer';
-import  {HashRouter as Router, Route} from 'react-router-dom'
-import Navbar from './Navbar';
+import  {HashRouter as Router, Route} from 'react-router-dom';
+import NavBar from './NavBar';
 
-describe('Navbar component test', () => {
-    test('Navbar test', () => {
+describe('NavBar component test', () => {
+    test('NavBar test', () => {
         let rc = true;
         try {
             <Router>
-                <Route exact path="/" render={() => <Navbar/>}/>
+                <Route exact path="/" render={() => <NavBar/>}/>
             </Router>   
         } catch {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});

@@ -45,7 +45,22 @@ The client build process compiles the React app located in `/src/frontend` into 
 
 The client utilizes React.js libraries contained in the following files:
 * index.js - The entry point on the client available via the "/" context.  It renders the App class in the root window.
+
+Components:
 * App.js - Defines the App class which asynchronously interacts with the published APIs and renders the response data via its child components.
+* HomePage.js - Main homepage for app. Contains a note text editor, and a sidebar listing all notes.
+* SideBar.js - Aside containing a button to add a new note, input to search for a note, and a list of note previews.
+* AddButton.js - Button component to add a new note
+* Search.js - Input to search for string
+* NotePreview.js - Container for note preview
+* Editor.js - Main text area for creating a note
+* EditBar.js - Panel above note text to allow users to edit, delete, and save a note
+* Contact.js - Container for contact cards
+* ContactCard.js - Cards to hold contact information for NoteQuest developers
+* About.js - Information about the app
+* Navbar.js - Navbar to route users to different paths, contained at the top of all pages
+* Footer.js - Copyright information
+* Api.js - API implementations
 
 ## Running the project
 In order to build the project, use `npm run build`.  This will package all frontend source files, run them through the Babel transpiler and
@@ -90,3 +105,7 @@ Critical dependency: require function is used in a way in which dependencies can
  @ ./src/frontend/index.js 17:12-38`
 
 This was introduced with the axe-core module (used for accessiblity testing) but is believed to be a benign bug in the module itself.
+
+Another issue that was recently visible was in stdout of the node.js server:
+`(node:73512) Warning: Accessing non-existent property 'MongoError' of module exports inside circular dependency at emitCircularRequireWarning (internal/modules/cjs/loader.js:650:11)`
+Researching this, it is again an issue with the mongodb 3rd party module and is in process of being fixed.

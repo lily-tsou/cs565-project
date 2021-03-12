@@ -21,5 +21,5 @@ describe('NotePreview component test', () => {
             rc = false;
         }
         expect(rc).toBe(true);
-    })
-})
+    });
+});

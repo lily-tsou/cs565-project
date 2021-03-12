@@ -1,3 +1,16 @@
+/*
+    Api.test.js
+
+    Jest unit test module.  Provides tests for all Api module functions.
+
+    Rendered results are not spot checked but rather we rely on exceptions to indicate something went 
+    wrong in rendering the target component.
+
+    There is a dependency on the jest-fetch-mock module which mocks all responses that come from the 
+    fetch() within each function.
+    
+*/
+
 import  {apiAdd, apiList, apiEdit, apiFind, apiDel} from './Api';
 global.fetch = require('jest-fetch-mock');
 

@@ -12,6 +12,7 @@ import Editor from './Editor';
 import SideBar from './SideBar';
 import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
+import Loader from "react-loader-spinner";
 
 const bootstrap = 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css';
 const sampleNote = 'Welcome to NoteQuest!  Click on a note or create a new note to begin.';
@@ -19,10 +20,8 @@ const deletedNote = 'Looks like you do not have any saved notes. Please create a
 
 function HomePage(props) {
 
-    let [user, setUser] = useState('');
     let [list, setList] = useState([]);
     let [current, setCurrent] = useState({ id: null, title: '', note: sampleNote });
-    let [err, setErr] = useState(null);
     let [isLoading, setIsLoading] = useState(false);
     let [readOnly, setReadOnly] = useState(true);
     let [width, setWidth] = useState(window.innerWidth);
@@ -30,18 +29,11 @@ function HomePage(props) {
     let [hideSideBar, setHideSideBar] = useState(false);
     let [backButton, setBackButton] = useState(false);
     let [onEditor, setOnEditor] = useState(false);
-    let [didLoad, setDidLoad] = useState(false);
 
     useEffect( async () => {
-        setUser(props.user);  // this doesn't appear to stick, why??
         setIsLoading(true);
         setList( await apiList(props.user) );
         setIsLoading(false);
-        // if(!didLoad && list.length > 0){
-        //     console.log(list.length)
-        //     setCurrent({id: list[0]._id, title: list[0].title, note:list[0].note});
-        //     setDidLoad(true);
-        // }
         document.getElementById('save').disabled = true;
         if(width <= 768){
             if(!onEditor){
@@ -64,7 +56,7 @@ function HomePage(props) {
 
     const handleWindowResize = () => {
         setWidth(window.innerWidth);
-    }
+    };
 
     let titleChange = (e) => {
         setCurrent( {id: current.id, title: e.target.value, note: current.note } );
@@ -104,13 +96,14 @@ function HomePage(props) {
             setHideEditor(false)
             setHideSideBar(true)
             setOnEditor(true)
+            setReadOnly(true)
         }
     };
 
     let addAction = async() => {
         let newNote = "New Note"
-        const res = await apiAdd(user, newNote, "");
-        setList( await apiList(user) );
+        const res = await apiAdd(props.user, newNote, "");
+        setList( await apiList(props.user) );
         openNew(res.insertedId, newNote, "");
     };
 
@@ -129,16 +122,16 @@ function HomePage(props) {
         document.getElementById('editMode').disabled = false;
         document.getElementById('note-title').readOnly = true;
         document.getElementById('note-body').readOnly = true;
-        await apiEdit(user, current.id, current.title, current.note);
-        setList( await apiList(user) );
+        await apiEdit(props.user, current.id, current.title, current.note);
+        setList( await apiList(props.user) );
     };
 
     let deleteAction = async () => {
         let result = confirm("Are you sure you want to delete this note?");
         if (result) {
             console.log('Delete: ' + current.id );
-            await apiDel(user, current.id);
-            setList( await apiList(user) );
+            await apiDel(props.user, current.id);
+            setList( await apiList(props.user) );
             if(width > 768){
                 if(list.length === 1)
                     setCurrent( {id: null, title: "", note: deletedNote} );
@@ -164,21 +157,36 @@ function HomePage(props) {
         setOnEditor(false);
     };
 
-    if(err) { return (<div> { err.message } </div>); }
-    if(isLoading) { return (<div> Loading... </div>); }
+    if(isLoading) { 
+        return (
+            <main className="spinner">
+                <h1 className="visually-hidden">NoteQuest</h1>
+                <Loader
+                    type="Oval"
+                    color="#962eff"
+                    height={200}
+                    width={200}
+                    timeout={3000} //3 secs
+                />
+            </main>
+        );
+    }
 
     return (
-        <main className="my-container">
+        <div className="my-container">
             <link rel="stylesheet" type="text/css" href={bootstrap}/>
+            <header>
+                <h1 className="visually-hidden">NoteQuest</h1>
+            </header>
             <section className="grid-container">
-                <SideBar searchChange = {searchChange} noteList = {list} listSelect = {listSelect} addAction = {addAction} isHidden = {hideSideBar}/>
-                <Editor readOnly = {readOnly} editAction = {editAction} saveAction = {saveAction} title = {current.title} body = {current.note} 
-                    noteChange = {noteChange} titleChange = {titleChange} isHidden = {hideEditor} backButton = {backButton} backAction = {backAction}
-                    deleteAction = {deleteAction}/>
-                <Footer/>
+                <SideBar searchChange={searchChange} noteList={list} listSelect={listSelect} addAction={addAction} isHidden={hideSideBar}/>
+                <Editor readOnly={readOnly} editAction={editAction} saveAction={saveAction} title={current.title} body={current.note} 
+                    noteChange={noteChange} titleChange={titleChange} isHidden={hideEditor} backButton={backButton} backAction={backAction}
+                    deleteAction={deleteAction}/>
+                {/* <Footer/> */}
             </section>
-        </main>
-    )
+        </div>
+    );
 };
 
-export default HomePage
+export default HomePage;
