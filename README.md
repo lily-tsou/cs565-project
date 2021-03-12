@@ -105,3 +105,7 @@ Critical dependency: require function is used in a way in which dependencies can
  @ ./src/frontend/index.js 17:12-38`
 
 This was introduced with the axe-core module (used for accessiblity testing) but is believed to be a benign bug in the module itself.
+
+Another issue that was recently visible was in stdout of the node.js server:
+`(node:73512) Warning: Accessing non-existent property 'MongoError' of module exports inside circular dependency at emitCircularRequireWarning (internal/modules/cjs/loader.js:650:11)`
+Researching this, it is again an issue with the mongodb 3rd party module and is in process of being fixed.

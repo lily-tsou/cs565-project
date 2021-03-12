@@ -18,19 +18,33 @@ class App extends React.Component {
         this.state = {
             loggedIn: true,
             user: '',
-            version: ''
+            version: '',
+            dark: false
         };
+        this.switchTheme = this.switchTheme.bind(this);
+    };
+
+    switchTheme() {
+        if(!this.state.dark){
+            document.documentElement.setAttribute('data-theme', 'dark');
+            this.setState({dark: true});
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            this.setState({dark: false});
+        }
     };
 
     componentDidMount() {
         this.setState({user: "sang-il"});
         this.setState({version: this.props.version});
+        this.state.dark ? document.documentElement.setAttribute('data-theme', 'dark')
+            : document.documentElement.setAttribute('data-theme', 'light');    
     };
 
     render() {
         return(
             <Router>
-                <NavBar/>
+                <NavBar dark={this.state.dark} switchTheme={this.switchTheme}/>
                 <Route exact path="/" render={() => <HomePage user={this.state.user}/>}/>
                 <Route exact path="/About" render={() => <About version={this.state.version}/>}/>
                 <Route exact path="/Contact" render={() => <Contact/>}/>
