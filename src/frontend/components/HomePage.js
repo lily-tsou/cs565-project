@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
 import Editor from './Editor';
 import SideBar from './SideBar';
-import Footer from './Footer';
 import {apiList, apiAdd, apiEdit, apiFind, apiDel} from './Api';
 import Loader from "react-loader-spinner";
 
@@ -67,7 +66,7 @@ function HomePage(props) {
     };
 
     let searchChange = async (e) => {
-        setList( await apiFind(user, e.target.value) );
+        setList( await apiFind(props.user, e.target.value) );
     };    
 
     let listSelect = (id, title, note) => {
@@ -183,7 +182,6 @@ function HomePage(props) {
                 <Editor readOnly={readOnly} editAction={editAction} saveAction={saveAction} title={current.title} body={current.note} 
                     noteChange={noteChange} titleChange={titleChange} isHidden={hideEditor} backButton={backButton} backAction={backAction}
                     deleteAction={deleteAction}/>
-                {/* <Footer/> */}
             </section>
         </div>
     );
